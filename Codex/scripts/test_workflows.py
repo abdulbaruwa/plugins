@@ -123,6 +123,17 @@ class PrRunTests(unittest.TestCase):
                         urlopen(base + target, timeout=3)
                     self.assertEqual(raised.exception.code, 404)
                     raised.exception.close()
+                public = directory / 'public'
+                public.rename(directory / 'original-public')
+                other_public = self.root / 'other-public'
+                other_public.mkdir(exist_ok=True)
+                (other_public / 'index.html').write_text('other task index')
+                public.symlink_to(other_public, target_is_directory=True)
+                for target in ('/', '/index.html'):
+                    with self.assertRaises(HTTPError) as raised:
+                        urlopen(base + target, timeout=3)
+                    self.assertEqual(raised.exception.code, 404)
+                    raised.exception.close()
             finally:
                 process.terminate()
                 process.wait(timeout=5)

@@ -20,12 +20,22 @@ def inside(root, path):
 
 
 class RunHandler(SimpleHTTPRequestHandler):
+    def __init__(self, *args, approved_root, **kwargs):
+        # This path is resolved once at server startup, never from a mutable
+        # serving directory during a request.
+        self.approved_root = approved_root
+        super().__init__(*args, **kwargs)
+
     def send_head(self):
         public = Path(self.directory)
         requested = Path(self.translate_path(self.path))
         if requested == public:
             requested = public / "index.html"
-        if requested != public / "index.html" or not inside(public, requested):
+        try:
+            allowed = requested.resolve().is_relative_to(self.approved_root)
+        except (OSError, RuntimeError, ValueError):
+            allowed = False
+        if requested != public / "index.html" or not allowed:
             self.send_error(404, "Resource is outside this review")
             return None
         # Resolve the directory route here; superclass index discovery must not
@@ -113,7 +123,7 @@ def main():
             public = directory / "public"
             if not inside(directory, public) or not inside(public, public / "index.html") or not (public / "index.html").is_file():
                 raise ValueError("assemble this run before serving it")
-            handler = partial(RunHandler, directory=str(public))
+            handler = partial(RunHandler, directory=str(public), approved_root=public.resolve())
             with ThreadingHTTPServer(("127.0.0.1", args.port), handler) as server:
                 print(json.dumps({"url": f"http://127.0.0.1:{server.server_port}/index.html"}), flush=True)
                 server.serve_forever()
