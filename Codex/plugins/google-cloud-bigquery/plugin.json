@@ -1,0 +1,34 @@
+{
+  "name": "google-cloud-bigquery",
+  "version": "1.0.0-codex.2",
+  "description": "Explore datasets and tables and run SQL queries.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "google cloud bigquery",
+    "google cloud",
+    "bigquery",
+    "sql",
+    "analytics",
+    "data warehouse",
+    "datasets",
+    "mcp"
+  ],
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Google Cloud BigQuery",
+        "shortDescription": "Explore datasets and tables and run SQL queries.",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Productivity",
+        "logo": "./assets/logo.png"
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "agent-compatibility",
+  "version": "1.0.0-codex.2",
+  "description": "CLI-backed repo compatibility scans plus agents that audit startup, validation, and docs against reality.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://github.com/cursor/plugins/tree/main/agent-compatibility",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "agent-compatibility",
+    "agents",
+    "compatibility",
+    "cursor-plugin",
+    "repo-audit",
+    "startup",
+    "validation"
+  ],
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Agent Compatibility",
+        "shortDescription": "CLI-backed repo compatibility scans plus agents that audit startup, validation, and docs against reality.",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Developer Tools",
+        "logo": "./assets/avatar.png"
+      }
+    }
+  }
+}

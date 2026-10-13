@@ -1,0 +1,9 @@
+{
+  "similarweb": {
+    "type": "http",
+    "url": "https://mcp.similarweb.com",
+    "headers": {
+      "api-key": "${SIMILARWEB_API_KEY}"
+    }
+  }
+}

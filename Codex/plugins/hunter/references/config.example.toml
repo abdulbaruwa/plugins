@@ -1,0 +1,3 @@
+[mcp_servers.hunter]
+url = "https://mcp.hunter.io/mcp"
+env_http_headers = {"X-API-Key" = "HUNTER_API_KEY"}

@@ -1,0 +1,33 @@
+{
+  "name": "zoom",
+  "version": "1.0.1-codex.2",
+  "description": "Search meetings, pull transcripts, and work with Zoom Docs.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://developers.zoom.us/docs/mcp/",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "zoom",
+    "mcp",
+    "meetings",
+    "recordings",
+    "transcripts",
+    "docs"
+  ],
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Zoom",
+        "shortDescription": "Search meetings, pull transcripts, and work with Zoom Docs.",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Productivity",
+        "logo": "./assets/logo.png"
+      },
+      "onboardingSkill": "./skills/setup-zoom/SKILL.md"
+    }
+  }
+}

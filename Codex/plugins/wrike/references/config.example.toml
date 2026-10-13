@@ -1,0 +1,3 @@
+[mcp_servers.wrike]
+url = "https://mcp.wrike.com/v2"
+bearer_token_env_var = "WRIKE_ACCESS_TOKEN"

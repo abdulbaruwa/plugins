@@ -1,0 +1,4 @@
+[mcp_servers.xero]
+command = "npx"
+args = ["-y", "@xeroapi/xero-mcp-server@latest"]
+env_vars = ["XERO_CLIENT_ID", "XERO_CLIENT_SECRET"]

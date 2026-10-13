@@ -1,0 +1,32 @@
+{
+  "name": "codex-team-kit",
+  "version": "1.2.0-codex.2",
+  "description": "Codex engineering workflows for CI, review, delivery, local control, and verification.",
+  "author": {
+    "name": "Eric Zakariasson"
+  },
+  "homepage": "https://github.com/cursor/plugins",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "cursor-team-kit",
+    "ci",
+    "code-review",
+    "shipping",
+    "testing",
+    "verification",
+    "local-automation"
+  ],
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Codex Team Kit",
+        "shortDescription": "Codex engineering workflows for CI, review, delivery, local control, and verification.",
+        "developerName": "Eric Zakariasson (community Codex port)",
+        "category": "Developer Tools",
+        "logo": "./assets/avatar.png"
+      }
+    }
+  }
+}

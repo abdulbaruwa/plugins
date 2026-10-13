@@ -1,0 +1,3 @@
+[mcp_servers.similarweb]
+url = "https://mcp.similarweb.com"
+env_http_headers = {"api-key" = "SIMILARWEB_API_KEY"}

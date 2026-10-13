@@ -1,0 +1,3 @@
+[mcp_servers.smartsheet]
+url = "https://mcp.smartsheet.com"
+bearer_token_env_var = "SMARTSHEET_API_TOKEN"

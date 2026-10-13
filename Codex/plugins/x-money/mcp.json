@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "x-money": {
+      "type": "streamable-http",
+      "url": "https://mcp.money.x.com/mcp"
+    }
+  }
+}
