@@ -141,7 +141,7 @@ An independent manual review found and corrected stale Advisor/Thermos runtime r
 
 ## Detailed-review corrections
 
-The seven detailed-review findings are addressed: stdio command/cwd containment; structured nested-metadata errors; self-contained package documentation; independent stack verdicts and patch-freshness shipping gates; accurate diff lines with visible imports; separate per-run PR captures and serving roots; and Ralph ownership checks with separate run state. Each package documentation revision is now `codex.2`. The revised helpers operate on local task artifacts and install no hooks or automatic follow-ups. Independent review and local regression results are reported in the task closeout; live-provider acceptance remains a separate check.
+The seven detailed-review findings are addressed: stdio command/cwd containment; structured nested-metadata errors; self-contained package documentation; independent stack verdicts and patch-freshness shipping gates; accurate diff lines with visible imports; separate per-run PR captures and serving roots; and Ralph ownership checks with separate run state. These corrections were released as `codex.2`. The revised helpers operate on local task artifacts and install no hooks or automatic follow-ups. Independent review and local regression results are reported in the task closeout; live-provider acceptance remains a separate check.
 
 ## Upstream reconciliation
 

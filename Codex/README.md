@@ -1,6 +1,6 @@
 # Codex plugin port
 
-A standalone Codex marketplace adapted from this repository's 101 Cursor plugin entries. All work lives under `Codex/`; the original plugin folders are preserved.
+A standalone Codex marketplace adapted from this repository's 101 Cursor plugin entries. Packages and tooling live under `Codex/`, with validation in `.github/workflows/codex-ci.yml`. The original plugin folders retain the upstream implementation.
 
 The port exposes **88 packages**: 17 adapted workflow plugins, 56 provider MCP bundles, and 15 setup workflows requiring credentials, tenant details, or provider registration. Thirteen host-specific or unimplemented entries are excluded. Read the [full compatibility review](COMPATIBILITY.md) before assuming feature parity or a connected service.
 
