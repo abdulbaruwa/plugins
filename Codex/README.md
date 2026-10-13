@@ -59,3 +59,5 @@ Codex/
 New plugin packages use the portable root manifest supported by [OpenAI's plugin packaging guidance](https://developers.openai.com/plugins/build/plugins). MCP URLs and headers are literal under the [Agent Plugins specification](https://agent-plugins.org/specification); credentials use [Codex-native MCP configuration](https://learn.chatgpt.com/docs/extend/mcp). The native SDK workflow follows the [Codex SDK guide](https://learn.chatgpt.com/docs/codex-sdk).
 
 When updating a port, compare it with the named source version, preserve attribution and invocation policy, update its compatibility entry, and rerun validation. Changes to the original catalog are reported as inventory drift instead of silently broadening the port.
+
+See [Keeping the Codex port current](UPDATING.md) for the fork/remotes, read-only source-diff checker, reconciliation checkpoints, and Codex CI workflow.
