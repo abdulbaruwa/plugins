@@ -108,14 +108,41 @@ class PrRunTests(unittest.TestCase):
                 with urlopen(url, timeout=3) as response:
                     self.assertIn(b'private-run', response.read())
                 base = url.rsplit('/', 1)[0]
+                with urlopen(base + '/', timeout=3) as response:
+                    self.assertIn(b'private-run', response.read())
                 for target in ('/body.html', '/patches.json', '/review.json', '/other-task.txt', '/../other-task.txt', '/outside.txt'):
                     with self.assertRaises(HTTPError) as raised:
                         urlopen(base + target, timeout=3)
                     self.assertEqual(raised.exception.code, 404)
+                    raised.exception.close()
+                index = directory / 'public/index.html'
+                index.unlink()
+                index.symlink_to(self.root / 'other-task.txt')
+                for target in ('/', '/index.html'):
+                    with self.assertRaises(HTTPError) as raised:
+                        urlopen(base + target, timeout=3)
+                    self.assertEqual(raised.exception.code, 404)
+                    raised.exception.close()
             finally:
                 process.terminate()
                 process.wait(timeout=5)
                 process.stdout.close()
+
+    def test_server_rejects_an_external_index_before_startup(self):
+        for helper in self.helpers():
+            run = helper.new_run('owner/a', 42, self.root)
+            directory = self.inputs(run, 'body')
+            index = helper.assemble(directory, run['repo'], run['pr'], run['run_id'])
+            outside = self.root / 'other-task.txt'
+            outside.write_text('other task')
+            index.unlink()
+            index.symlink_to(outside)
+            result = subprocess.run([
+                sys.executable, helper.__file__, 'serve', '--run-dir', str(directory),
+                '--repo', run['repo'], '--pr', str(run['pr']), '--run-id', run['run_id'],
+            ], capture_output=True, text=True, timeout=5)
+            self.assertEqual(result.returncode, 1)
+            self.assertNotIn('http://', result.stdout)
 
 
 class RalphOwnershipTests(unittest.TestCase):

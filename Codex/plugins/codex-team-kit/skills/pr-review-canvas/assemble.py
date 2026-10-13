@@ -13,14 +13,24 @@ import uuid
 
 
 def inside(root, path):
-    return path.resolve().is_relative_to(root.resolve())
+    try:
+        return path.resolve().is_relative_to(root.resolve())
+    except (OSError, RuntimeError, ValueError):
+        return False
 
 
 class RunHandler(SimpleHTTPRequestHandler):
     def send_head(self):
-        if not inside(Path(self.directory), Path(self.translate_path(self.path))):
+        public = Path(self.directory)
+        requested = Path(self.translate_path(self.path))
+        if requested == public:
+            requested = public / "index.html"
+        if requested != public / "index.html" or not inside(public, requested):
             self.send_error(404, "Resource is outside this review")
             return None
+        # Resolve the directory route here; superclass index discovery must not
+        # select an unchecked symlink or expose a directory listing.
+        self.path = "/index.html"
         return super().send_head()
 
 
@@ -101,7 +111,7 @@ def main():
         else:
             directory = verify_run(args.run_dir, args.repo, args.pr, args.run_id)
             public = directory / "public"
-            if not inside(directory, public) or not (public / "index.html").is_file():
+            if not inside(directory, public) or not inside(public, public / "index.html") or not (public / "index.html").is_file():
                 raise ValueError("assemble this run before serving it")
             handler = partial(RunHandler, directory=str(public))
             with ThreadingHTTPServer(("127.0.0.1", args.port), handler) as server:

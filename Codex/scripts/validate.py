@@ -20,7 +20,7 @@ def load_json(path):
 def contained(root, path):
     try:
         return path.resolve().is_relative_to(root.resolve())
-    except (OSError, RuntimeError):
+    except (OSError, RuntimeError, ValueError):
         return False
 
 
