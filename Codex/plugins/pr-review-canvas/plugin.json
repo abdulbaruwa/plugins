@@ -1,0 +1,32 @@
+{
+  "name": "pr-review-canvas",
+  "version": "0.1.0-codex.1",
+  "description": "Create a self-contained HTML PR walkthrough grouped by reviewer value.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://github.com/cursor/plugins/tree/main/pr-review-canvas",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "cursor-plugin",
+    "canvas",
+    "pr-review",
+    "code-review",
+    "diff",
+    "pull-request"
+  ],
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "PR Review Canvas",
+        "shortDescription": "Create a self-contained HTML PR walkthrough grouped by reviewer value.",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Developer Tools",
+        "logo": "./assets/avatar.png"
+      }
+    }
+  }
+}

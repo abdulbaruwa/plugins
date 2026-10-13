@@ -1,0 +1,3 @@
+[mcp_servers.brevo]
+url = "https://mcp.brevo.com/v1/brevo/mcp"
+bearer_token_env_var = "BREVO_MCP_TOKEN"

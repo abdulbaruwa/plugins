@@ -1,0 +1,9 @@
+# Codex runtime
+
+Use only the tools exposed by the current Codex session. When delegation is available and authorized, spawn ordinary Codex subagents with a standalone brief, scoped file paths, acceptance criteria, and the bundled role procedure. Keep review agents read-only by instruction. Read their actual evidence before accepting their conclusions. Shared-folder subagents do not get separate checkouts automatically; isolate writes with worktrees or disjoint paths. Queue work within the available concurrency slots.
+
+Inherit the parent model by default. Override a model or reasoning effort only when the user or applicable instructions explicitly specify it, and use a confirmed available identifier. Cursor model names, Custom Modes, cloud environments, and named agent registration do not carry over. The markdown files in references/agents are prompt resources, not registered agent types.
+
+If delegation is unavailable, do the scoped passes sequentially and disclose that execution. Ask clarifying questions using the available user-input tool when needed. A skill invocation authorizes its workflow within the user's stated scope; publishing, merging, production changes, messaging people, and persistent memory writes retain their existing authorization requirements.
+
+Use transcript or chat tools only for the relevant conversation or authorized workspace corpus. If no transcript is available, use the current conversation and say so. A state file cannot bind a mode to another chat or create background execution. Repeated work after a turn ends requires an explicitly requested Codex goal or automation and an available native tool. Do not claim that a stop hook or scheduling loop is installed by this package.

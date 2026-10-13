@@ -1,0 +1,31 @@
+{
+  "name": "jotform",
+  "version": "1.0.0-codex.1",
+  "description": "Create and edit forms, then read submissions.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://www.jotform.com/mcp/",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "jotform",
+    "forms",
+    "submissions",
+    "surveys",
+    "mcp"
+  ],
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Jotform",
+        "shortDescription": "Create and edit forms, then read submissions.",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Productivity",
+        "logo": "./assets/logo.png"
+      }
+    }
+  }
+}

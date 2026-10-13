@@ -1,0 +1,30 @@
+{
+  "name": "continual-learning",
+  "version": "1.0.0-codex.1",
+  "description": "On-demand updates to repository AGENTS.md from explicitly requested scoped chat learning.",
+  "author": {
+    "name": "Eric Zakariasson"
+  },
+  "homepage": "https://github.com/cursor/plugins",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "continual-learning",
+    "agent-memory",
+    "transcripts",
+    "hooks",
+    "incremental"
+  ],
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Continual Learning",
+        "shortDescription": "On-demand updates to repository AGENTS.md from explicitly requested scoped chat learning.",
+        "developerName": "Eric Zakariasson (community Codex port)",
+        "category": "Developer Tools",
+        "logo": "./assets/avatar.png"
+      }
+    }
+  }
+}

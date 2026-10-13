@@ -1,0 +1,38 @@
+{
+  "name": "x",
+  "version": "2.6.6-codex.1",
+  "description": "Search posts, read timelines, pull trends, manage bookmarks, and access X Chat.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://docs.x.com/tools/mcp",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "x",
+    "twitter",
+    "posts",
+    "search",
+    "trends",
+    "news",
+    "lists",
+    "bookmarks",
+    "chat",
+    "social",
+    "mcp"
+  ],
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "X",
+        "shortDescription": "Search posts, read timelines, pull trends, manage bookmarks, and access X Chat.",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Productivity",
+        "logo": "./assets/logo.svg"
+      },
+      "onboardingSkill": "./skills/setup-x/SKILL.md"
+    }
+  }
+}

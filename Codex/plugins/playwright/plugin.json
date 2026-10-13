@@ -1,0 +1,32 @@
+{
+  "name": "playwright",
+  "version": "1.0.0-codex.1",
+  "description": "Navigate, click, screenshot, and test in a real browser.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://github.com/microsoft/playwright-mcp",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "playwright",
+    "browser",
+    "automation",
+    "testing",
+    "e2e",
+    "mcp"
+  ],
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Playwright",
+        "shortDescription": "Navigate, click, screenshot, and test in a real browser.",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Productivity",
+        "logo": "./assets/logo.svg"
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "codex-sdk",
+  "version": "1.0.0-codex.1",
+  "description": "Build server-side tools and CI workflows with the Codex SDK.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://github.com/cursor/plugins/tree/main/cursor-sdk",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "sdk",
+    "typescript",
+    "automation"
+  ],
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Codex SDK",
+        "shortDescription": "Build server-side tools and CI workflows with the Codex SDK.",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Developer Tools"
+      }
+    }
+  }
+}
