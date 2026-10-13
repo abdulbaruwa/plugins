@@ -156,7 +156,7 @@ class PackageValidationTests(unittest.TestCase):
         self.assert_error("cwd must stay")
 
     def test_null_bytes_in_stdio_paths_are_reported(self):
-        for values in ({"command": "./\x00"}, {"command": "node", "cwd": "./\x00"}):
+        for values in ({"command": "./\x00"}, {"command": "node\x00"}, {"command": "\x00"}, {"command": "node", "cwd": "./\x00"}):
             with self.subTest(values=values):
                 self.stdio(**values)
                 self.assert_error("must")

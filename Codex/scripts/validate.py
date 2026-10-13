@@ -57,7 +57,7 @@ def validate(root):
             executable = directory / command
             if not contained(directory, executable) or not executable.is_file():
                 fail(path, f"{name}: command must resolve to a file inside the plugin")
-        elif command in (".", "..") or re.search(r"[\s/\\]", command):
+        elif command in (".", "..") or "\x00" in command or re.search(r"[\s/\\]", command):
             fail(path, f"{name}: command must be a bare executable or a contained ./ path")
         cwd = server.get("cwd")
         if cwd is None:
