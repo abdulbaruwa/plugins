@@ -1,6 +1,6 @@
 {
   "name": "sp-global",
-  "version": "1.0.0-codex.1",
+  "version": "1.0.0-codex.2",
   "description": "Query S&P Capital IQ financials, prices, and transcripts.",
   "author": {
     "name": "Cursor",

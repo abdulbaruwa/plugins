@@ -1,6 +1,6 @@
 {
   "name": "continual-learning",
-  "version": "1.0.0-codex.1",
+  "version": "1.0.0-codex.2",
   "description": "On-demand updates to repository AGENTS.md from explicitly requested scoped chat learning.",
   "author": {
     "name": "Eric Zakariasson"

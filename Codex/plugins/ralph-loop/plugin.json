@@ -1,6 +1,6 @@
 {
   "name": "ralph-loop",
-  "version": "1.0.0-codex.1",
+  "version": "1.0.0-codex.2",
   "description": "Bounded iterative development in a Codex turn, with observable completion and cancellation.",
   "author": {
     "name": "Cursor",

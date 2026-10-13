@@ -1,6 +1,6 @@
 {
   "name": "create-plugin",
-  "version": "1.0.0-codex.1",
+  "version": "1.0.0-codex.2",
   "description": "Author and validate portable Codex plugins and local marketplaces.",
   "author": {
     "name": "Cursor",

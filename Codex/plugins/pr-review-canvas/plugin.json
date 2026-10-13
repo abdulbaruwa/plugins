@@ -1,6 +1,6 @@
 {
   "name": "pr-review-canvas",
-  "version": "0.1.0-codex.1",
+  "version": "0.1.0-codex.2",
   "description": "Create a self-contained HTML PR walkthrough grouped by reviewer value.",
   "author": {
     "name": "Cursor",

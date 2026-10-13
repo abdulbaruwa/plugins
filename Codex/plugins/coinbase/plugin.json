@@ -1,6 +1,6 @@
 {
   "name": "coinbase",
-  "version": "1.0.0-codex.1",
+  "version": "1.0.0-codex.2",
   "description": "Check balances, get quotes, and preview or place trades.",
   "author": {
     "name": "Cursor",

@@ -1,6 +1,6 @@
 {
   "name": "origin-apps",
-  "version": "0.1.0-codex.1",
+  "version": "0.1.0-codex.2",
   "description": "Use Codex to work with the external Cursor Origin API; this does not replace that API.",
   "author": {
     "name": "Cursor",

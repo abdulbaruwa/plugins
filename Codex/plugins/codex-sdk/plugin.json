@@ -1,6 +1,6 @@
 {
   "name": "codex-sdk",
-  "version": "1.0.0-codex.1",
+  "version": "1.0.0-codex.2",
   "description": "Build server-side tools and CI workflows with the Codex SDK.",
   "author": {
     "name": "Cursor",

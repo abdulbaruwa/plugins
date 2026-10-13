@@ -18,7 +18,10 @@ def load_json(path):
 
 
 def contained(root, path):
-    return path.resolve().is_relative_to(root.resolve())
+    try:
+        return path.resolve().is_relative_to(root.resolve())
+    except (OSError, RuntimeError):
+        return False
 
 
 def validate(root):
@@ -42,6 +45,36 @@ def validate(root):
             fail(path, f"{'.'.join(map(str, error.path)) or '/'}: {error.message}")
         return not schema_errors
 
+    def mapping(path, value, field):
+        if not isinstance(value, dict):
+            fail(path, f"{field} must be an object")
+            return {}
+        return value
+
+    def check_stdio(path, directory, name, server):
+        command = server["command"]
+        if command.startswith("./"):
+            executable = directory / command
+            if not contained(directory, executable) or not executable.is_file():
+                fail(path, f"{name}: command must resolve to a file inside the plugin")
+        elif command in (".", "..") or re.search(r"[\s/\\]", command):
+            fail(path, f"{name}: command must be a bare executable or a contained ./ path")
+        cwd = server.get("cwd")
+        if cwd is None:
+            return
+        if cwd == "${PLUGIN_ROOT}" or cwd.startswith("${PLUGIN_ROOT}/"):
+            target = directory / cwd.removeprefix("${PLUGIN_ROOT}").lstrip("/")
+            base = directory
+        elif cwd == "${PLUGIN_DATA}" or cwd.startswith("${PLUGIN_DATA}/"):
+            # The client supplies the real data root. Check traversal now; its
+            # actual symlinks and containment remain a runtime client check.
+            base = root / ".validation-plugin-data" / directory.name
+            target = base / cwd.removeprefix("${PLUGIN_DATA}").lstrip("/")
+        else:
+            base, target = directory, directory / cwd
+        if "\\" in cwd or not contained(base, target):
+            fail(path, f"{name}: cwd must stay inside its plugin or PLUGIN_DATA root")
+
     catalog_path = root / ".agents/plugins/marketplace.json"
     catalog = read(catalog_path)
     inventory = read(root / "inventory.json")
@@ -54,7 +87,8 @@ def validate(root):
     if not isinstance(inventory, dict) or not isinstance(inventory.get("plugins"), list):
         fail(root / "inventory.json", "expected an object with plugins[]")
         return errors, counts
-    if not catalog.get("name") or not catalog.get("interface", {}).get("displayName"):
+    catalog_interface = mapping(catalog_path, catalog.get("interface", {}), "interface")
+    if not isinstance(catalog.get("name"), str) or not catalog["name"].strip() or not isinstance(catalog_interface.get("displayName"), str) or not catalog_interface["displayName"].strip():
         fail(catalog_path, "missing marketplace identity or displayName")
     seen = set()
     paths = set()
@@ -119,6 +153,8 @@ def validate(root):
                 fail(file, "resource escapes plugin")
         skills = list((directory / "skills").glob("*/SKILL.md"))
         for skill in skills:
+            if not contained(directory, skill):
+                continue
             text = skill.read_text(encoding="utf-8")
             if re.search(r"\.\.?\$[a-z][a-z0-9-]*(?:/|\b)", text):
                 fail(skill, "invocation syntax corrupted a relative resource path")
@@ -141,9 +177,12 @@ def validate(root):
             policy = skill.parent / "agents/openai.yaml"
             if policy.exists():
                 value = read(policy, lambda p: yaml.safe_load(p.read_text()))
-                if not isinstance(value, dict) or not isinstance(value.get("policy", {}).get("allow_implicit_invocation"), bool):
+                value = mapping(policy, value, "skill metadata")
+                invocation = mapping(policy, value.get("policy", {}), "policy")
+                if not isinstance(invocation.get("allow_implicit_invocation"), bool):
                     fail(policy, "invocation policy must be a boolean")
         mcp_path = directory / "mcp.json"
+        server_count = 0
         if mcp_path.exists():
             mcp = read(mcp_path)
             if mcp is not None:
@@ -154,7 +193,12 @@ def validate(root):
                         fail(mcp_path, f"{server_name}: server must be an object")
                         continue
                     if server.get("type") in ("streamable-http", "sse"):
-                        url = urlsplit(server.get("url", ""))
+                        try:
+                            url = urlsplit(server["url"])
+                            url.port
+                        except ValueError:
+                            fail(mcp_path, f"{server_name}: invalid literal HTTPS URL")
+                            continue
                         if url.scheme != "https" or not url.hostname or url.username or url.password or url.fragment or "${" in server.get("url", ""):
                             fail(mcp_path, f"{server_name}: invalid literal HTTPS URL")
                         if url.hostname and (url.hostname.endswith("cursor.com") or url.hostname.endswith("grok.com")):
@@ -162,15 +206,22 @@ def validate(root):
                         for header, value in server.get("headers", {}).items():
                             if "${" in value or header.lower() in ("authorization", "api-key", "x-api-key"):
                                 fail(mcp_path, f"{server_name}: credentials or placeholders in literal header")
+                    elif server["type"] == "stdio":
+                        check_stdio(mcp_path, directory, server_name, server)
                     for value in [*server.get("args", []), *server.get("env", {}).values()]:
                         if re.search(r"\$\{(?!PLUGIN_ROOT\}|PLUGIN_DATA\})", value):
                             fail(mcp_path, f"{server_name}: unsupported environment interpolation")
-                counts["mcp_servers"] += len(mcp.get("mcpServers", {}))
-        if not skills and not mcp_path.exists():
+                server_count = len(mcp["mcpServers"])
+                counts["mcp_servers"] += server_count
+        if not skills and not server_count:
             fail(directory, "plugin has no usable components")
         for example in directory.rglob("*.toml"):
+            if not contained(directory, example):
+                continue
             read(example, lambda p: tomllib.loads(p.read_text()))
         for markdown in directory.rglob("*.md"):
+            if not contained(directory, markdown):
+                continue
             prose = re.sub(r"(?ms)^```.*?^```[^\n]*", "", markdown.read_text(encoding="utf-8"))
             for target in re.findall(r"\[[^\]]*\]\(([^)]+)\)", prose):
                 target = target.strip().split(" ", 1)[0].strip("<>")
@@ -180,12 +231,19 @@ def validate(root):
                 if not target or any(x in target for x in ("<", ">", "*", "{", "}")):
                     continue
                 resolved = markdown.parent / target
-                # Packaged docs can link to the marketplace report, but cannot escape it.
-                if not contained(root, resolved) or not resolved.exists():
+                if not contained(directory, resolved) or not resolved.exists():
                     fail(markdown, f"broken relative reference {target}")
         counts["plugins"] += 1
         counts["skills"] += len(skills)
-    rows = inventory.get("plugins", [])
+    rows = []
+    for row in inventory["plugins"]:
+        if not isinstance(row, dict) or not isinstance(row.get("originalName"), str) or not isinstance(row.get("name"), str):
+            fail(root / "inventory.json", "inventory entry must contain string names")
+            continue
+        if row.get("path") is not None and not isinstance(row["path"], str):
+            fail(root / "inventory.json", "inventory path must be a string or null")
+            continue
+        rows.append(row)
     originals = [row.get("originalName") for row in rows]
     if len(set(originals)) != len(originals):
         fail(root / "inventory.json", "duplicate source plugins")

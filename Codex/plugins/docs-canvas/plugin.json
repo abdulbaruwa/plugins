@@ -1,6 +1,6 @@
 {
   "name": "docs-canvas",
-  "version": "0.1.0-codex.1",
+  "version": "0.1.0-codex.2",
   "description": "Create navigable documentation as local HTML or a Markdown walkthrough.",
   "author": {
     "name": "Cursor",

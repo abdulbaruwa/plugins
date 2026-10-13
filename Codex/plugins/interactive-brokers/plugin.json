@@ -1,6 +1,6 @@
 {
   "name": "interactive-brokers",
-  "version": "1.0.0-codex.1",
+  "version": "1.0.0-codex.2",
   "description": "Review positions, balances, P&L, and draft trade instructions.",
   "author": {
     "name": "Cursor",

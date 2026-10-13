@@ -8,4 +8,20 @@ Credentials, OAuth client registration, or tenant URL require Codex-native setup
 
 Packaged skills: `$setup-x-ads`.
 
-See [compatibility](../../COMPATIBILITY.md) for scope and proof limits and [installation](../../README.md) for marketplace setup.
+## Scope and proof
+
+Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled.
+
+Package validation and client discovery establish structure and readable components. Installation, end-to-end skill decisions, SDK execution, authentication, and live provider operations need separate acceptance checks.
+
+## Installation
+
+Register the standalone marketplace from a clone of this repository with `codex plugin marketplace add <repository-path>/Codex`, then install this package:
+
+```sh
+codex plugin add x-ads@cursor-plugins-codex
+```
+
+Use the installed skill catalog to invoke a packaged skill, such as `$x-ads:setup-x-ads`. Full names avoid collisions with skills from other plugins.
+
+Run `$x-ads:setup-x-ads` to complete the provider configuration. The bundled `references/upstream-mcp.json` is evidence, not an enabled connection; credentials belong in supported native client configuration.

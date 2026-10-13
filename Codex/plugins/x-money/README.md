@@ -8,4 +8,20 @@ Provider endpoint and portable MCP transport packaged; authentication and live b
 
 Packaged skills: `$x-money-guide`.
 
-See [compatibility](../../COMPATIBILITY.md) for scope and proof limits and [installation](../../README.md) for marketplace setup.
+## Scope and proof
+
+Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified.
+
+The provider endpoint is packaged, but Codex enrollment is unverified. Grok Bot enrollment is not assumed to work in Codex.
+
+Package validation and client discovery establish structure and readable components. Installation, end-to-end skill decisions, SDK execution, authentication, and live provider operations need separate acceptance checks.
+
+## Installation
+
+Register the standalone marketplace from a clone of this repository with `codex plugin marketplace add <repository-path>/Codex`, then install this package:
+
+```sh
+codex plugin add x-money@cursor-plugins-codex
+```
+
+Use the installed skill catalog to invoke a packaged skill, such as `$x-money:x-money-guide`. Full names avoid collisions with skills from other plugins.

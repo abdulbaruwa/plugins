@@ -1,6 +1,6 @@
 {
   "name": "smartsheet",
-  "version": "1.0.0-codex.1",
+  "version": "1.0.0-codex.2",
   "description": "Query and update sheets, rows, and workspaces.",
   "author": {
     "name": "Cursor",

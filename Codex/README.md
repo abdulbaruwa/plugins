@@ -27,7 +27,7 @@ For a configuration-required package, run its `$setup-<plugin-name>` skill. Its 
 
 ## Validate locally
 
-Python 3.11 or later is required for the validation tools; the commands below use Python 3.12. From the repository root:
+Python 3.11 or later and Node.js 18 or later are required for the checks; the commands below use Python 3.12. From the repository root:
 
 ```sh
 python3.12 -m venv Codex/.venv

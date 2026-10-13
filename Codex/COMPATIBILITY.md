@@ -25,9 +25,9 @@ Reviewed source commit `dbf49813a39c1a5389c5e28cb8e4c1c2379e2454` on 13 October 
 
 ## Validation scope
 
-Local checks passed for 88 packages, 119 skills, and 56 bundled MCP server definitions; all 12 packaging regression tests passed. Both renderer JavaScript files passed syntax checks. Local fixture checks confirmed multi-page PR patch aggregation, distinct filename keys, and safe JSON/HTML embedding.
+The current checks cover 88 packages, 119 skills, and 56 bundled MCP server definitions. The regression suite exercises malformed metadata, executable/cwd containment, isolated installed documentation, exact diff line mapping, concurrent PR artifacts, local serving boundaries, and chat-owned Ralph state. These checks run locally and do not connect external providers.
 
-The validator checks manifests against vendored Agent Plugins 1.0.0 schemas, catalog paths and identity, resource containment, skill metadata and invocation policy, Markdown reference integrity, TOML examples, safe literal MCP connections, component availability, and full source-catalog coverage. Tests exercise malformed packages and rejection of false portable credentials.
+The validator checks manifests against vendored Agent Plugins 1.0.0 schemas, catalog paths and identity, resource containment, skill metadata and invocation policy, package-local Markdown reference integrity, TOML examples, safe literal MCP connections, component availability, and full source-catalog coverage. Tests exercise malformed packages and rejection of false portable credentials.
 
 Codex CLI 0.157.1 listed all 88 packages using a process-scoped local marketplace override. The recorded names are in client-discovery.json. No account marketplace configuration or installation was changed. This proves catalog discovery only. Installation, actual skill decisions, SDK execution, OAuth, payments, provider connectivity, and deployed behavior require separate acceptance runs. No external services were connected or written during this port.
 
@@ -138,3 +138,7 @@ An independent manual review found and corrected stale Advisor/Thermos runtime r
 | workday | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
 | square | [square](plugins/square/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
 | tailscale | — | blocked | Grok Bot tailnet enrollment and tag:grokbot policy have no Codex implementation supplied. |
+
+## Detailed-review corrections
+
+The seven detailed-review findings are addressed: stdio command/cwd containment; structured nested-metadata errors; self-contained package documentation; independent stack verdicts and patch-freshness shipping gates; accurate diff lines with visible imports; separate per-run PR captures and serving roots; and Ralph ownership checks with separate run state. Each package documentation revision is now `codex.2`. The revised helpers operate on local task artifacts and install no hooks or automatic follow-ups. Independent review and local regression results are reported in the task closeout; live-provider acceptance remains a separate check.

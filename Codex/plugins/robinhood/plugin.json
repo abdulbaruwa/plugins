@@ -1,6 +1,6 @@
 {
   "name": "robinhood",
-  "version": "1.0.0-codex.1",
+  "version": "1.0.0-codex.2",
   "description": "View portfolios, positions, orders, watchlists, and market data, and trade in a Robinhood Agentic account.",
   "author": {
     "name": "Cursor",

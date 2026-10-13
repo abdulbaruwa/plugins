@@ -1,6 +1,6 @@
 {
   "name": "tinyfish",
-  "version": "1.0.1-codex.1",
+  "version": "1.0.1-codex.2",
   "description": "Browse and automate the web with TinyFish: run multi-step web automations, search the web, extract clean page content, and drive remote stealth browser sessions.",
   "author": {
     "name": "Cursor",

@@ -1,6 +1,6 @@
 {
   "name": "salesforce",
-  "version": "1.0.0-codex.1",
+  "version": "1.0.0-codex.2",
   "description": "Query, create, and update records in your org.",
   "author": {
     "name": "Cursor",

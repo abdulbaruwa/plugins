@@ -1,6 +1,6 @@
 {
   "name": "posthog-mcp",
-  "version": "1.0.1-codex.1",
+  "version": "1.0.1-codex.2",
   "description": "Work with PostHog from chat: query product analytics and run SQL, manage feature flags and experiments, triage error tracking issues, and review session replays, surveys, and dashboards (URL-only connector to PostHog's hosted MCP server).",
   "author": {
     "name": "Cursor",
