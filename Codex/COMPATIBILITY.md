@@ -142,3 +142,7 @@ An independent manual review found and corrected stale Advisor/Thermos runtime r
 ## Detailed-review corrections
 
 The seven detailed-review findings are addressed: stdio command/cwd containment; structured nested-metadata errors; self-contained package documentation; independent stack verdicts and patch-freshness shipping gates; accurate diff lines with visible imports; separate per-run PR captures and serving roots; and Ralph ownership checks with separate run state. Each package documentation revision is now `codex.2`. The revised helpers operate on local task artifacts and install no hooks or automatic follow-ups. Independent review and local regression results are reported in the task closeout; live-provider acceptance remains a separate check.
+
+## Upstream reconciliation
+
+The source checkpoint now includes Cursor commit `c86f349b102feb91f1966f8a6a60882a4e601b50` (2026-10-14 review). Its three pstack changes revise the ketchup workflow and the corresponding README/help descriptions. The Codex port carries the new plain-language, short-reply and small-visual guidance; its native help remains scoped to supported Codex workflows. Invocation syntax and the existing explicit-only policy are preserved. Pstack is now `0.15.23-codex.3`; other packages retain `codex.2`. The upstream version did not change, so file-level source comparison was necessary. No service authentication or runtime-agent acceptance is implied by this reconciliation.
