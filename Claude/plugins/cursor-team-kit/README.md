@@ -5,7 +5,7 @@
 >
 > Changes from the Cursor version:
 > - Cursor's always-apply rules are injected by a `SessionStart` hook.
-> - `pr-review-canvas` opens the generated HTML file in your browser instead of Cursor's in-app browser.
+> - `pr-review-canvas` uses an isolated run directory, accurate visible diffs, and a task-owned preview instead of Cursor's in-app browser.
 >
 > The rest of this page is the upstream Cursor README. Where it disagrees with the notes above, the notes apply.
 

@@ -4,7 +4,7 @@
 > Install: `/plugin marketplace add <path-to-repo>/Claude`, then `/plugin install pr-review-canvas@cursor-plugins-claude`.
 >
 > Changes from the Cursor version:
-> - Renders a self-contained HTML review page instead of a Cursor Canvas.
+> - Renders a self-contained HTML review page in an isolated run directory with accurate visible diffs and a task-owned preview.
 >
 > The rest of this page is the upstream Cursor README. Where it disagrees with the notes above, the notes apply.
 
@@ -22,7 +22,7 @@ Cursor plugin for rendering pull request diffs as an interactive Cursor Canvas o
 - Summarising a stack of PRs for a human reviewer.
 - Asking for a diff walkthrough, change-set overview, or "what actually changed here" view.
 
-Trigger it with phrases like "PR review page", "review this PR on a page", "walk me through this diff on a page", or by pointing the agent at a PR URL / branch ref.
+Trigger it with phrases like "PR review canvas", "review this PR on a canvas", "walk me through this diff on a canvas", or by pointing the agent at a PR URL / branch ref.
 
 ## How it's organized
 

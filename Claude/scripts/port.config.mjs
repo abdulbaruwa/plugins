@@ -281,7 +281,7 @@ export const PLUGINS = {
     skillIndex: true,
     notes: [
       "Cursor's always-apply rules are injected by a `SessionStart` hook.",
-      "`pr-review-canvas` opens the generated HTML file in your browser instead of Cursor's in-app browser.",
+      "`pr-review-canvas` uses an isolated run directory, accurate visible diffs, and a task-owned preview instead of Cursor's in-app browser.",
     ],
     patches: [
       {
@@ -293,21 +293,6 @@ export const PLUGINS = {
         file: "skills/workflow-from-chats/SKILL.md",
         find: "## Scope\n",
         replace: "## Scope\n\n- Transcripts are the `*.jsonl` files in `~/.claude/projects/<slug>/`, where the slug is the absolute project path with every non-alphanumeric character as `-` (`~/.claude/projects/*/` covers every project). The session id is the file name. Subagent transcripts are `<session-id>/subagents/agent-*.jsonl`, with a sibling `.meta.json` holding `agentType` and `description`.\n",
-      },
-      {
-        file: "skills/pr-review-canvas/SKILL.md",
-        find: "css = Path('styles.css').read_text()\njs = Path('renderer.js').read_text()\ntmpl = Path('template.html').read_text()",
-        replace: "css = Path('${CLAUDE_SKILL_DIR}/styles.css').read_text()\njs = Path('${CLAUDE_SKILL_DIR}/renderer.js').read_text()\ntmpl = Path('${CLAUDE_SKILL_DIR}/template.html').read_text()",
-      },
-      {
-        file: "skills/pr-review-canvas/SKILL.md",
-        find: "   cd /tmp && python3 -m http.server 8432 --bind 127.0.0.1",
-        replace: "   open /tmp/pr-review-{number}.html   # macOS; use xdg-open on Linux",
-      },
-      {
-        file: "skills/pr-review-canvas/SKILL.md",
-        find: "   Run this backgrounded, then navigate the in-app browser to `http://127.0.0.1:8432/pr-review-{number}.html`.",
-        replace: "   If the session has a browser or HTML preview tool, open the file there instead.",
       },
       {
         file: "skills/loop-on-ci/SKILL.md",
@@ -411,21 +396,7 @@ export const PLUGINS = {
   },
   "origin-apps": { rewriteSets: [], notes: ["Unchanged: Cursor Origin API skills."] },
   "pr-review-canvas": {
-    notes: ["Renders a self-contained HTML review page instead of a Cursor Canvas."],
-    rewrites: CANVAS_WORDS.slice(1, 2),
-    patches: [
-      {
-        file: "skills/pr-review-canvas/SKILL.md",
-        find: "Render a PR diff review as a Cursor Canvas",
-        replace: "Render a PR diff review as a self-contained HTML page",
-      },
-      { file: "skills/pr-review-canvas/SKILL.md", find: CANVAS_SETUP, replace: HTML_PAGE_SETUP.replace("<name>", "pr-review-<number>") },
-      {
-        file: "skills/pr-review-canvas/SKILL.md",
-        find: "The canvas SDK has charts, tables, diff views, DAG layout, cards, stats, interactive state, and more.",
-        replace: "Plain HTML, CSS, inline SVG, and a little JS cover charts, tables, side-by-side diffs, call graphs, cards, collapsible sections, and interactive state.",
-      },
-    ],
+    notes: ["Renders a self-contained HTML review page in an isolated run directory with accurate visible diffs and a task-owned preview."],
   },
   pstack: {
     skillIndex: true,

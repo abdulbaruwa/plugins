@@ -3,8 +3,11 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 
-for (const plugin of ['pr-review-canvas', 'codex-team-kit']) {
-  const filename = path.join(__dirname, '..', 'plugins', plugin, 'skills', 'pr-review-canvas', 'renderer.js');
+const supplied = process.argv.slice(2);
+const filenames = supplied.length ? supplied : ['pr-review-canvas', 'codex-team-kit'].map(plugin =>
+  path.join(__dirname, '..', 'plugins', plugin, 'skills', 'pr-review-canvas', 'renderer.js'));
+for (const filename of filenames) {
+  const plugin = filename;
   const context = { document: { addEventListener() {} }, console };
   vm.createContext(context);
   vm.runInContext(fs.readFileSync(filename, 'utf8'), context, { filename });
@@ -38,4 +41,4 @@ for (const plugin of ['pr-review-canvas', 'codex-team-kit']) {
   const unsafe = render('@@ -0,0 +1 @@\n+<img src=x onerror="bad()">');
   assert(!unsafe.includes('<img') && unsafe.includes('&lt;img'));
 }
-console.log('Both PR renderers: line mapping, visible imports, hunk parsing, and escaping passed.');
+console.log(`${filenames.length} PR renderers: line mapping, visible imports, hunk parsing, and escaping passed.`);

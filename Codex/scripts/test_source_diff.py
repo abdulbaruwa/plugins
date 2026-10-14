@@ -60,6 +60,7 @@ class SourceDiffTests(unittest.TestCase):
         self.write("Codex/plugins/codex-alpha/skills/main/SKILL.md", "native safeguards")
         self.write("Claude/skills/other/SKILL.md", "other port")
         self.write(".github/workflows/codex-ci.yml", "native CI")
+        self.write(".github/workflows/claude-ci.yml", "native Claude CI")
         self.save("port overlays")
         result = report(self.root, "HEAD")
         self.assertFalse(result["needsReview"])

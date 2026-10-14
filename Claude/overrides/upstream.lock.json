@@ -16,5 +16,12 @@
   "create-plugin/rules/plugin-quality-gates.mdc": "79efb4b9a58f4565609b52df2f61eb83ea677ab5de96932df0b160341676d1e8",
   "create-plugin/skills/create-plugin-scaffold/SKILL.md": "b1ca0ef8398d957c59c1ab8c34527fd53120de51318af33ef61acab7961c9b46",
   "create-plugin/skills/review-plugin-submission/SKILL.md": "ff7411fc0426934871ac18f8ed55edcfc49f19443701dbe9109a3395ccded61d",
+  "cursor-team-kit/rules/no-inline-imports.mdc": "91bb4412f2775b386ddf6af0d235fbe8160907f6104c76928470fdf51be69edd",
+  "cursor-team-kit/rules/typescript-exhaustive-switch.mdc": "58214625757c38b73fc3e66a715ea4b2ae609f6b3e285edc4393c5144430a8f4",
+  "cursor-team-kit/skills/pr-review-canvas/SKILL.md": "88a07a2459197acba3c5e06b7d695e35ad618a998442b72d05cdba4efc117ac6",
+  "cursor-team-kit/skills/pr-review-canvas/renderer.js": "d78d36a46b0aeae755e2edd9b712970fd181183bb1c320d10caa8d9f776695c6",
+  "cursor-team-kit/skills/pr-review-canvas/styles.css": "3c3ff002dd3bfe7f4fdbda521fce05e336c4a7922f4bd4d848f6566a961ceb19",
+  "cursor-team-kit/skills/pr-review-canvas/template.html": "cb56bc764384856da4733d1c999521c3e1b20d65ed80605630b74da448abe756",
+  "pr-review-canvas/skills/pr-review-canvas/SKILL.md": "f494f30a2d423953b4976d41353702fa32d347edf27519dbf936db5717865f03",
   "pstack/skills/setup-pstack/SKILL.md": "d61b47256a18155a81c8e5ef95e3cc6569ce8c18317c35c4dd9c8015cf68cb59"
 }
