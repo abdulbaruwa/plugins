@@ -1,0 +1,26 @@
+{
+  "name": "robinhood",
+  "displayName": "Robinhood",
+  "version": "1.0.0+claude.9df0b6bf",
+  "description": "View portfolios, positions, orders, watchlists, and market data, and trade in a Robinhood Agentic account.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://robinhood.com/us/en/support/articles/agentic-trading-overview/",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "robinhood",
+    "brokerage",
+    "trading",
+    "portfolio",
+    "stocks",
+    "options",
+    "crypto",
+    "market data",
+    "watchlists",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png"
+}

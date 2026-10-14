@@ -1,0 +1,20 @@
+{
+  "advisor/README.md": "dfc6626c184c3e02aa01d4323349c0aa71ef21ed983969d764a6b539fff5f1f6",
+  "advisor/hooks/capture-response.sh": "51c249434fbd19fd198fba05a99b6b2637f34877a5bd43adc62b3ecd8f71440a",
+  "advisor/hooks/hooks.json": "353d83923e0056f62648c76256d85935fc080ceb2b34d153f13b6cb9356eea49",
+  "advisor/hooks/lib.sh": "1ca60db14f4693d75768372ca64f74456591227ba7a39474e5a20960427b8cbe",
+  "advisor/hooks/mark-pending.sh": "61096abd683fb13b645a8c038fd05f11bf6f0bab77a9c15cd5ede9cbe7bb18fd",
+  "advisor/hooks/record-consult.sh": "ca937ec0a3ab9d97998c18432da11a09c3a6cb720072dacb00b66851e3ccee3e",
+  "advisor/hooks/stop-hook.sh": "563efd736a5b5a2dc1cadbbd64caefc9f30133d49d02b5312c9e4ea0fc2636bf",
+  "advisor/skills/advisor/SKILL.md": "e34d52a0f9948057ac754151b2e116db47205674418de0548cd9df4477f52bf8",
+  "continual-learning/README.md": "0b45e42eca8536add2d1ae5a45e5e93898f9613587345853988c365dcdd4d0ea",
+  "continual-learning/agents/agents-memory-updater.md": "93dfb244f173e2240d8d6bffe4870a647d1da27d402b8de83197e3e2b471527d",
+  "continual-learning/hooks/continual-learning-stop.ts": "ad2610f3e3fe10981e9aa80a6be56e1d7ee20a203ec94585b003bd49904dc1e2",
+  "continual-learning/hooks/hooks.json": "bc26f31a03e0cd4be8f62c58e263117191067df726e7363af5a88084304c7c8c",
+  "continual-learning/skills/continual-learning/SKILL.md": "f627f733a33879b63523da7e92c8b33e6086df42a49a8139a87d1c21e7bd9b16",
+  "create-plugin/agents/plugin-architect.md": "100e47bdc94ba67f25c99358a211e8cf7de02564f0cf60a7069b0db07f97ed41",
+  "create-plugin/rules/plugin-quality-gates.mdc": "79efb4b9a58f4565609b52df2f61eb83ea677ab5de96932df0b160341676d1e8",
+  "create-plugin/skills/create-plugin-scaffold/SKILL.md": "b1ca0ef8398d957c59c1ab8c34527fd53120de51318af33ef61acab7961c9b46",
+  "create-plugin/skills/review-plugin-submission/SKILL.md": "ff7411fc0426934871ac18f8ed55edcfc49f19443701dbe9109a3395ccded61d",
+  "pstack/skills/setup-pstack/SKILL.md": "d61b47256a18155a81c8e5ef95e3cc6569ce8c18317c35c4dd9c8015cf68cb59"
+}

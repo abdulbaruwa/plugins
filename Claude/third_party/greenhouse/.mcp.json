@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "greenhouse": {
+      "type": "http",
+      "url": "https://mcp.us.greenhouse.io/mcp",
+      "oauth": {
+        "callbackPort": 8787
+      }
+    }
+  }
+}

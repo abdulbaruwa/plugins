@@ -1,0 +1,22 @@
+{
+  "name": "todoist",
+  "displayName": "Todoist",
+  "version": "1.0.1+claude.f9755d97",
+  "description": "Create, find, and complete tasks and projects.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://github.com/Doist/todoist-mcp",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "todoist",
+    "tasks",
+    "todo",
+    "projects",
+    "productivity",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png"
+}

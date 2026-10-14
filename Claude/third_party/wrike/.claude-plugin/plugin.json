@@ -1,0 +1,31 @@
+{
+  "name": "wrike",
+  "displayName": "Wrike",
+  "version": "1.0.0+claude.59c9d2fa",
+  "description": "Search projects, create tasks, and post comments.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://developers.wrike.com/docs/wrike-mcp-server-overview",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "wrike",
+    "project-management",
+    "tasks",
+    "projects",
+    "work-management",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png",
+  "userConfig": {
+    "WRIKE_ACCESS_TOKEN": {
+      "type": "string",
+      "title": "Wrike permanent access token",
+      "description": "Permanent access token created in Wrike under Apps & Integrations → API.",
+      "required": true,
+      "sensitive": true
+    }
+  }
+}

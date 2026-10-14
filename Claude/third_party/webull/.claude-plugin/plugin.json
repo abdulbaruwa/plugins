@@ -1,0 +1,24 @@
+{
+  "name": "webull",
+  "displayName": "Webull",
+  "version": "1.0.1+claude.cd87c38a",
+  "description": "View accounts, positions, orders, watchlists, and market data.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://developer.webull.com/apis/docs/AI-friendly-Resources/mcp/",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "webull",
+    "brokerage",
+    "trading",
+    "portfolio",
+    "quotes",
+    "watchlists",
+    "market data",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png"
+}

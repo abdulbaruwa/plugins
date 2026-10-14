@@ -1,0 +1,25 @@
+{
+  "name": "buffer",
+  "displayName": "Buffer",
+  "version": "1.0.1+claude.b99afe3d",
+  "description": "Manage social media with Buffer: draft, schedule, and publish posts across connected channels, manage the queue and ideas, and review post performance.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://developers.buffer.com/guides/integrations/mcp.html",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "buffer",
+    "social media",
+    "scheduling",
+    "publishing",
+    "content calendar",
+    "queue",
+    "analytics",
+    "ideas",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png"
+}
