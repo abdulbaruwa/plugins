@@ -4,7 +4,7 @@ The maintained fork is [abdulbaruwa/plugins](https://github.com/abdulbaruwa/plug
 
 ## Remotes and worktrees
 
-This checkout shares Git configuration with another agent's worktree. Its existing `origin` still points to Cursor, and `main` still tracks `origin/main`. The additional remotes are:
+This checkout shares Git configuration with another agent's worktree. Its existing `origin` still points to Cursor, but `main` tracks `fork/main`, so a plain pull or push on `main` uses the fork. The additional remotes are:
 
 | Remote | Repository | Use |
 |---|---|---|
