@@ -1,0 +1,11 @@
+# Plugin quality gates
+
+When creating or editing Claude Code plugins:
+
+1. Ensure `.claude-plugin/plugin.json` exists and includes a valid `name`.
+2. Keep paths relative, starting with `./`, and within the plugin directory (no absolute paths, no `..` traversal).
+3. Match declared component paths to real files and folders.
+4. Include YAML frontmatter for skills, agents, and commands with required metadata.
+5. Keep plugin scope focused and document installation and usage in `README.md`.
+6. Save new plugins to `~/.claude/skills/<plugin-name>/` by default (`claude plugin init`) so they load in the next session. Only use a different location when the user explicitly requests it.
+7. Run `claude plugin validate <path>` before calling the plugin done.

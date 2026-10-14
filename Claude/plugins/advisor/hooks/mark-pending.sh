@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# PostToolUse hook for Advisor (matcher: Edit|Write|MultiEdit|NotebookEdit).
+# Remembers that files changed since the last advisor consult, so the Stop hook
+# can ask for a pre-completion review if the turn ends without one.
+#
+# Input:  { "tool_name": "Edit", "tool_input": { "file_path": "<absolute path>", ... }, ...common }
+# Output: none
+
+set -Eeuo pipefail
+trap 'exit 0' ERR
+
+source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
+
+HOOK_INPUT=$(cat)
+
+advisor_require_enabled
+advisor_bind_session "$HOOK_INPUT" || exit 0
+
+FILE_PATH=$(jq -r '.tool_input.file_path // .tool_input.notebook_path // empty' <<< "$HOOK_INPUT")
+
+# The plugin's own state is not work product.
+case "$FILE_PATH" in
+  */.claude/advisor/*) exit 0 ;;
+esac
+
+touch "$PENDING_FILE"
+exit 0

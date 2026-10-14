@@ -1,0 +1,16 @@
+{
+  "description": "Continual learning: every few turns, ask Claude to mine new transcripts into the project's instruction file.",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/continual-learning-stop.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

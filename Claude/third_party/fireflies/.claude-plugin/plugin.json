@@ -1,0 +1,22 @@
+{
+  "name": "fireflies",
+  "displayName": "Fireflies",
+  "version": "1.0.0+claude.5c870ab8",
+  "description": "Search meeting transcripts, summaries, and action items.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://docs.fireflies.ai/getting-started/mcp-configuration",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "fireflies",
+    "meetings",
+    "transcripts",
+    "notes",
+    "action-items",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png"
+}

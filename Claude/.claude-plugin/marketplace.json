@@ -1,0 +1,1259 @@
+{
+  "name": "cursor-plugins-claude",
+  "owner": {
+    "name": "abdulbaruwa"
+  },
+  "metadata": {
+    "description": "Claude Code port of the Cursor plugin marketplace (github.com/cursor/plugins): developer workflows, agent skills, and MCP integrations."
+  },
+  "plugins": [
+    {
+      "name": "teaching",
+      "source": "./plugins/teaching",
+      "description": "Skill mapping, practice plans, and learning retrospectives. Builds personalized roadmaps with milestones and practice checkpoints, and runs periodic reviews to adjust based on progress.",
+      "version": "1.0.0+claude.ec264d27",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "utilities",
+      "tags": [
+        "teaching",
+        "education",
+        "practice"
+      ]
+    },
+    {
+      "name": "continual-learning",
+      "source": "./plugins/continual-learning",
+      "description": "Incrementally learns durable user preferences and workspace facts from transcript changes and keeps AGENTS.md up to date with plain bullet points.",
+      "version": "1.0.0+claude.419b7a3f",
+      "author": {
+        "name": "Eric Zakariasson"
+      },
+      "category": "developer-tools",
+      "tags": [
+        "automation",
+        "memory",
+        "transcripts"
+      ]
+    },
+    {
+      "name": "cursor-team-kit",
+      "source": "./plugins/cursor-team-kit",
+      "description": "Internal engineering team workflows for CI, code review, shipping, control-cli, control-ui, verify-this, test reliability, code cleanup, and work summaries. Designed to work without requiring third-party service integrations.",
+      "version": "1.2.0+claude.1840cada",
+      "author": {
+        "name": "Eric Zakariasson"
+      },
+      "category": "developer-tools",
+      "tags": [
+        "internal-workflows",
+        "quality",
+        "delivery",
+        "review",
+        "automation"
+      ]
+    },
+    {
+      "name": "thermos",
+      "source": "./plugins/thermos",
+      "description": "Thermo-nuclear branch review: deep correctness and security audits plus harsh code-quality rubrics, parallel subagents, thermos orchestration, and optional take-the-wheel and FSD merge-ready flows.",
+      "version": "1.0.0+claude.f5adbafa",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "developer-tools",
+      "tags": [
+        "review",
+        "quality",
+        "shipping",
+        "automation"
+      ]
+    },
+    {
+      "name": "create-plugin",
+      "source": "./plugins/create-plugin",
+      "description": "Scaffold and validate new agent plugins. Handles directory setup, manifest generation, and pre-submission quality checks for the marketplace.",
+      "version": "1.0.0+claude.cbb07045",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "developer-tools",
+      "tags": [
+        "meta",
+        "authoring",
+        "templates"
+      ]
+    },
+    {
+      "name": "agent-compatibility",
+      "source": "./plugins/agent-compatibility",
+      "description": "CLI-backed repo compatibility scans plus agents that audit startup, validation, and docs against reality.",
+      "version": "1.0.0+claude.33e51290",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "developer-tools",
+      "tags": [
+        "agents",
+        "compatibility",
+        "quality",
+        "workflow"
+      ]
+    },
+    {
+      "name": "cli-for-agent",
+      "source": "./plugins/cli-for-agent",
+      "description": "Patterns for designing CLIs that coding agents can run reliably: non-interactive flags, layered help with examples, pipelines, actionable errors, idempotency, and dry-run.",
+      "version": "1.0.0+claude.82a04746",
+      "author": {
+        "name": "Eric Zakariasson"
+      },
+      "category": "developer-tools",
+      "tags": [
+        "cli",
+        "agents",
+        "automation",
+        "developer-tools"
+      ]
+    },
+    {
+      "name": "pr-review-canvas",
+      "source": "./plugins/pr-review-canvas",
+      "description": "Render PR diffs as review canvases grouped by importance.",
+      "version": "0.1.0+claude.9494dc2a",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "developer-tools",
+      "tags": [
+        "canvas",
+        "code-review",
+        "pull-request",
+        "workflow"
+      ]
+    },
+    {
+      "name": "docs-canvas",
+      "source": "./plugins/docs-canvas",
+      "description": "Render documentation as a navigable canvas.",
+      "version": "0.1.0+claude.76e7e8dc",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "developer-tools",
+      "tags": [
+        "canvas",
+        "documentation",
+        "workflow"
+      ]
+    },
+    {
+      "name": "cursor-sdk",
+      "source": "./plugins/cursor-sdk",
+      "description": "Build apps, scripts, and automations with the TypeScript SDK.",
+      "version": "1.0.0+claude.14d417be",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "developer-tools",
+      "tags": [
+        "sdk",
+        "agents",
+        "automation",
+        "developer-tools"
+      ]
+    },
+    {
+      "name": "origin-apps",
+      "source": "./plugins/origin-apps",
+      "description": "Skills for building on the Cursor Origin API. Fetch the live spec first, then follow the Origin rules for credentials, scopes, webhooks, paging, and errors. Includes a skill that plans the port of an existing GitHub App.",
+      "version": "0.1.0+claude.95ec4498",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "developer-tools",
+      "tags": [
+        "origin",
+        "origin-api",
+        "webhooks",
+        "github-app"
+      ]
+    },
+    {
+      "name": "orchestrate",
+      "source": "./plugins/orchestrate",
+      "description": "Fan a large task out across parallel cloud agents via the Cursor SDK: planners publish tasks, workers hand off back up, and a script reconciles the tree from disk and git.",
+      "version": "1.1.0+claude.fe2c76cc",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "developer-tools",
+      "tags": [
+        "agents",
+        "automation",
+        "developer-tools",
+        "sdk"
+      ]
+    },
+    {
+      "name": "pstack",
+      "source": "./plugins/pstack",
+      "description": "if you want to go fast, go deep first. pstack helps you write less, but higher quality code. rigorous agent workflows you can parallelize with confidence.",
+      "version": "0.15.23+claude.1099b316",
+      "author": {
+        "name": "Lauren Tan"
+      },
+      "category": "developer-tools",
+      "tags": [
+        "workflow",
+        "principles",
+        "review",
+        "planning"
+      ]
+    },
+    {
+      "name": "dyl-stack",
+      "source": "./plugins/dyl-stack",
+      "description": "Dylan's agent style on top of pstack: root causes over symptom patches, The Algorithm before design, terse verified delivery, a PR review that fits in a paste, and Figma-to-UI with a visual judge.",
+      "version": "0.1.0+claude.0fd7503d",
+      "author": {
+        "name": "Dylan Gattey"
+      },
+      "category": "developer-tools",
+      "tags": [
+        "workflow",
+        "review",
+        "design",
+        "principles"
+      ]
+    },
+    {
+      "name": "grok-voice",
+      "source": "./plugins/grok-voice",
+      "description": "Add Grok voice to an app: realtime speech-to-speech, speech-to-text dictation, text-to-speech read-aloud, and a log-driven fix loop for voice sessions.",
+      "version": "0.1.0+claude.c70f896e",
+      "author": {
+        "name": "Eric Zakariasson"
+      },
+      "category": "developer-tools",
+      "tags": [
+        "voice",
+        "grok",
+        "ai",
+        "developer-tools"
+      ]
+    },
+    {
+      "name": "advisor",
+      "source": "./plugins/advisor",
+      "description": "Consult a stronger model at key checkpoints: before major decisions, when stuck on an error, and before declaring a task done. The advisor gets a full briefing plus the conversation transcript, returns guidance, and the main model keeps doing the work.",
+      "version": "1.0.0+claude.af6dc0da",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "developer-tools",
+      "tags": [
+        "agents",
+        "quality",
+        "review",
+        "automation"
+      ]
+    },
+    {
+      "name": "playwright",
+      "source": "./third_party/playwright",
+      "description": "Navigate, click, screenshot, and test in a real browser.",
+      "version": "1.0.0+claude.5ba958e3",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "playwright",
+        "browser",
+        "automation",
+        "testing",
+        "e2e",
+        "mcp"
+      ]
+    },
+    {
+      "name": "github",
+      "source": "./third_party/github",
+      "description": "Manage repos, issues, pull requests, and Actions.",
+      "version": "1.0.0+claude.43065ab4",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "github",
+        "git",
+        "mcp",
+        "repositories"
+      ]
+    },
+    {
+      "name": "ashby",
+      "source": "./third_party/ashby",
+      "description": "Search candidates, prep interviews, and manage pipeline tasks.",
+      "version": "1.0.0+claude.7a70ee4a",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "ashby",
+        "recruiting",
+        "ats",
+        "mcp"
+      ]
+    },
+    {
+      "name": "greenhouse",
+      "source": "./third_party/greenhouse",
+      "description": "Search candidates, jobs, and applications, and review scorecards in Greenhouse Recruiting.",
+      "version": "1.0.0+claude.0fbc938c",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "greenhouse",
+        "recruiting",
+        "ats",
+        "mcp"
+      ]
+    },
+    {
+      "name": "intercom",
+      "source": "./third_party/intercom",
+      "description": "Search conversations, contacts, and Help Center articles.",
+      "version": "1.0.0+claude.4771364d",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "intercom",
+        "support",
+        "mcp",
+        "crm"
+      ]
+    },
+    {
+      "name": "clay",
+      "source": "./third_party/clay",
+      "description": "Enrich people and companies, run AI research agents.",
+      "version": "1.0.0+claude.90320d62",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "clay",
+        "sales",
+        "enrichment",
+        "mcp"
+      ]
+    },
+    {
+      "name": "circleback",
+      "source": "./third_party/circleback",
+      "description": "Search meetings, transcripts, action items, and emails.",
+      "version": "1.0.0+claude.eda917b5",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "circleback",
+        "meetings",
+        "mcp",
+        "productivity"
+      ]
+    },
+    {
+      "name": "navan",
+      "source": "./third_party/navan",
+      "description": "Query expenses, travel bookings, policies, and cards.",
+      "version": "1.0.0+claude.e7c6e223",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "navan",
+        "travel",
+        "expenses",
+        "mcp"
+      ]
+    },
+    {
+      "name": "profound",
+      "source": "./third_party/profound",
+      "description": "Track AI visibility, sentiment, and citations.",
+      "version": "1.0.0+claude.099a9564",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "profound",
+        "mcp",
+        "analytics",
+        "aeo"
+      ]
+    },
+    {
+      "name": "juicebox",
+      "source": "./third_party/juicebox",
+      "description": "Query recruiting analytics, shortlists, and sourcing agents.",
+      "version": "1.0.0+claude.676448b7",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "juicebox",
+        "recruiting",
+        "mcp",
+        "sourcing"
+      ]
+    },
+    {
+      "name": "outreach",
+      "source": "./third_party/outreach",
+      "description": "Search sequences, prospects, and Kaia meetings.",
+      "version": "1.0.0+claude.618d89e3",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "outreach",
+        "sales",
+        "mcp",
+        "sequences"
+      ]
+    },
+    {
+      "name": "amplemarket",
+      "source": "./third_party/amplemarket",
+      "description": "Search people and companies, enrich leads, run sequences.",
+      "version": "1.0.0+claude.7c632cf5",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "amplemarket",
+        "sales",
+        "mcp",
+        "prospecting"
+      ]
+    },
+    {
+      "name": "klaviyo",
+      "source": "./third_party/klaviyo",
+      "description": "Manage profiles, segments, campaigns, and flows.",
+      "version": "1.0.0+claude.8cf41698",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "klaviyo",
+        "marketing",
+        "mcp",
+        "email"
+      ]
+    },
+    {
+      "name": "customer-io",
+      "source": "./third_party/customer-io",
+      "description": "Build campaigns, manage segments, and query people.",
+      "version": "1.0.0+claude.ed40124d",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "customer-io",
+        "marketing",
+        "mcp",
+        "campaigns"
+      ]
+    },
+    {
+      "name": "mailerlite",
+      "source": "./third_party/mailerlite",
+      "description": "Manage subscribers, groups, campaigns, and automations.",
+      "version": "1.0.0+claude.047e9e6b",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "mailerlite",
+        "email",
+        "mcp",
+        "marketing"
+      ]
+    },
+    {
+      "name": "brevo",
+      "source": "./third_party/brevo",
+      "description": "Manage contacts, email and SMS campaigns, and CRM deals.",
+      "version": "1.0.0+claude.1c2e3965",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "brevo",
+        "email",
+        "mcp",
+        "marketing"
+      ]
+    },
+    {
+      "name": "typeform",
+      "source": "./third_party/typeform",
+      "description": "Build forms, analyze responses, and manage contacts.",
+      "version": "1.0.0+claude.4589aa87",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "typeform",
+        "forms",
+        "mcp",
+        "surveys"
+      ]
+    },
+    {
+      "name": "jotform",
+      "source": "./third_party/jotform",
+      "description": "Create and edit forms, then read submissions.",
+      "version": "1.0.0+claude.f0888b02",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "jotform",
+        "forms",
+        "mcp",
+        "submissions"
+      ]
+    },
+    {
+      "name": "semrush",
+      "source": "./third_party/semrush",
+      "description": "Research keywords, backlinks, traffic, and competitors.",
+      "version": "1.0.0+claude.95af90cd",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "semrush",
+        "seo",
+        "mcp",
+        "marketing"
+      ]
+    },
+    {
+      "name": "ahrefs",
+      "source": "./third_party/ahrefs",
+      "description": "Research keywords, backlinks, rankings, and site health.",
+      "version": "1.0.0+claude.2378b5cd",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "ahrefs",
+        "seo",
+        "mcp",
+        "backlinks"
+      ]
+    },
+    {
+      "name": "godaddy",
+      "source": "./third_party/godaddy",
+      "description": "Brainstorm domain names and check availability.",
+      "version": "1.0.0+claude.0888f39d",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "godaddy",
+        "domains",
+        "mcp"
+      ]
+    },
+    {
+      "name": "upwork",
+      "source": "./third_party/upwork",
+      "description": "Search talent, post jobs, and manage contracts.",
+      "version": "1.0.0+claude.1ca3992c",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "upwork",
+        "hiring",
+        "mcp",
+        "freelance"
+      ]
+    },
+    {
+      "name": "workable",
+      "source": "./third_party/workable",
+      "description": "Search candidates, move pipelines, and manage HR records.",
+      "version": "1.0.0+claude.42dca165",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "workable",
+        "recruiting",
+        "mcp",
+        "ats"
+      ]
+    },
+    {
+      "name": "brex",
+      "source": "./third_party/brex",
+      "description": "Query expenses, receipts, bills, cards, and travel.",
+      "version": "1.0.0+claude.e3539c46",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "brex",
+        "finance",
+        "mcp",
+        "expenses"
+      ]
+    },
+    {
+      "name": "todoist",
+      "source": "./third_party/todoist",
+      "description": "Create, find, and complete tasks and projects.",
+      "version": "1.0.1+claude.f9755d97",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "todoist",
+        "tasks",
+        "mcp",
+        "productivity"
+      ]
+    },
+    {
+      "name": "calendly",
+      "source": "./third_party/calendly",
+      "description": "Check availability and book, cancel, or reschedule.",
+      "version": "1.0.0+claude.4cb29725",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "calendly",
+        "scheduling",
+        "mcp",
+        "calendar"
+      ]
+    },
+    {
+      "name": "smartsheet",
+      "source": "./third_party/smartsheet",
+      "description": "Query and update sheets, rows, and workspaces.",
+      "version": "1.0.0+claude.20d65f36",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "smartsheet",
+        "project-management",
+        "mcp"
+      ]
+    },
+    {
+      "name": "wrike",
+      "source": "./third_party/wrike",
+      "description": "Search projects, create tasks, and post comments.",
+      "version": "1.0.0+claude.59c9d2fa",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "wrike",
+        "project-management",
+        "mcp",
+        "tasks"
+      ]
+    },
+    {
+      "name": "coda",
+      "source": "./third_party/coda",
+      "description": "Search docs, read pages, and update tables.",
+      "version": "1.0.0+claude.46654264",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "coda",
+        "docs",
+        "mcp",
+        "knowledge"
+      ]
+    },
+    {
+      "name": "guru",
+      "source": "./third_party/guru",
+      "description": "Search company knowledge and draft verified answers.",
+      "version": "1.0.0+claude.14e0820d",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "guru",
+        "knowledge",
+        "mcp",
+        "search"
+      ]
+    },
+    {
+      "name": "fireflies",
+      "source": "./third_party/fireflies",
+      "description": "Search meeting transcripts, summaries, and action items.",
+      "version": "1.0.0+claude.5c870ab8",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "fireflies",
+        "meetings",
+        "mcp",
+        "transcripts"
+      ]
+    },
+    {
+      "name": "otter",
+      "source": "./third_party/otter",
+      "description": "Search meeting history and pull full transcripts.",
+      "version": "1.0.0+claude.9b6f75fa",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "otter",
+        "meetings",
+        "mcp",
+        "transcripts"
+      ]
+    },
+    {
+      "name": "fathom",
+      "source": "./third_party/fathom",
+      "description": "Search meetings and pull transcripts and summaries.",
+      "version": "1.0.0+claude.25b790ba",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "fathom",
+        "meetings",
+        "mcp",
+        "transcripts"
+      ]
+    },
+    {
+      "name": "craft",
+      "source": "./third_party/craft",
+      "description": "Search, create, and update documents and daily notes.",
+      "version": "1.0.0+claude.f2af6404",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "craft",
+        "notes",
+        "mcp",
+        "documents"
+      ]
+    },
+    {
+      "name": "mem",
+      "source": "./third_party/mem",
+      "description": "Capture, search, and organize notes and collections.",
+      "version": "1.0.0+claude.01f312a0",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "mem",
+        "notes",
+        "mcp",
+        "knowledge"
+      ]
+    },
+    {
+      "name": "readwise",
+      "source": "./third_party/readwise",
+      "description": "Search highlights and Reader documents, save articles.",
+      "version": "1.0.0+claude.13b6c8eb",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "readwise",
+        "reading",
+        "mcp",
+        "highlights"
+      ]
+    },
+    {
+      "name": "similarweb",
+      "source": "./third_party/similarweb",
+      "description": "Analyze website traffic, audiences, and competitors.",
+      "version": "1.0.0+claude.07fb32da",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "similarweb",
+        "analytics",
+        "mcp",
+        "research"
+      ]
+    },
+    {
+      "name": "xero",
+      "source": "./third_party/xero",
+      "description": "Read and write invoices, contacts, reports, and payroll.",
+      "version": "1.0.0+claude.b0953528",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "xero",
+        "accounting",
+        "mcp",
+        "finance"
+      ]
+    },
+    {
+      "name": "attio",
+      "source": "./third_party/attio",
+      "description": "Search and update CRM records, lists, notes, and tasks.",
+      "version": "1.0.0+claude.26e7360a",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "attio",
+        "crm",
+        "sales",
+        "mcp"
+      ]
+    },
+    {
+      "name": "hunter",
+      "source": "./third_party/hunter",
+      "description": "Find and verify emails, discover companies, and save leads.",
+      "version": "1.0.0+claude.97e116f3",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "hunter",
+        "sales",
+        "prospecting",
+        "enrichment",
+        "mcp"
+      ]
+    },
+    {
+      "name": "gamma",
+      "source": "./third_party/gamma",
+      "description": "Generate presentations, documents, and webpages.",
+      "version": "1.0.0+claude.1ce0c4dd",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "gamma",
+        "presentations",
+        "productivity",
+        "mcp"
+      ]
+    },
+    {
+      "name": "webull",
+      "source": "./third_party/webull",
+      "description": "View accounts, positions, orders, watchlists, and market data.",
+      "version": "1.0.1+claude.cd87c38a",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "webull",
+        "finance",
+        "trading",
+        "mcp"
+      ]
+    },
+    {
+      "name": "sp-global",
+      "source": "./third_party/sp-global",
+      "description": "Query S&P Capital IQ financials, prices, and transcripts.",
+      "version": "1.0.0+claude.fd618102",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "s&p global",
+        "kensho",
+        "finance",
+        "mcp"
+      ]
+    },
+    {
+      "name": "interactive-brokers",
+      "source": "./third_party/interactive-brokers",
+      "description": "Review positions, balances, P&L, and draft trade instructions.",
+      "version": "1.0.0+claude.d875a155",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "ibkr",
+        "finance",
+        "trading",
+        "mcp"
+      ]
+    },
+    {
+      "name": "meltwater",
+      "source": "./third_party/meltwater",
+      "description": "Search media and social mentions and pull analytics.",
+      "version": "1.0.0+claude.cce1f826",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "meltwater",
+        "media",
+        "pr",
+        "mcp"
+      ]
+    },
+    {
+      "name": "daloopa",
+      "source": "./third_party/daloopa",
+      "description": "Pull source-linked fundamentals, KPIs, filings, and prices.",
+      "version": "1.0.0+claude.62a2ac7d",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "daloopa",
+        "finance",
+        "research",
+        "mcp"
+      ]
+    },
+    {
+      "name": "excalidraw",
+      "source": "./third_party/excalidraw",
+      "description": "Draw and export hand-drawn diagrams from chat.",
+      "version": "1.0.1+claude.e32e91e2",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "excalidraw",
+        "diagrams",
+        "productivity",
+        "mcp"
+      ]
+    },
+    {
+      "name": "statsig",
+      "source": "./third_party/statsig",
+      "description": "Inspect and manage feature gates, experiments, dynamic configs, and metrics.",
+      "version": "2.0.0+claude.2cb64b36",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "statsig",
+        "feature-flags",
+        "experimentation",
+        "mcp"
+      ]
+    },
+    {
+      "name": "robinhood",
+      "source": "./third_party/robinhood",
+      "description": "View portfolios, positions, orders, watchlists, and market data, and trade in a Robinhood Agentic account.",
+      "version": "1.0.0+claude.9df0b6bf",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "robinhood",
+        "finance",
+        "trading",
+        "mcp"
+      ]
+    },
+    {
+      "name": "coinbase",
+      "source": "./third_party/coinbase",
+      "description": "Check balances, get quotes, and preview or place trades.",
+      "version": "1.0.0+claude.0938a961",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "coinbase",
+        "finance",
+        "crypto",
+        "mcp"
+      ]
+    },
+    {
+      "name": "etoro-trading",
+      "source": "./third_party/etoro-trading",
+      "description": "View your eToro portfolio, balances, positions, and watchlists, research instruments and traders, and prepare and place trades.",
+      "version": "1.0.3+claude.0167fd06",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "etoro",
+        "finance",
+        "trading",
+        "mcp"
+      ]
+    },
+    {
+      "name": "tinyfish",
+      "source": "./third_party/tinyfish",
+      "description": "Browse and automate the web with TinyFish: run multi-step web automations, search the web, extract clean page content, and drive remote stealth browser sessions.",
+      "version": "1.0.1+claude.1a5b7b07",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "tinyfish",
+        "web",
+        "automation",
+        "mcp"
+      ]
+    },
+    {
+      "name": "beehiiv",
+      "source": "./third_party/beehiiv",
+      "description": "Run your beehiiv newsletter from chat: draft and edit posts, organize subscribers with tags, custom fields, and segments, build automations, and review publication, post, and website performance.",
+      "version": "1.0.1+claude.d1dc8c7e",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "beehiiv",
+        "newsletter",
+        "email",
+        "mcp"
+      ]
+    },
+    {
+      "name": "trello",
+      "source": "./third_party/trello",
+      "description": "Manage your Trello workspace from chat: browse and create boards, view and move lists, create, update, move, archive, and complete cards with labels and due dates, manage checklists, capture Inbox cards, schedule Planner focus time, and search across boards.",
+      "version": "1.0.1+claude.b31fea75",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "trello",
+        "project management",
+        "mcp"
+      ]
+    },
+    {
+      "name": "buffer",
+      "source": "./third_party/buffer",
+      "description": "Manage social media with Buffer: draft, schedule, and publish posts across connected channels, manage the queue and ideas, and review post performance.",
+      "version": "1.0.1+claude.b99afe3d",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "buffer",
+        "social media",
+        "scheduling",
+        "mcp"
+      ]
+    },
+    {
+      "name": "plaud",
+      "source": "./third_party/plaud",
+      "description": "Work with your Plaud recordings: list and search meetings and voice notes, read full transcripts with speaker labels, and pull AI summaries, action items, and key topics into your workflow.",
+      "version": "1.0.1+claude.962db603",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "plaud",
+        "meetings",
+        "notes",
+        "mcp"
+      ]
+    },
+    {
+      "name": "posthog-mcp",
+      "source": "./third_party/posthog-mcp",
+      "description": "Work with PostHog from chat: query product analytics and run SQL, manage feature flags and experiments, triage error tracking issues, and review session replays, surveys, and dashboards (URL-only connector to PostHog's hosted MCP server).",
+      "version": "1.0.1+claude.db41cb06",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "posthog",
+        "analytics",
+        "mcp"
+      ]
+    },
+    {
+      "name": "square",
+      "source": "./third_party/square",
+      "description": "Work with payments, orders, catalog, customers, and invoices.",
+      "version": "1.0.0+claude.0e70cf6c",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "square",
+        "payments",
+        "commerce",
+        "mcp"
+      ]
+    }
+  ]
+}

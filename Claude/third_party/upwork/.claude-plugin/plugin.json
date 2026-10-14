@@ -1,0 +1,23 @@
+{
+  "name": "upwork",
+  "displayName": "Upwork",
+  "version": "1.0.0+claude.1ca3992c",
+  "description": "Search talent, post jobs, and manage contracts.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://www.upwork.com/ai/mcp",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "upwork",
+    "freelance",
+    "hiring",
+    "jobs",
+    "contracts",
+    "proposals",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png"
+}
