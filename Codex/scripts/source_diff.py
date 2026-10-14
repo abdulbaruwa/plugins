@@ -9,7 +9,7 @@ import sys
 
 
 CATALOG = ".cursor-plugin/marketplace.json"
-LOCAL_PATHS = ("Codex/", "Claude/", ".github/workflows/codex-ci.yml")
+LOCAL_PATHS = ("Codex/", "Claude/", ".github/workflows/codex-ci.yml", ".github/workflows/claude-ci.yml")
 
 
 def git(root, *args):

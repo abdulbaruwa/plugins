@@ -50,6 +50,8 @@ Run it after pulling upstream changes. It needs only Node 20+, builds in a stagi
 | `--validate` | Read-only. Runs `claude plugin validate --strict` on the marketplace and every plugin. |
 | `--residuals` | Read-only. Lists lines in the output that still mention Cursor, Grok, `.cursor/`, or Cursor-only tool parameters, so you can audit the port. |
 
+The PR review helpers require Python 3.9 or later and create separate artifacts for every run. See [Maintaining both plugin ports](UPDATING.md) for the override workflow, regression checks, strict Claude CI, and weekly reconciliation. CI prepares evidence; merging stays manual.
+
 ## How the port maps Cursor to Claude Code
 
 | Cursor | Claude Code |
@@ -76,12 +78,12 @@ Run it after pulling upstream changes. It needs only Node 20+, builds in a stagi
 | --- | --- |
 | [Teaching](plugins/teaching/) | Ported as-is. |
 | [Continual Learning](plugins/continual-learning/) | The Stop hook runs on Node instead of Bun and keeps its cadence state in the plugin's data directory. Mines Claude Code transcripts (`~/.claude/projects/<slug>/*.jsonl`) and writes `CLAUDE.md`, or `AGENTS.md` when the repo has no `CLAUDE.md`. |
-| [Cursor Team Kit](plugins/cursor-team-kit/) | Cursor's always-apply rules are injected by a `SessionStart` hook. `pr-review-canvas` opens the generated HTML file in your browser instead of Cursor's in-app browser. |
+| [Cursor Team Kit](plugins/cursor-team-kit/) | Cursor's always-apply rules are injected by a `SessionStart` hook. `pr-review-canvas` uses an isolated run directory, accurate visible diffs, and a task-owned preview instead of Cursor's in-app browser. |
 | [Thermos](plugins/thermos/) | Agent references are namespaced (`thermos:thermo-nuclear-review-subagent`). The review agents read their rubric skills by path, since the Skill tool refuses user-only skills. |
 | [Create Plugin](plugins/create-plugin/) | Rewritten to scaffold and validate Claude Code plugins (`.claude-plugin/plugin.json`, `claude plugin init`, `claude plugin validate`). |
 | [Agent Compatibility](plugins/agent-compatibility/) | Review agents run on `haiku` (Cursor's `fast`) with file-writing tools disabled; they can still run shell commands. The published scanner checks Cursor files (`.cursor/rules`, `.cursor/mcp.json`); the review agent treats `CLAUDE.md`, `.claude/`, and `.mcp.json` as equivalents. |
 | [CLI for Agents](plugins/cli-for-agent/) | Ported as-is. |
-| [PR Review Canvas](plugins/pr-review-canvas/) | Renders a self-contained HTML review page instead of a Cursor Canvas. |
+| [PR Review Canvas](plugins/pr-review-canvas/) | Renders a self-contained HTML review page in an isolated run directory with accurate visible diffs and a task-owned preview. |
 | [Docs Canvas](plugins/docs-canvas/) | Renders a self-contained HTML page instead of a Cursor Canvas. The skill is still a placeholder upstream. |
 | [Cursor SDK](plugins/cursor-sdk/) | Unchanged: teaches the `@cursor/sdk` TypeScript SDK. Code it writes needs a Cursor API key. |
 | [Origin Apps](plugins/origin-apps/) | Unchanged: Cursor Origin API skills. |

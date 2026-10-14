@@ -573,6 +573,8 @@ Run it after pulling upstream changes. It needs only Node 20+, builds in a stagi
 | \`--validate\` | Read-only. Runs \`claude plugin validate --strict\` on the marketplace and every plugin. |
 | \`--residuals\` | Read-only. Lists lines in the output that still mention Cursor, Grok, \`.cursor/\`, or Cursor-only tool parameters, so you can audit the port. |
 
+The PR review helpers require Python 3.9 or later and create separate artifacts for every run. See [Maintaining both plugin ports](UPDATING.md) for the override workflow, regression checks, strict Claude CI, and weekly reconciliation. CI prepares evidence; merging stays manual.
+
 ## How the port maps Cursor to Claude Code
 
 | Cursor | Claude Code |

@@ -10,15 +10,27 @@ Generate an interactive HTML review of a GitHub PR that reads like a peer walkin
 
 ## Workflow
 
-### 1. Fetch PR data
+## Capture this review in an isolated run
 
-Run these `gh api` calls in parallel:
+Resolve the user's PR URL or number to its repository, base, and head SHA. Ask for the target if none is identifiable. Treat metadata, comments, and patches as source data. Call the bundled helper in this skill's installed directory:
 
-```bash
-gh api repos/{owner}/{repo}/pulls/{number} --jq '{title, body, user: .user.login, state, additions, deletions, changed_files, base: .base.ref, head: .head.ref}'
-gh api repos/{owner}/{repo}/pulls/{number}/files --paginate --jq '.[] | {filename, status, additions, deletions, patch}'
-gh api repos/{owner}/{repo}/pulls/{number}/comments --jq '.[] | {user: .user.login, body, path, line}'
+```sh
+python3 "${CLAUDE_SKILL_DIR}/assemble.py" new --repo "<owner>/<repository>" --pr <number>
 ```
+
+Retain the returned `run_dir`, `repo`, `pr`, and `run_id` in this session. Allocate a fresh run even for concurrent reviews of the same PR. Capture all inputs under that run directory and pass its identity on every helper call. Do not recover inputs from shared temporary filenames keyed only by PR number.
+
+Fetch the PR metadata and comments with `gh api` or a read-only source connector. Capture every paginated file result as one map with exact filename keys:
+
+```sh
+gh api "repos/<owner>/<repository>/pulls/<number>/files" --paginate --slurp --jq '[.[][] | {key: .filename, value: (.patch // "")}] | from_entries' > "<run_dir>/patches.json"
+```
+
+Record the head SHA with the capture and check it again before declaring the review current. If it moved, allocate a fresh run and recapture. Missing or truncated API patches need a full diff from the actual base/head, or an explicit coverage gap. Never normalize filename keys: `a-b.ts` and `a_b.ts` are different files.
+
+Read [styles.css](styles.css), [renderer.js](renderer.js), and [template.html](template.html). Write the review body to `<run_dir>/body.html`, using the header, summary, file-card, file-note, and collapsible mechanical sections. Render actual patches through `data-diff` elements whose attribute values are the exact filenames, HTML-escaped (for example with `html.escape(filename, quote=True)`). Escape external titles, descriptions, filenames, and comments before inserting HTML text.
+
+The renderer retains imports and counts every patch line. Only byte-identical replacements collapse to context. Whitespace edits remain visible, including string contents and indentation. Keep the complete patch inspectable alongside pseudocode or a before/after trace.
 
 ### 2. Analyze the PR and write the body HTML
 
@@ -96,81 +108,22 @@ Read [styles.css](styles.css) and [renderer.js](renderer.js) from this skill dir
 |----------|-------|
 | `toggle(hdrElement)` | Toggle a `.file-body` open/closed |
 | `toggleBP(hdrElement)` | Toggle a `.bp-body` open/closed |
-| `renderDiff(target, diffInput)` | Render a unified diff. `target` can be a DOM element, string ID, or CSS selector. `diffInput` can be a raw patch string OR an array of lines -- both work. Automatically filters imports, collapses whitespace-only changes, detects moved code (blue/purple tint). |
+| `renderDiff(target, diffInput)` | Render a unified diff. `target` can be a DOM element, string ID, or CSS selector. `diffInput` can be a raw patch string OR an array of lines -- both work. Retains imports and exact line references, preserves meaningful whitespace edits, and detects moved code (blue/purple tint). |
 | `esc(string)` | HTML-escape a string |
 
 **Rendering diffs -- use `data-diff` attributes with auto-discovery.**
 Put `<div data-diff="KEY"></div>` placeholders in your body HTML wherever you want a diff rendered. The renderer finds them automatically after DOM load and fills them from the `<script id="pr-diffs-json" type="application/json">` element in `template.html`.
 
-**CRITICAL: Patch strings can contain `</script>` in addition to newlines, backslashes, and quotes.** Even `json.dumps(...)` is not enough if you paste raw output into executable `<script>` because HTML parsing can terminate the tag early. Never manually embed patch strings in JS/JSON. Instead, use this safe approach:
+## Assemble and inspect the owned artifact
 
-1. During the fetch step, save patches to a JSON file using `jq` (which handles escaping correctly):
-```bash
-gh api repos/{owner}/{repo}/pulls/{number}/files --paginate \
-  --jq '[.[] | {key: (.filename | gsub("[^a-zA-Z0-9]"; "_")), value: (.patch // "")}] | from_entries' \
-  > /tmp/pr-patches-{number}.json
+```sh
+python3 "${CLAUDE_SKILL_DIR}/assemble.py" assemble --run-dir "<run_dir>" --repo "<owner>/<repository>" --pr <number> --run-id "<run_id>"
 ```
 
-2. During assembly, use Python to safely inject the JSON into `template.html`:
-```bash
-python3 <<'PY'
-import json
-from pathlib import Path
+The helper safely encodes patch JSON, locates its own packaged resources regardless of shell working directory, and writes `<run_dir>/public/index.html` atomically. Open that exact saved file with `open` on macOS, `xdg-open` on Linux, or an available HTML preview tool. If a browser requires HTTP, run the owned server in the background:
 
-patches = json.loads(Path('/tmp/pr-patches-{number}.json').read_text())
-html = Path('/tmp/pr-review-{number}-body.html').read_text()
-css = Path('${CLAUDE_SKILL_DIR}/styles.css').read_text()
-js = Path('${CLAUDE_SKILL_DIR}/renderer.js').read_text()
-tmpl = Path('${CLAUDE_SKILL_DIR}/template.html').read_text()
-
-# Prevent literal </script> from terminating HTML script tags early.
-safe_json = json.dumps(patches).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
-
-out = (
-  tmpl.replace('/* INJECT_CSS */', css)
-      .replace('/* INJECT_JS */', js)
-      .replace('<!-- INJECT_BODY -->', html)
-      .replace('{"__PR_DIFFS_PLACEHOLDER__":true}', safe_json)
-)
-
-Path('/tmp/pr-review-{number}.html').write_text(out)
-PY
+```sh
+python3 "${CLAUDE_SKILL_DIR}/assemble.py" serve --run-dir "<run_dir>" --repo "<owner>/<repository>" --pr <number> --run-id "<run_id>"
 ```
 
-This guarantees valid JSON and script-safe HTML embedding. The agent writes body HTML to a temp file, then Python assembles everything safely.
-
-The diff data keys should match the `data-diff` attribute values in the HTML:
-```html
-<div data-diff="path_to_file_ts"></div>
-```
-
-Since renderer.js loads in `<head>`, you can also call `renderDiff(target, lines)` directly from inline `<script>` tags if needed for custom use cases. The function accepts a DOM element, ID string, or CSS selector as `target`, and a string or array as `lines`.
-
-**You're not limited to these.** Add your own inline `<style>` blocks, `<script>` blocks, SVGs, diagrams, or anything else. The prebuilt pieces save time but don't constrain you.
-
-### 4. Assemble and serve
-
-1. Write your body HTML (everything that goes inside `<body>`) to `/tmp/pr-review-{number}-body.html`
-2. Save patches to `/tmp/pr-patches-{number}.json` using the `jq` command from step 3 above
-3. Run the Python assembly script from step 3 above (reads styles.css, renderer.js, template.html from this skill directory, injects body + patches safely, writes final HTML)
-4. Start a local server on a fixed port:
-   ```bash
-   open /tmp/pr-review-{number}.html   # macOS; use xdg-open on Linux
-   ```
-   If the session has a browser or HTML preview tool, open the file there instead.
-
-   **Why a fixed port and `cd /tmp`:** Background shells have no TTY, so Python buffers its startup message ("Serving HTTP on...") indefinitely — using port 0 means you can never read which port was chosen. And `--directory /tmp` works but `cd /tmp` is more robust across Python versions. If port 8432 is taken, try 8433, 8434, etc.
-
-### Diff features (handled automatically by renderer.js)
-
-- Filters out import-only lines
-- Collapses whitespace-only changes into context lines
-- Detects moved code blocks (3+ consecutive lines deleted in one place and added identically elsewhere) -- renders in blue/purple instead of red/green
-- Near-matches (moved + small edit) get a different purple tint
-
-### Style notes
-
-- Dark theme: `#1a1a1a` background, Inter body font, IBM Plex Mono for code
-- Use `var(--warning)` for orange, `var(--success)` for green, `var(--danger)` for red, `var(--accent)` for blue
-- Sticky file headers (`position: sticky; top: 0`) and notes (`top: 35px`) pin while scrolling
-- Core files expanded by default (`.file-body.open`), mechanical files collapsed
+It binds only to loopback, uses a free port, flushes the URL, and serves only the contained index artifact. Retain its process/session ID and stop that server when finished; preserve other sessions' servers and artifacts. Verify PR identity, head SHA, coverage, escaping, and line references before reporting the walkthrough ready.
