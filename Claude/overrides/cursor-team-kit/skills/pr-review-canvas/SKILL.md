@@ -76,7 +76,7 @@ fetch(url):
       <div class="bp-hdr" onclick="toggleBP(this)">
         <span>Show full implementation (+173 lines)</span><span class="chev">&#9654;</span>
       </div>
-      <div class="bp-body"><div data-diff="retryClient"></div></div>
+      <div class="bp-body"><div data-diff="retryClient.ts"></div></div>
     </div>
   </div>
 </div>

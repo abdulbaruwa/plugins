@@ -27,7 +27,7 @@ const repoRoot = path.resolve(claudeRoot, "..");
 const overridesRoot = path.join(claudeRoot, "overrides");
 const lockPath = path.join(overridesRoot, "upstream.lock.json");
 const GENERATED = ["plugins", "third_party", ".claude-plugin", "README.md"];
-const IGNORED_NAMES = new Set([".DS_Store", "node_modules"]);
+const IGNORED_NAMES = new Set([".DS_Store", "node_modules", "__pycache__"]);
 const READ_ONLY_TOOLS = ["Edit", "Write", "NotebookEdit"];
 const TEXT_FILE = /\.(md|mdc|sh|ts|mjs|js|json|yaml|yml|tsv|txt|html|css)$/;
 const MCP_SERVER_KEYS = new Set(["type", "url", "headers", "command", "args", "env", "placement", "auth"]);
@@ -58,7 +58,7 @@ function writeJson(file, value) {
 function walk(dir, base = dir) {
   if (!fs.existsSync(dir)) return [];
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
-    if (IGNORED_NAMES.has(entry.name)) return [];
+    if (IGNORED_NAMES.has(entry.name) || (entry.isFile() && /\.py[co]$/.test(entry.name))) return [];
     const full = path.join(dir, entry.name);
     if (entry.isSymbolicLink()) throw new Error(`${path.relative(repoRoot, full)}: symlinks are not supported`);
     if (entry.isDirectory()) return walk(full, base);

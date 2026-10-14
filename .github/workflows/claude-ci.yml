@@ -34,5 +34,7 @@ jobs:
         run: node Claude/scripts/build.mjs --check
       - name: Run Claude review regressions
         run: python -m unittest discover -s Claude/scripts -p 'test_*.py'
+      - name: Confirm regressions leave generated output current
+        run: node Claude/scripts/build.mjs --check
       - name: Validate all Claude marketplace packages
         run: node Claude/scripts/build.mjs --validate

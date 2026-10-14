@@ -27,6 +27,9 @@ class ClaudeRendererTests(unittest.TestCase):
                         *[str(ROOT / "Claude/plugins" / plugin / "skills/pr-review-canvas/renderer.js")
                           for plugin in ("pr-review-canvas", "cursor-team-kit")]], check=True)
 
+    def test_documented_example_renders_its_actual_file(self):
+        subprocess.run(["node", str(ROOT / "Claude/scripts/test_examples.cjs")], check=True)
+
 
 class ClaudeOverrideTests(unittest.TestCase):
     def test_versionless_source_change_behind_renderer_override_is_rejected(self):
@@ -36,6 +39,15 @@ class ClaudeOverrideTests(unittest.TestCase):
             fixture = Path(directory) / "plugins"
             shutil.copytree(ROOT, fixture, ignore=shutil.ignore_patterns(
                 ".git", "node_modules", ".venv", "__pycache__", ".build-*"))
+            package = fixture / "Claude/plugins/pr-review-canvas/skills/pr-review-canvas"
+            cache = package / "__pycache__"
+            cache.mkdir()
+            (cache / "assemble.cpython-test.pyc").write_bytes(b"runtime cache")
+            (package / "assemble.pyc").write_bytes(b"legacy runtime cache")
+            (package / "assemble.pyo").write_bytes(b"optimized runtime cache")
+            clean = subprocess.run(["node", "Claude/scripts/build.mjs", "--check"],
+                                   cwd=fixture, capture_output=True, text=True)
+            self.assertEqual(clean.returncode, 0, clean.stderr)
             renderer = fixture / "cursor-team-kit/skills/pr-review-canvas/renderer.js"
             renderer.write_text(renderer.read_text() + "\n// upstream fix without a version bump\n")
             result = subprocess.run(["node", "Claude/scripts/build.mjs", "--check"],
