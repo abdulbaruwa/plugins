@@ -32,16 +32,16 @@ fork it. improve it. make it yours. PRs are welcome!
 /plugin install pstack@cursor-plugins-claude
 ```
 
-in claude code:
+in this community Claude Code port, from a clone of this repository:
 
 ```bash
-/plugin marketplace add cursor/plugins
-/plugin install pstack@cursor-plugins
+/plugin marketplace add <path-to-repo>/Claude
+/plugin install pstack@cursor-plugins-claude
 ```
 
 claude code prefixes plugin commands and agents, so `/poteto-mode` is `/pstack:poteto-mode`. the [claude code adapter](./docs/harness/claude-code.md) maps every other cursor name. in claude code, `/pstack:setup-pstack` writes your model choices to `~/.claude/rules/pstack-models.md`, and a step that needs a cursor-only feature, such as bugbot or automations, is skipped with a one-line note.
 
-claude code installs a generated copy of pstack, including this readme and the guide, from [`harness/pstack/`](https://github.com/cursor/plugins/tree/main/harness/pstack) at the repository root. after you change pstack, run `node scripts/generate-pstack-harness-trees.mjs` from the repository root and commit the result. ci fails while the generated copy is out of date.
+this community port is generated under `Claude/plugins/pstack/`. maintain it through `Claude/scripts/port.config.mjs` and `Claude/overrides/pstack/`, then run `node Claude/scripts/build.mjs` from the repository root and commit the generated output. `node Claude/scripts/build.mjs --check` checks output and override locks; review changed sources before updating any lock. the separate upstream `harness/pstack/` tree is not this port.
 
 ## get started
 

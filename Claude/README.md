@@ -163,7 +163,7 @@ Remote servers sign in through `/mcp` the first time you use them, and plugins t
 
 ## Add these servers yourself
 
-These servers need an OAuth client of your own: their authorization servers offer no dynamic client registration, and a Claude Code plugin cannot hold a client secret. Create an OAuth app with the provider, register `http://localhost:8787/callback` as its redirect URI, then add the server:
+These servers require provider-specific endpoint, registration, redirect, or secret configuration before use. Read each row and verify those requirements first. Where the provider requires your own OAuth app, register `http://localhost:8787/callback` as its redirect URI. The commands below are templates for manually registered clients; when the selected endpoint supports dynamic client registration for Claude Code, omit the explicit client ID and any unnecessary secret. A plugin cannot hold a client secret. These recipes do not establish connectivity or authenticated tool coverage.
 
 | Server | Why | Command |
 | --- | --- | --- |

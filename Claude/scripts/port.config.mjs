@@ -43,10 +43,11 @@ export const SKIP = {
   teams: CURSOR_HOSTED,
 };
 
-// MCP servers that need an OAuth client of your own. Their authorization servers
-// offer no dynamic client registration, and Claude Code reads client secrets only
+// Servers excluded from automatic packaging until their endpoint, registration,
+// redirect, or secret requirements are configured and verified. Some support DCR;
+// others require an OAuth client of your own. Claude Code reads client secrets only
 // from `claude mcp add --client-secret` (or MCP_CLIENT_SECRET), never from a plugin.
-// Claude/README.md prints a manual recipe for each one instead.
+// Claude/README.md prints provider-specific qualifications and manual templates.
 //   why     shown in the README
 //   secret  whether the provider's client needs a secret (default: the Cursor config has CLIENT_SECRET)
 export const MANUAL_MCP = {
@@ -168,7 +169,9 @@ const PSTACK_RUNTIME = [
   [/local agents are dead, cloud work is not\./g, "every subagent is gone; worktrees, pushed branches, and PRs survive."],
   [/reattach cloud work by PR and branch/g, "reattach work by PR and branch"],
   [/Never resume an agent to check on it\. A resume restarts an idle agent\./g, "Never message an agent just to check on it. A `SendMessage` wakes an idle agent."],
-  [/in the current agent's store \(path in the system prompt\)/g, "in a durable store outside the repo, `~/.claude/pstack/` (create it, and pass it to `orch` as `--store` or `ORCH_STORE`)"],
+  [/in the (?:current|root) agent's store \(path in the system prompt\)/g, "in a durable store outside the repo, `~/.claude/pstack/` (create it, and pass it to `orch` as `--store` or `ORCH_STORE`)"],
+  [/Each owner is a Cursor cloud agent/g, 'Each owner is a local Claude Code subagent in its own worktree (`isolation: "worktree"`)'],
+  [/Assume the VM dies\./g, "Assume the session ends; subagents stop, while worktrees, pushed branches, and PRs survive."],
   [/the agent store's `docs\/`/g, "the pstack store's `docs/` (`~/.claude/pstack/docs/`)"],
   [/the cloud agent's status in the Cursor dashboard/g, "the agent's last output"],
   [/on its own cloud VM at the PR head/g, "in its own worktree at the PR head"],
@@ -424,6 +427,16 @@ export const PLUGINS = {
       },
     ],
     patches: [
+      {
+        file: "README.md",
+        find: "in claude code:\n\n```bash\n/plugin marketplace add cursor/plugins\n/plugin install pstack@cursor-plugins\n```",
+        replace: "in this community Claude Code port, from a clone of this repository:\n\n```bash\n/plugin marketplace add <path-to-repo>/Claude\n/plugin install pstack@cursor-plugins-claude\n```",
+      },
+      {
+        file: "README.md",
+        find: "claude code installs a generated copy of pstack, including this readme and the guide, from [`harness/pstack/`](https://github.com/cursor/plugins/tree/main/harness/pstack) at the repository root. after you change pstack, run `node scripts/generate-pstack-harness-trees.mjs` from the repository root and commit the result. ci fails while the generated copy is out of date.",
+        replace: "this community port is generated under `Claude/plugins/pstack/`. maintain it through `Claude/scripts/port.config.mjs` and `Claude/overrides/pstack/`, then run `node Claude/scripts/build.mjs` from the repository root and commit the generated output. `node Claude/scripts/build.mjs --check` checks output and override locks; review changed sources before updating any lock. the separate upstream `harness/pstack/` tree is not this port.",
+      },
       {"file": "skills/poteto-mode/SKILL.md", "find": "**Match the model to the job.** Before each spawn, start from the role's line or default and pick the reasoning level and speed the job needs. The `/setup-pstack` budget sets each role's starting level, xhigh by default. Raise it one step, up to max, for the hardest or subtlest work. Lower it one step for judgment and two or more steps for routine work. Use fast mode only when the job is urgent, meaning CI or trunk is red or a person is blocked on the result right now. Otherwise use standard speed, the same slug without `-fast`. Verification is the exception and stays on the `swarm workers` model and speed (`grok-4.7-xhigh-fast` by default). Change only the effort level and whether the slug is fast, and keep the family the role names, so a diverse panel stays diverse. If the family has no slug at that level and speed, use its nearest slug. A role on `auto` or `inherit-parent` stays on the parent model. If the Task tool rejects the adjusted slug, do not try another adjusted slug. Use the role's line or default and say so.", "replace": "**Match the model to the job.** Start from the configured role alias and budget. Keep `opus`, `sonnet`, `haiku`, `fable`, or inherited model selection; never construct aliases such as `sonnet-fast` or append an effort suffix. When the Agent tool exposes a separate `effort` parameter, choose a supported value for the task and honor the configured budget. Use a speed setting only when the actual session tool supports it. Omit unsupported fields and state the limitation. An inherited role remains inherited."},
       {"file": "docs/guide/01-setup.md", "find": "In Claude Code, run `/plugin marketplace add cursor/plugins`, then `/plugin install pstack@cursor-plugins`. Claude Code prefixes plugin commands, so each command in this guide takes a `pstack:` prefix there, such as `/pstack:setup-pstack`, which writes its model rule to `~/.claude/rules/pstack-models.md`. The [Claude Code adapter](../harness/claude-code.md) covers the other differences.", "replace": "Use the community marketplace installed above. Commands take a `pstack:` prefix, such as `/pstack:setup-pstack`, and the [native Claude Code adapter](../harness/claude-code.md) explains this port's routing and session boundaries."},
       {
