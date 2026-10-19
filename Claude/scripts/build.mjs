@@ -505,7 +505,7 @@ const row = (cells) => `| ${cells.map(cell).join(" | ")} |`;
 function manualMcpRecipe(name, spec) {
   const mcp = readJson(path.join(repoRoot, "third_party", name, "mcp.json"));
   const [[id, server]] = Object.entries(mcp.mcpServers);
-  const url = server.url.replace(/\$\{([A-Z_]+)[^}]*\}/g, (_, v) => `<${v.toLowerCase().replace(/_/g, "-")}>`);
+  const url = (spec.url ?? server.url).replace(/\$\{([A-Z_]+)[^}]*\}/g, (_, v) => `<${v.toLowerCase().replace(/_/g, "-")}>`);
   const secret = server.auth?.CLIENT_SECRET;
   const needsSecret = spec.secret ?? Boolean(secret && !/:-\}$/.test(secret));
   const port = config.OAUTH_CALLBACK_PORT;
@@ -546,7 +546,7 @@ Inside a session, \`/plugin\` opens the same browser. Skills run as \`/<plugin>:
 
 A marketplace added from a local folder loads its plugins in place, so a rebuild takes effect at the next session or after \`/reload-plugins\`. Each plugin's version carries a content hash (\`1.0.0+claude.<hash>\`), so installs that cache by version also pick up every change.
 
-To use the marketplace from GitHub without cloning, point \`extraKnownMarketplaces\` in \`~/.claude/settings.json\` at this folder (untested with this repo). The repository root also has Cursor's own \`.claude-plugin/marketplace.json\`, which lists only \`origin-apps\`; the \`path\` key is what selects this one:
+To use the marketplace from GitHub without cloning, point \`extraKnownMarketplaces\` in \`~/.claude/settings.json\` at this folder (untested with this repo). The repository root also has a separate upstream \`.claude-plugin/marketplace.json\`; the \`path\` key is what selects this one:
 
 \`\`\`json
 {
@@ -611,7 +611,7 @@ ${thirdParty.map((p) => row([`[${p.displayName}](${p.source.slice(2)}/)`, p.desc
 
 ## Add these servers yourself
 
-These servers need an OAuth client of your own: their authorization servers offer no dynamic client registration, and a Claude Code plugin cannot hold a client secret. Create an OAuth app with the provider, register \`${redirect}\` as its redirect URI, then add the server:
+These servers require provider-specific endpoint, registration, redirect, or secret configuration before use. Read each row and verify those requirements first. Where the provider requires your own OAuth app, register \`${redirect}\` as its redirect URI. The commands below are templates for manually registered clients; when the selected endpoint supports dynamic client registration for Claude Code, omit the explicit client ID and any unnecessary secret. A plugin cannot hold a client secret. These recipes do not establish connectivity or authenticated tool coverage.
 
 ${row(["Server", "Why", "Command"])}
 ${row(["---", "---", "---"])}

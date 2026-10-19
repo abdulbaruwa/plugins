@@ -80,3 +80,7 @@ Tell the user the rule was written and that it applies to new sessions. Re-runni
 ### 7. Offer a verification skill (optional)
 
 Check whether the project has a way to drive the real app for proof (a `verify-*` skill, or an existing harness). If not, offer once: "want a project-local verification skill, so agents can drive the app the way a user does and prove changes work? I can generate one with /pstack:create-verification-skill." On yes, read and follow `../create-verification-skill/SKILL.md` (it is user-only, so the Skill tool will not load it). On no, move on without pushing.
+
+### 8. Offer a formal verification skill (optional)
+
+If the project has no skill running a model checker, proof, or code-level verifier against named code, offer once to create one with `/pstack:create-formal-verification-skill`. On acceptance, read and follow `../create-formal-verification-skill/SKILL.md`; it is user-only, so the Skill tool does not load it. On decline, continue without pushing. Existing checks that no longer describe their code use `../maintain-formal-verification-skill/SKILL.md`. A generated-input fallback is not a formal proof.

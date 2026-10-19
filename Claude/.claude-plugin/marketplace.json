@@ -209,7 +209,7 @@
       "name": "pstack",
       "source": "./plugins/pstack",
       "description": "if you want to go fast, go deep first. pstack helps you write less, but higher quality code. rigorous agent workflows you can parallelize with confidence.",
-      "version": "0.15.23+claude.1099b316",
+      "version": "0.15.28+claude.748f070c",
       "author": {
         "name": "Lauren Tan"
       },
@@ -1252,6 +1252,57 @@
         "square",
         "payments",
         "commerce",
+        "mcp"
+      ]
+    },
+    {
+      "name": "finary",
+      "source": "./third_party/finary",
+      "description": "Read your net worth, accounts, holdings, spending, and budgets.",
+      "version": "1.0.0+claude.38910488",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "finary",
+        "finance",
+        "wealth",
+        "mcp"
+      ]
+    },
+    {
+      "name": "tiktok-for-business",
+      "source": "./third_party/tiktok-for-business",
+      "description": "Manage TikTok ad campaigns, ad groups, ads, audiences, creatives, and reports.",
+      "version": "1.0.0+claude.83e1a45a",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "tiktok",
+        "advertising",
+        "marketing",
+        "mcp"
+      ]
+    },
+    {
+      "name": "gusto",
+      "source": "./third_party/gusto",
+      "description": "Work with payroll, employees, contractors, time off, and reports.",
+      "version": "1.0.0+claude.a6b03918",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "gusto",
+        "payroll",
+        "hr",
         "mcp"
       ]
     }

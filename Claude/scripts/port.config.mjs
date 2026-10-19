@@ -23,11 +23,16 @@ export const SKIP = {
   finance: "Grok Bot only (`minClientVersions.cursor` is `never`).",
   "shopify-store": "Grok Bot only (`minClientVersions.cursor` is `never`).",
   tailscale: "Grok Bot only: joins Grok Bot to a tailnet.",
+  gopuff: "Grok Bot only, with a fixed mcp-grok-bot OAuth client; no supported Claude Code registration is supplied.",
   "x-money": "Grok Bot only (`minClientVersions.cursor` is `never`).",
-  "quickbooks-online": "No MCP config in the Cursor plugin; Cursor wires the server up on its side.",
   workday: "No MCP config in the Cursor plugin; Cursor wires the server up on its side.",
+  "whatsapp-business": "Metadata only; no MCP endpoint or implementation is supplied.",
+  "zoho-books": "Metadata only; no MCP endpoint or implementation is supplied.",
+  "zoho-crm": "Metadata only; no MCP endpoint or implementation is supplied.",
+  "zoho-desk": "Metadata only; no MCP endpoint or implementation is supplied.",
   zoom: "Zoom accepts only a `127.0.0.1` loopback redirect and rejects `localhost`, and Claude Code always signs in through `http://localhost:<port>/callback`.",
   "google-docs": CURSOR_HOSTED,
+  "google-ads": CURSOR_HOSTED,
   "google-drive": CURSOR_HOSTED,
   "google-sheets": CURSOR_HOSTED,
   "google-slides": CURSOR_HOSTED,
@@ -38,13 +43,17 @@ export const SKIP = {
   teams: CURSOR_HOSTED,
 };
 
-// MCP servers that need an OAuth client of your own. Their authorization servers
-// offer no dynamic client registration, and Claude Code reads client secrets only
+// Servers excluded from automatic packaging until their endpoint, registration,
+// redirect, or secret requirements are configured and verified. Some support DCR;
+// others require an OAuth client of your own. Claude Code reads client secrets only
 // from `claude mcp add --client-secret` (or MCP_CLIENT_SECRET), never from a plugin.
-// Claude/README.md prints a manual recipe for each one instead.
+// Claude/README.md prints provider-specific qualifications and manual templates.
 //   why     shown in the README
 //   secret  whether the provider's client needs a secret (default: the Cursor config has CLIENT_SECRET)
 export const MANUAL_MCP = {
+  "highlevel": { why: "Upstream uses a client-specific Cursor v2 endpoint. This recipe selects the separately documented universal endpoint, with fewer tools; verify provider-supported client registration, redirect support, and the required tools before adding it.", url: "https://services.leadconnectorhq.com/mcp/", secret: false },
+  "meta-ads": { why: "Upstream uses Cursor's registered Meta app ID and no dynamic client registration. Register a Meta OAuth client with your own allowed redirect URI; do not reuse Cursor's app ID.", secret: false },
+  "quickbooks-online": { why: "Intuit now publishes an MCP endpoint, but the upstream setup relies on Cursor-owned OAuth credentials. Verify provider-supported Claude Code client registration and redirect support first; connectivity is unverified.", secret: false },
   docusign: { why: "Needs your own Docusign integration key and secret." },
   gong: { why: "Needs your own Gong OAuth client ID and secret." },
   hubspot: { why: "Needs your own HubSpot app client ID and secret." },
@@ -154,18 +163,16 @@ const PSTACK_RUNTIME = [
   [/When a worker must start from a non-default pushed branch, pass `cloud_base_branch`\./g, "A worktree starts from the default branch, so a worker that must start from another pushed branch runs `git fetch origin <branch> && git checkout <branch>` first."],
   [/`environment: "cloud"`/g, '`isolation: "worktree"`'],
   [/full Agent schema including `environment`/g, "full Agent schema including `isolation`"],
-  [/parallel cloud workers/g, "parallel workers"],
-  [/, not the cloud concurrency limit/g, ""],
   [/Agents are spawned, resumed, and drained only through the Agent tool\./g, "Agents are spawned with the Agent tool, continued with `SendMessage`, and drained from their completion notifications."],
   [/Every spawn and every resume carries the standing orders verbatim\./g, "Every spawn and every `SendMessage` continuation carries the standing orders verbatim."],
   [/Local spawns may reference the standing-orders file by store path\. Verbatim paste is for cloud spawns and every resume\./g, "Spawns may reference the standing-orders file by store path. Paste it verbatim into every `SendMessage` continuation."],
   [/local agents are dead, cloud work is not\./g, "every subagent is gone; worktrees, pushed branches, and PRs survive."],
   [/reattach cloud work by PR and branch/g, "reattach work by PR and branch"],
   [/Never resume an agent to check on it\. A resume restarts an idle agent\./g, "Never message an agent just to check on it. A `SendMessage` wakes an idle agent."],
-  [/in the current agent's store \(path in the system prompt\)/g, "in a durable store outside the repo, `~/.claude/pstack/` (create it, and pass it to `orch` as `--store` or `ORCH_STORE`)"],
+  [/in the (?:current|root) agent's store \(path in the system prompt\)/g, "in a durable store outside the repo, `~/.claude/pstack/` (create it, and pass it to `orch` as `--store` or `ORCH_STORE`)"],
+  [/Each owner is a Cursor cloud agent/g, 'Each owner is a local Claude Code subagent in its own worktree (`isolation: "worktree"`)'],
+  [/Assume the VM dies\./g, "Assume the session ends; subagents stop, while worktrees, pushed branches, and PRs survive."],
   [/the agent store's `docs\/`/g, "the pstack store's `docs/` (`~/.claude/pstack/docs/`)"],
-  [/, each a Cursor cloud agent,/g, ', each in its own worktree (`isolation: "worktree"`),'],
-  [/One Cursor cloud agent per PR/g, "One subagent per PR, in its own worktree,"],
   [/the cloud agent's status in the Cursor dashboard/g, "the agent's last output"],
   [/on its own cloud VM at the PR head/g, "in its own worktree at the PR head"],
   [/4-6 options each, `allow_multiple: true`/g, 'up to 4 options each (the tool\'s limit; it adds an "Other" answer), `multiSelect: true`'],
@@ -175,7 +182,7 @@ const PSTACK_RUNTIME = [
   [/`\/loop` is Cursor's built-in wake mechanism/g, "`/loop` is Claude Code's built-in wake mechanism"],
   [/\b(a|After a) Cursor restart\b/g, "$1 Claude Code restart"],
   [/\brestart Cursor\b/g, "restart Claude Code"],
-  [/Families go by prefix: `claude-\*` and `grok-\*`\./g, "Families are the aliases `opus`, `sonnet`, `haiku`, and `fable`."],
+  [/Families go by prefix: `claude-\*`, and `grok-\*` with `cursor-grok-\*` and `composer-\*`\./g, "Models are the accepted aliases `opus`, `sonnet`, `haiku`, and `fable`; non-Claude source families map through this port's role defaults."],
   [/\.cursor\/worktrees\/myrepo\/x/g, ".claude/worktrees/x"],
   [/Cursor's built-in babysit skill/g, "any other installed babysit skill"],
   [/ or from Customize in the sidebar/g, " or from the `/plugin` browser"],
@@ -410,6 +417,10 @@ export const PLUGINS = {
     exclude: ["automations", "skills/make-bot-ui"],
     rewrites: [...PSTACK_MODELS, ...PSTACK_RUNTIME, ...SKILL_CREATOR, ...REFLECT_EVIDENCE],
     prepend: [
+      {"file": "skills/poteto-mode/SKILL.md", "text": "Read ../../docs/harness/claude-code.md for this port's native tools, explicit-only skill routing, model fields, conversation identity, and prerequisite gates before following the runtime instructions below."},
+      {"file": "skills/create-formal-verification-skill/SKILL.md", "text": "Run real-code negative controls in an isolated worktree or owned scratch checkout. Preserve unrelated changes, restore only your control edits, and retain evidence outside the disposable checkout. A generated-input fallback is testing, not a formal proof."},
+      {"file": "skills/maintain-formal-verification-skill/SKILL.md", "text": "Run real-code negative controls in an isolated worktree or owned scratch checkout. Preserve unrelated changes, restore only your control edits, and retain evidence outside the disposable checkout. A generated-input fallback is testing, not a formal proof."},
+      {"file": "skills/sharpen/SKILL.md", "text": "Keep the user's explicit scope, constraints, and approval gates. Propose changing a user-owned constraint instead of silently relaxing it."},
       {
         file: "skills/poteto-mode/playbooks/orchestrate.md",
         text: "> **Claude Code port.** This playbook was written for Cursor, where workers run as cloud agents on their own VMs and survive the coordinator. Here every worker is a local subagent in a worktree on this machine, and every subagent ends with the session; only worktrees, pushed branches, and PRs survive a restart. Read \"cloud\" below as \"worktree\", and size waves for one machine.",
@@ -417,8 +428,20 @@ export const PLUGINS = {
     ],
     patches: [
       {
+        file: "README.md",
+        find: "in claude code:\n\n```bash\n/plugin marketplace add cursor/plugins\n/plugin install pstack@cursor-plugins\n```",
+        replace: "in this community Claude Code port, from a clone of this repository:\n\n```bash\n/plugin marketplace add <path-to-repo>/Claude\n/plugin install pstack@cursor-plugins-claude\n```",
+      },
+      {
+        file: "README.md",
+        find: "claude code installs a generated copy of pstack, including this readme and the guide, from [`harness/pstack/`](https://github.com/cursor/plugins/tree/main/harness/pstack) at the repository root. after you change pstack, run `node scripts/generate-pstack-harness-trees.mjs` from the repository root and commit the result. ci fails while the generated copy is out of date.",
+        replace: "this community port is generated under `Claude/plugins/pstack/`. maintain it through `Claude/scripts/port.config.mjs` and `Claude/overrides/pstack/`, then run `node Claude/scripts/build.mjs` from the repository root and commit the generated output. `node Claude/scripts/build.mjs --check` checks output and override locks; review changed sources before updating any lock. the separate upstream `harness/pstack/` tree is not this port.",
+      },
+      {"file": "skills/poteto-mode/SKILL.md", "find": "**Match the model to the job.** Before each spawn, start from the role's line or default and pick the reasoning level and speed the job needs. The `/setup-pstack` budget sets each role's starting level, xhigh by default. Raise it one step, up to max, for the hardest or subtlest work. Lower it one step for judgment and two or more steps for routine work. Use fast mode only when the job is urgent, meaning CI or trunk is red or a person is blocked on the result right now. Otherwise use standard speed, the same slug without `-fast`. Verification is the exception and stays on the `swarm workers` model and speed (`grok-4.7-xhigh-fast` by default). Change only the effort level and whether the slug is fast, and keep the family the role names, so a diverse panel stays diverse. If the family has no slug at that level and speed, use its nearest slug. A role on `auto` or `inherit-parent` stays on the parent model. If the Task tool rejects the adjusted slug, do not try another adjusted slug. Use the role's line or default and say so.", "replace": "**Match the model to the job.** Start from the configured role alias and budget. Keep `opus`, `sonnet`, `haiku`, `fable`, or inherited model selection; never construct aliases such as `sonnet-fast` or append an effort suffix. When the Agent tool exposes a separate `effort` parameter, choose a supported value for the task and honor the configured budget. Use a speed setting only when the actual session tool supports it. Omit unsupported fields and state the limitation. An inherited role remains inherited."},
+      {"file": "docs/guide/01-setup.md", "find": "In Claude Code, run `/plugin marketplace add cursor/plugins`, then `/plugin install pstack@cursor-plugins`. Claude Code prefixes plugin commands, so each command in this guide takes a `pstack:` prefix there, such as `/pstack:setup-pstack`, which writes its model rule to `~/.claude/rules/pstack-models.md`. The [Claude Code adapter](../harness/claude-code.md) covers the other differences.", "replace": "Use the community marketplace installed above. Commands take a `pstack:` prefix, such as `/pstack:setup-pstack`, and the [native Claude Code adapter](../harness/claude-code.md) explains this port's routing and session boundaries."},
+      {
         file: "skills/poteto-help/SKILL.md",
-        find: "pstack is built for Cursor. Its skills use the Agent Skills format, so other tools can read them. But most workflow skills, including `/poteto-mode`, `/how`, `/why`, and `/teach`, spawn Cursor subagents with per-role models, and Custom Modes and `/loop` are Cursor features, so those parts may not work there.",
+        find: "pstack is built for Cursor, and it also installs in Claude Code with `/plugin marketplace add cursor/plugins`, then `/plugin install pstack@cursor-plugins`. There, each command takes a `pstack:` prefix, such as `/pstack:poteto-mode`. The [Claude Code adapter](../../docs/harness/claude-code.md) maps the Cursor names, and a step that needs a Cursor-only feature, such as Bugbot or Automations, is skipped with a one-line note.\n\nOther tools can read the skills, because they use the Agent Skills format. But most workflow skills, including `/poteto-mode`, `/how`, `/why`, and `/teach`, spawn Cursor subagents with per-role models, and Custom Modes and `/loop` are Cursor features, so those parts may not work there.",
         replace: "This is the Claude Code port of pstack, which was built for Cursor. Workflow skills such as `/poteto-mode`, `/how`, `/why`, and `/teach` spawn Claude subagents with per-role models (`sonnet` for code and `opus` for judgment by default). Playbooks that fan out to Cursor cloud agents run as local subagents in worktrees here, and Cursor's Custom Modes have no Claude Code equivalent.",
       },
       {
@@ -513,7 +536,7 @@ export const PLUGINS = {
       },
       {
         file: "docs/guide/01-setup.md",
-        find: "To keep `/poteto-mode` on for the whole chat, pick it from the `/` menu with Option+Enter (Mac) or Alt+Enter (Windows) instead of Enter. That makes it a [Custom Mode](https://cursor.com/docs/skills), which stays in context on every turn until you exit it. Custom Modes are available in the Agents Window and the CLI. Plain Enter attaches the skill to one message, and it fades as the chat moves on.",
+        find: "To keep `/poteto-mode` on for the whole chat, pick it from the `/` menu with Option+Enter (Mac) or Alt+Enter (Windows) instead of Enter. That makes it a [Custom Mode](https://cursor.com/docs/skills#using-a-skill-as-a-custom-mode), which stays in context on every turn until you exit it. Custom Modes are available in the Agents Window and the CLI. Plain Enter attaches the skill to one message, and it fades as the chat moves on.",
         replace: "Claude Code has no Custom Modes: `/pstack:poteto-mode` attaches to one message and fades as the session moves on, so start each new task with it.",
       },
       {

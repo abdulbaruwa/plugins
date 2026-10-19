@@ -1,0 +1,39 @@
+{
+  "name": "highlevel",
+  "description": "Work with contacts, conversations, opportunities, calendars, and payments.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://help.leadconnectorhq.com/support/solutions/articles/155000008185",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "highlevel",
+    "gohighlevel",
+    "leadconnector",
+    "crm",
+    "contacts",
+    "conversations",
+    "opportunities",
+    "pipelines",
+    "calendars",
+    "appointments",
+    "marketing",
+    "mcp"
+  ],
+  "version": "1.1.0-codex.1",
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "HighLevel",
+        "shortDescription": "Work with contacts, conversations, opportunities, calendars, and payments.",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Productivity",
+        "logo": "./assets/logo.png"
+      },
+      "onboardingSkill": "./skills/setup-highlevel/SKILL.md"
+    }
+  }
+}

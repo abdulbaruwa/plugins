@@ -15,3 +15,8 @@ This is the half after `playbooks/babysit.md`.
 9. **Stop at the ceiling.** When the verified run is merged, report what landed, what the next unverified PR is, and what verifying it would take. Extending the run is a new pass through step 1.
 
 **Reply:** the verified run and its ceiling, each PR's verdict and who produced it, what you armed and how you confirmed it, what landed, and what the next gap needs.
+
+
+## Native ownership and landing guards
+
+One designated topology writer owns rebases, retargets, and landing; workers only author their own branch fixes. Preserve the existing independent-verdict, patch-identity, first-bottom trunk preparation, current-head checks, and explicit user-request condition on auto-merge. Any separately authorized force-with-lease operation uses the branch owner's exact last-pushed or explicitly taken-over SHA and stops on an unknown push. Extracting an independent descendant onto trunk requires a new verdict against that trunk base. Confirm both the forge's merged state and the intended trunk base before advancing; a queue acknowledgement is not a landed PR. Keep the chain frozen except for the designated writer's authorized post-merge move. These rules add no publication or merge authority.
