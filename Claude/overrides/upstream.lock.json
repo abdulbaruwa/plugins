@@ -23,5 +23,7 @@
   "cursor-team-kit/skills/pr-review-canvas/styles.css": "3c3ff002dd3bfe7f4fdbda521fce05e336c4a7922f4bd4d848f6566a961ceb19",
   "cursor-team-kit/skills/pr-review-canvas/template.html": "cb56bc764384856da4733d1c999521c3e1b20d65ed80605630b74da448abe756",
   "pr-review-canvas/skills/pr-review-canvas/SKILL.md": "f494f30a2d423953b4976d41353702fa32d347edf27519dbf936db5717865f03",
-  "pstack/skills/setup-pstack/SKILL.md": "d61b47256a18155a81c8e5ef95e3cc6569ce8c18317c35c4dd9c8015cf68cb59"
+  "pstack/docs/harness/claude-code.md": "c79e2283d3a83c6be3dd1cac33f9c074067c95e610ae6e0a16d9fdee84058927",
+  "pstack/skills/poteto-mode/playbooks/shipping.md": "bf56339bdf7e0223bcff5abf4e8599e3f5b547b3fcc3b4ce9475e6e7dda14a9f",
+  "pstack/skills/setup-pstack/SKILL.md": "b45512f6ca5e96e81681984683b7472bfe892581da3a89a73cca4159438f29ed"
 }

@@ -1,6 +1,6 @@
 {
   "sourceCatalog": ".cursor-plugin/marketplace.json",
-  "sourceCommit": "c86f349b102feb91f1966f8a6a60882a4e601b50",
+  "sourceCommit": "d457567332aa6989e753ea289f30ea2bfbc80bc0",
   "plugins": [
     {
       "originalName": "teaching",
@@ -149,8 +149,8 @@
       "originalName": "pstack",
       "name": "pstack",
       "source": "pstack",
-      "originalVersion": "0.15.23",
-      "originalSkills": 53,
+      "originalVersion": "0.15.28",
+      "originalSkills": 56,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "adapted-skills",
       "reason": "Codex skill adaptation; Cursor hooks and automatic rules are not installed.",
@@ -358,7 +358,7 @@
       "originalName": "zoom",
       "name": "zoom",
       "source": "third_party/zoom",
-      "originalVersion": "1.0.1",
+      "originalVersion": "1.0.2",
       "originalSkills": 0,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "configuration-required",
@@ -369,7 +369,7 @@
       "originalName": "x",
       "name": "x",
       "source": "third_party/x",
-      "originalVersion": "2.6.6",
+      "originalVersion": "2.7.0",
       "originalSkills": 1,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "configuration-required",
@@ -1073,12 +1073,12 @@
       "originalName": "quickbooks-online",
       "name": "quickbooks-online",
       "source": "third_party/quickbooks-online",
-      "originalVersion": "1.0.0",
+      "originalVersion": "1.1.0",
       "originalSkills": 0,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
-      "status": "blocked",
-      "reason": "Metadata only; no MCP endpoint or implementation supplied.",
-      "path": null
+      "status": "configuration-required",
+      "reason": "Intuit now publishes an MCP endpoint, but upstream relies on Cursor-owned OAuth credentials. Verify a provider-supported Codex OAuth client before setup; no connection is enabled.",
+      "path": "./plugins/quickbooks-online"
     },
     {
       "originalName": "workday",
@@ -1106,12 +1106,133 @@
       "originalName": "tailscale",
       "name": "tailscale",
       "source": "third_party/tailscale",
-      "originalVersion": "1.0.0",
+      "originalVersion": "1.0.1",
       "originalSkills": 1,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "blocked",
-      "reason": "Grok Bot tailnet enrollment and tag:grokbot policy have no Codex implementation supplied.",
+      "reason": "Grok Bot personal/company tailnet enrollment and tag:grokbot policy have no Codex implementation supplied.",
       "path": null
+    },
+    {
+      "originalName": "google-ads",
+      "name": "google-ads",
+      "source": "third_party/google-ads",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static source review only; no authenticated service or behavioral acceptance run.",
+      "status": "blocked",
+      "reason": "Cursor-hosted REST MCP gateway; no native Codex service replacement is supplied.",
+      "path": null
+    },
+    {
+      "originalName": "gopuff",
+      "name": "gopuff",
+      "source": "third_party/gopuff",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static source review only; no authenticated service or behavioral acceptance run.",
+      "status": "blocked",
+      "reason": "Grok Bot-only integration with a fixed mcp-grok-bot OAuth client; no supported Codex client setup is supplied.",
+      "path": null
+    },
+    {
+      "originalName": "whatsapp-business",
+      "name": "whatsapp-business",
+      "source": "third_party/whatsapp-business",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static source review only; no authenticated service or behavioral acceptance run.",
+      "status": "blocked",
+      "reason": "Metadata only; no MCP endpoint or implementation supplied.",
+      "path": null
+    },
+    {
+      "originalName": "zoho-books",
+      "name": "zoho-books",
+      "source": "third_party/zoho-books",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static source review only; no authenticated service or behavioral acceptance run.",
+      "status": "blocked",
+      "reason": "Metadata only; no MCP endpoint or implementation supplied.",
+      "path": null
+    },
+    {
+      "originalName": "zoho-crm",
+      "name": "zoho-crm",
+      "source": "third_party/zoho-crm",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static source review only; no authenticated service or behavioral acceptance run.",
+      "status": "blocked",
+      "reason": "Metadata only; no MCP endpoint or implementation supplied.",
+      "path": null
+    },
+    {
+      "originalName": "zoho-desk",
+      "name": "zoho-desk",
+      "source": "third_party/zoho-desk",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static source review only; no authenticated service or behavioral acceptance run.",
+      "status": "blocked",
+      "reason": "Metadata only; no MCP endpoint or implementation supplied.",
+      "path": null
+    },
+    {
+      "originalName": "finary",
+      "name": "finary",
+      "source": "third_party/finary",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "status": "mcp-bundle",
+      "reason": "Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified.",
+      "path": "./plugins/finary"
+    },
+    {
+      "originalName": "gusto",
+      "name": "gusto",
+      "source": "third_party/gusto",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "status": "mcp-bundle",
+      "reason": "Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified.",
+      "path": "./plugins/gusto"
+    },
+    {
+      "originalName": "tiktok-for-business",
+      "name": "tiktok-for-business",
+      "source": "third_party/tiktok-for-business",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "status": "mcp-bundle",
+      "reason": "Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified.",
+      "path": "./plugins/tiktok-for-business"
+    },
+    {
+      "originalName": "highlevel",
+      "name": "highlevel",
+      "source": "third_party/highlevel",
+      "originalVersion": "1.1.0",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "status": "configuration-required",
+      "reason": "Upstream uses HighLevel\u2019s client-specific Cursor endpoint. Confirm a provider-supported Codex endpoint and client registration before configuration; no connection is enabled.",
+      "path": "./plugins/highlevel"
+    },
+    {
+      "originalName": "meta-ads",
+      "name": "meta-ads",
+      "source": "third_party/meta-ads",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "status": "configuration-required",
+      "reason": "Upstream supplies Cursor\u2019s registered Meta OAuth app ID and no dynamic client registration. Register a provider-supported Codex client; no shared app ID or connection is enabled.",
+      "path": "./plugins/meta-ads"
     }
   ]
 }

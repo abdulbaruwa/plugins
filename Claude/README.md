@@ -1,6 +1,6 @@
 # Claude Code port
 
-Claude Code versions of the Cursor plugins in this repository, as one marketplace: **16** workflow plugins and **58** MCP integrations.
+Claude Code versions of the Cursor plugins in this repository, as one marketplace: **16** workflow plugins and **61** MCP integrations.
 
 > [!IMPORTANT]
 > Everything in `plugins/`, `third_party/`, `.claude-plugin/`, and this README is generated. To change a plugin, edit [`scripts/port.config.mjs`](scripts/port.config.mjs) or add a file under [`overrides/<plugin>/`](overrides/), then rebuild.
@@ -23,7 +23,7 @@ Inside a session, `/plugin` opens the same browser. Skills run as `/<plugin>:<sk
 
 A marketplace added from a local folder loads its plugins in place, so a rebuild takes effect at the next session or after `/reload-plugins`. Each plugin's version carries a content hash (`1.0.0+claude.<hash>`), so installs that cache by version also pick up every change.
 
-To use the marketplace from GitHub without cloning, point `extraKnownMarketplaces` in `~/.claude/settings.json` at this folder (untested with this repo). The repository root also has Cursor's own `.claude-plugin/marketplace.json`, which lists only `origin-apps`; the `path` key is what selects this one:
+To use the marketplace from GitHub without cloning, point `extraKnownMarketplaces` in `~/.claude/settings.json` at this folder (untested with this repo). The repository root also has a separate upstream `.claude-plugin/marketplace.json`; the `path` key is what selects this one:
 
 ```json
 {
@@ -157,6 +157,9 @@ Remote servers sign in through `/mcp` the first time you use them, and plugins t
 | [Plaud](third_party/plaud/) | Work with your Plaud recordings: list and search meetings and voice notes, read full transcripts with speaker labels, and pull AI summaries, action items, and key topics into your workflow. | — |
 | [PostHog MCP](third_party/posthog-mcp/) | Work with PostHog from chat: query product analytics and run SQL, manage feature flags and experiments, triage error tracking issues, and review session replays, surveys, and dashboards (URL-only connector to PostHog's hosted MCP server). | — |
 | [Square](third_party/square/) | Work with payments, orders, catalog, customers, and invoices. | — |
+| [Finary](third_party/finary/) | Read your net worth, accounts, holdings, spending, and budgets. | — |
+| [TikTok for Business](third_party/tiktok-for-business/) | Manage TikTok ad campaigns, ad groups, ads, audiences, creatives, and reports. | — |
+| [Gusto](third_party/gusto/) | Work with payroll, employees, contractors, time off, and reports. | — |
 
 ## Add these servers yourself
 
@@ -164,6 +167,9 @@ These servers need an OAuth client of your own: their authorization servers offe
 
 | Server | Why | Command |
 | --- | --- | --- |
+| highlevel | Upstream uses a client-specific Cursor v2 endpoint. This recipe selects the separately documented universal endpoint, with fewer tools; verify provider-supported client registration, redirect support, and the required tools before adding it. | `claude mcp add --transport http highlevel https://services.leadconnectorhq.com/mcp/ --client-id <your-client-id> --callback-port 8787` |
+| meta-ads | Upstream uses Cursor's registered Meta app ID and no dynamic client registration. Register a Meta OAuth client with your own allowed redirect URI; do not reuse Cursor's app ID. | `claude mcp add --transport http meta-ads https://mcp.facebook.com/ads --client-id <your-client-id> --callback-port 8787` |
+| quickbooks-online | Intuit now publishes an MCP endpoint, but the upstream setup relies on Cursor-owned OAuth credentials. Verify provider-supported Claude Code client registration and redirect support first; connectivity is unverified. | `claude mcp add --transport http quickbooks-online https://mcp-e2e.quickbooks.intuit.com/mcp --client-id <your-client-id> --callback-port 8787` |
 | docusign | Needs your own Docusign integration key and secret. | `claude mcp add --transport http docusign https://mcp.docusign.com/mcp --client-id <your-client-id> --callback-port 8787 --client-secret` |
 | gong | Needs your own Gong OAuth client ID and secret. | `claude mcp add --transport http gong https://mcp.gong.io/mcp --client-id <your-client-id> --callback-port 8787 --client-secret` |
 | hubspot | Needs your own HubSpot app client ID and secret. | `claude mcp add --transport http hubspot https://mcp.hubspot.com --client-id <your-client-id> --callback-port 8787 --client-secret` |
@@ -172,7 +178,7 @@ These servers need an OAuth client of your own: their authorization servers offe
 | google-cloud-bigquery | Google offers no dynamic client registration. Create a Desktop OAuth client in Google Cloud with the BigQuery API enabled. | `claude mcp add --transport http google-cloud-bigquery https://bigquery.googleapis.com/mcp --client-id <your-client-id> --callback-port 8787 --client-secret` |
 | salesforce | Needs your org's MCP URL and an External Client App consumer key (Connected Apps are not supported; enable JWT-based access tokens). | `claude mcp add-json salesforce '{"type":"http","url":"<salesforce-mcp-url>","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"mcp_api refresh_token"}}'` |
 | salesforce-headless-360 | Needs your org's MCP URL and an External Client App consumer key and secret (Connected Apps are not supported). | `claude mcp add-json salesforce-headless-360 '{"type":"http","url":"<salesforce-mcp-url>","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"mcp_api refresh_token"}}' --client-secret` |
-| x | X's MCP uses a fixed client ID whose allowed redirect URIs are not documented. Try X's client ID from the Cursor plugin's `mcp.json` first; if sign-in fails, register your own X app. | `claude mcp add-json x '{"type":"http","url":"https://api.x.com/mcp","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"tweet.read users.read follows.read space.read mute.read like.read list.read list.write block.read block.write bookmark.read bookmark.write dm.read dm.write media.write developer.billing.write developer.write offline.access"}}'` |
+| x | X's MCP uses a fixed client ID whose allowed redirect URIs are not documented. Try X's client ID from the Cursor plugin's `mcp.json` first; if sign-in fails, register your own X app. | `claude mcp add-json x '{"type":"http","url":"https://api.x.com/mcp","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"tweet.read users.read follows.read space.read mute.read like.read list.read list.write block.read block.write bookmark.read bookmark.write dm.read dm.write calls.read calls.write media.write developer.billing.write developer.write offline.access"}}'` |
 | x-ads | X's MCP uses a fixed client ID whose allowed redirect URIs are not documented. Try X's client ID from the Cursor plugin's `mcp.json` first; if sign-in fails, register your own X app. | `claude mcp add-json x-ads '{"type":"http","url":"https://ads-api.x.com/mcp","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"ads.read ads.write media.write offline.access"}}'` |
 
 ## Not ported
@@ -183,11 +189,16 @@ These servers need an OAuth client of your own: their authorization servers offe
 | finance | Grok Bot only (`minClientVersions.cursor` is `never`). |
 | shopify-store | Grok Bot only (`minClientVersions.cursor` is `never`). |
 | tailscale | Grok Bot only: joins Grok Bot to a tailnet. |
+| gopuff | Grok Bot only, with a fixed mcp-grok-bot OAuth client; no supported Claude Code registration is supplied. |
 | x-money | Grok Bot only (`minClientVersions.cursor` is `never`). |
-| quickbooks-online | No MCP config in the Cursor plugin; Cursor wires the server up on its side. |
 | workday | No MCP config in the Cursor plugin; Cursor wires the server up on its side. |
+| whatsapp-business | Metadata only; no MCP endpoint or implementation is supplied. |
+| zoho-books | Metadata only; no MCP endpoint or implementation is supplied. |
+| zoho-crm | Metadata only; no MCP endpoint or implementation is supplied. |
+| zoho-desk | Metadata only; no MCP endpoint or implementation is supplied. |
 | zoom | Zoom accepts only a `127.0.0.1` loopback redirect and rejects `localhost`, and Claude Code always signs in through `http://localhost:<port>/callback`. |
 | google-docs | The MCP server is Cursor's hosted proxy (`api.cursor.com/rest-mcp`), which needs a Cursor account. |
+| google-ads | The MCP server is Cursor's hosted proxy (`api.cursor.com/rest-mcp`), which needs a Cursor account. |
 | google-drive | The MCP server is Cursor's hosted proxy (`api.cursor.com/rest-mcp`), which needs a Cursor account. |
 | google-sheets | The MCP server is Cursor's hosted proxy (`api.cursor.com/rest-mcp`), which needs a Cursor account. |
 | google-slides | The MCP server is Cursor's hosted proxy (`api.cursor.com/rest-mcp`), which needs a Cursor account. |

@@ -1,15 +1,15 @@
 # Codex compatibility review
 
-Reviewed source commit `dbf49813a39c1a5389c5e28cb8e4c1c2379e2454` on 13 October 2026. All 101 entries in the source catalog are accounted for. This is a community adaptation, not an official Cursor or OpenAI distribution.
+Reviewed source commit `d457567332aa6989e753ea289f30ea2bfbc80bc0` on 19 October 2026. All 112 entries in the source catalog are accounted for. This is a community adaptation, not an official Cursor or OpenAI distribution.
 
 ## Coverage
 
 | Class | Count | Meaning |
 | --- | ---: | --- |
 | Adapted skills | 17 | Packaged workflows with Codex runtime substitutions. Behavior is not forward-tested end to end. |
-| MCP bundles | 56 | Literal provider endpoints or local server launchers in the portable schema. Not authenticated or live-tested. |
-| Configuration required | 15 | Setup skill and source evidence; no MCP connection is loaded until supported configuration is supplied. |
-| Blocked | 13 | No installable package is exposed. Needs a service replacement or implementation. |
+| MCP bundles | 59 | Literal provider endpoints or local server launchers in the portable schema. Not authenticated or live-tested. |
+| Configuration required | 18 | Setup skill and source evidence; no MCP connection is loaded until supported configuration is supplied. |
+| Blocked | 18 | No installable package is exposed. Needs a service replacement or implementation. |
 
 ## Material differences
 
@@ -25,11 +25,11 @@ Reviewed source commit `dbf49813a39c1a5389c5e28cb8e4c1c2379e2454` on 13 October 
 
 ## Validation scope
 
-The current checks cover 88 packages, 119 skills, and 56 bundled MCP server definitions. The regression suite exercises malformed metadata, executable/cwd containment, isolated installed documentation, exact diff line mapping, concurrent PR artifacts, local serving boundaries, and chat-owned Ralph state. These checks run locally and do not connect external providers.
+The current checks cover 94 packages, 125 skills, and 59 bundled MCP server definitions. The regression suite exercises malformed metadata, executable/cwd containment, isolated installed documentation, exact diff line mapping, concurrent PR artifacts, local serving boundaries, and chat-owned Ralph state. These checks run locally and do not connect external providers.
 
 The validator checks manifests against vendored Agent Plugins 1.0.0 schemas, catalog paths and identity, resource containment, skill metadata and invocation policy, package-local Markdown reference integrity, TOML examples, safe literal MCP connections, component availability, and full source-catalog coverage. Tests exercise malformed packages and rejection of false portable credentials.
 
-Codex CLI 0.157.1 listed all 88 packages using a process-scoped local marketplace override. The recorded names are in client-discovery.json. No account marketplace configuration or installation was changed. This proves catalog discovery only. Installation, actual skill decisions, SDK execution, OAuth, payments, provider connectivity, and deployed behavior require separate acceptance runs. No external services were connected or written during this port.
+The historical discovery snapshot used Codex CLI 0.157.1 to list the previous 88 packages with a process-scoped local marketplace override. The 19 October update adds six packages and is validated statically; it has not been installed or connected by the weekly automation. The recorded names are in client-discovery.json. No account marketplace configuration or installation was changed. This proves catalog discovery only. Installation, actual skill decisions, SDK execution, OAuth, payments, provider connectivity, and deployed behavior require separate acceptance runs. No external services were connected or written during this port.
 
 An independent manual review found and corrected stale Advisor/Thermos runtime references, PR pagination and filename-key bugs, and a missing runtime preference read. Resource paths damaged during invocation-syntax conversion were restored, and a regression check now rejects that corruption. Two attempts to run `codex review --uncommitted` failed before review with the configured model/account compatibility error; no automated review verdict is claimed.
 
@@ -134,15 +134,18 @@ An independent manual review found and corrected stale Advisor/Thermos runtime r
 | buffer | [buffer](plugins/buffer/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
 | plaud | [plaud](plugins/plaud/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
 | posthog-mcp | [posthog-mcp](plugins/posthog-mcp/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
-| quickbooks-online | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
+| quickbooks-online | [quickbooks-online](plugins/quickbooks-online/README.md) | configuration-required | Intuit now publishes an MCP endpoint, but upstream relies on Cursor-owned OAuth credentials. Verify a provider-supported Codex OAuth client before setup; no connection is enabled. |
 | workday | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
 | square | [square](plugins/square/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
-| tailscale | — | blocked | Grok Bot tailnet enrollment and tag:grokbot policy have no Codex implementation supplied. |
-
-## Detailed-review corrections
-
-The seven detailed-review findings are addressed: stdio command/cwd containment; structured nested-metadata errors; self-contained package documentation; independent stack verdicts and patch-freshness shipping gates; accurate diff lines with visible imports; separate per-run PR captures and serving roots; and Ralph ownership checks with separate run state. These corrections were released as `codex.2`. The revised helpers operate on local task artifacts and install no hooks or automatic follow-ups. Independent review and local regression results are reported in the task closeout; live-provider acceptance remains a separate check.
-
-## Upstream reconciliation
-
-The source checkpoint now includes Cursor commit `c86f349b102feb91f1966f8a6a60882a4e601b50` (2026-10-14 review). Its three pstack changes revise the ketchup workflow and the corresponding README/help descriptions. The Codex port carries the new plain-language, short-reply and small-visual guidance; its native help remains scoped to supported Codex workflows. Invocation syntax and the existing explicit-only policy are preserved. Pstack is now `0.15.23-codex.3`; other packages retain `codex.2`. The upstream version did not change, so file-level source comparison was necessary. No service authentication or runtime-agent acceptance is implied by this reconciliation.
+| tailscale | — | blocked | Grok Bot personal/company tailnet enrollment and tag:grokbot policy have no Codex implementation supplied. |
+| google-ads | — | blocked | Cursor-hosted REST MCP gateway; no native Codex service replacement is supplied. |
+| gopuff | — | blocked | Grok Bot-only integration with a fixed mcp-grok-bot OAuth client; no supported Codex client setup is supplied. |
+| whatsapp-business | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
+| zoho-books | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
+| zoho-crm | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
+| zoho-desk | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
+| finary | [finary](plugins/finary/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
+| gusto | [gusto](plugins/gusto/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
+| tiktok-for-business | [tiktok-for-business](plugins/tiktok-for-business/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
+| highlevel | [highlevel](plugins/highlevel/README.md) | configuration-required | Upstream uses HighLevel’s client-specific Cursor endpoint. Confirm a provider-supported Codex endpoint and client registration before configuration; no connection is enabled. |
+| meta-ads | [meta-ads](plugins/meta-ads/README.md) | configuration-required | Upstream supplies Cursor’s registered Meta OAuth app ID and no dynamic client registration. Register a provider-supported Codex client; no shared app ID or connection is enabled. |

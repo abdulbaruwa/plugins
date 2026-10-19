@@ -1,6 +1,6 @@
 # X for Codex
 
-Community adaptation of `third_party/x` at upstream version `2.6.6`. Original authors and MIT license are preserved. This is not an official Cursor or OpenAI distribution.
+Community adaptation of `third_party/x` at upstream version `2.7.0`. Original authors and MIT license are preserved. This is not an official Cursor or OpenAI distribution.
 
 Search posts, read timelines, pull trends, manage bookmarks, and access X Chat.
 

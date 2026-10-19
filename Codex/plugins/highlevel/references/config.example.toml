@@ -1,0 +1,4 @@
+# Upstream also documents this universal endpoint with fewer tools than its Cursor v2 endpoint.
+# Verify native OAuth and required tools before configuring a connection.
+[mcp_servers.highlevel]
+url = "https://services.leadconnectorhq.com/mcp/"
