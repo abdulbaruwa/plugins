@@ -55,11 +55,11 @@ An independent manual review found and corrected stale Advisor/Thermos runtime r
 | grok-voice | [grok-voice](plugins/grok-voice/README.md) | adapted-skills | Codex skill adaptation; Cursor hooks and automatic rules are not installed. |
 | advisor | [advisor](plugins/advisor/README.md) | adapted-skills | Codex skill adaptation; Cursor hooks and automatic rules are not installed. |
 | gmail | [gmail](plugins/gmail/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
-| google-drive | [google-drive](plugins/google-drive/README.md) | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
+| google-drive | — | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
 | google-calendar | [google-calendar](plugins/google-calendar/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
-| google-docs | [google-docs](plugins/google-docs/README.md) | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
-| google-sheets | [google-sheets](plugins/google-sheets/README.md) | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
-| google-slides | [google-slides](plugins/google-slides/README.md) | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
+| google-docs | — | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
+| google-sheets | — | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
+| google-slides | — | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
 | gong | [gong](plugins/gong/README.md) | configuration-required | Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled. |
 | salesforce | [salesforce](plugins/salesforce/README.md) | configuration-required | Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled. |
 | salesforce-headless-360 | [salesforce-headless-360](plugins/salesforce-headless-360/README.md) | configuration-required | Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled. |
@@ -105,12 +105,12 @@ An independent manual review found and corrected stale Advisor/Thermos runtime r
 | readwise | [readwise](plugins/readwise/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
 | similarweb | [similarweb](plugins/similarweb/README.md) | configuration-required | Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled. |
 | xero | [xero](plugins/xero/README.md) | configuration-required | Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled. |
-| outlook | [outlook](plugins/outlook/README.md) | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
-| outlook-calendar | [outlook-calendar](plugins/outlook-calendar/README.md) | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
-| onedrive | [onedrive](plugins/onedrive/README.md) | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
-| sharepoint | [sharepoint](plugins/sharepoint/README.md) | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
-| teams | [teams](plugins/teams/README.md) | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
-| finance | [finance](plugins/finance/README.md) | blocked | Grok-hosted connector gateway; no independent MCP endpoint supplied. |
+| outlook | — | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
+| outlook-calendar | — | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
+| onedrive | — | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
+| sharepoint | — | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
+| teams | — | blocked | Cursor-hosted REST MCP gateway; needs a provider or Codex connector replacement. |
+| finance | — | blocked | Grok-hosted connector gateway; no independent MCP endpoint supplied. |
 | x-ads | [x-ads](plugins/x-ads/README.md) | configuration-required | Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled. |
 | attio | [attio](plugins/attio/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
 | hunter | [hunter](plugins/hunter/README.md) | configuration-required | Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled. |
@@ -135,15 +135,15 @@ An independent manual review found and corrected stale Advisor/Thermos runtime r
 | plaud | [plaud](plugins/plaud/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
 | posthog-mcp | [posthog-mcp](plugins/posthog-mcp/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
 | quickbooks-online | [quickbooks-online](plugins/quickbooks-online/README.md) | configuration-required | Intuit now publishes an MCP endpoint, but upstream relies on Cursor-owned OAuth credentials. Verify a provider-supported Codex OAuth client before setup; no connection is enabled. |
-| workday | [workday](plugins/workday/README.md) | blocked | Metadata only; no MCP endpoint or implementation supplied. |
+| workday | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
 | square | [square](plugins/square/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
-| tailscale | [tailscale](plugins/tailscale/README.md) | blocked | Grok Bot personal/company tailnet enrollment and tag:grokbot policy have no Codex implementation supplied. |
-| google-ads | [google-ads](plugins/google-ads/README.md) | blocked | Cursor-hosted REST MCP gateway; no native Codex service replacement is supplied. |
-| gopuff | [gopuff](plugins/gopuff/README.md) | blocked | Grok Bot-only integration with a fixed mcp-grok-bot OAuth client; no supported Codex client setup is supplied. |
-| whatsapp-business | [whatsapp-business](plugins/whatsapp-business/README.md) | blocked | Metadata only; no MCP endpoint or implementation supplied. |
-| zoho-books | [zoho-books](plugins/zoho-books/README.md) | blocked | Metadata only; no MCP endpoint or implementation supplied. |
-| zoho-crm | [zoho-crm](plugins/zoho-crm/README.md) | blocked | Metadata only; no MCP endpoint or implementation supplied. |
-| zoho-desk | [zoho-desk](plugins/zoho-desk/README.md) | blocked | Metadata only; no MCP endpoint or implementation supplied. |
+| tailscale | — | blocked | Grok Bot personal/company tailnet enrollment and tag:grokbot policy have no Codex implementation supplied. |
+| google-ads | — | blocked | Cursor-hosted REST MCP gateway; no native Codex service replacement is supplied. |
+| gopuff | — | blocked | Grok Bot-only integration with a fixed mcp-grok-bot OAuth client; no supported Codex client setup is supplied. |
+| whatsapp-business | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
+| zoho-books | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
+| zoho-crm | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
+| zoho-desk | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
 | finary | [finary](plugins/finary/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
 | gusto | [gusto](plugins/gusto/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
 | tiktok-for-business | [tiktok-for-business](plugins/tiktok-for-business/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
