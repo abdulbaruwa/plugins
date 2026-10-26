@@ -155,7 +155,7 @@
       "status": "adapted-skills",
       "reason": "Codex skill adaptation; Cursor hooks and automatic rules are not installed.",
       "path": "./plugins/pstack",
-      "reviewedSourceCommit": "1af11407699047f6a897c8bbc25d151589c8efaa"
+      "reviewedSourceCommit": "991b71fd54c2c57ffe0b56969236b83678401fc8"
     },
     {
       "originalName": "dyl-stack",
