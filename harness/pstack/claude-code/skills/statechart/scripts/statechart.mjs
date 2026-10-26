@@ -893,11 +893,12 @@ try {
   const { help, command, input, flags } = parseArgs(process.argv.slice(2));
   if (help) {
     console.log(help);
-    process.exit(0);
+    process.exitCode = 0;
+  } else {
+    process.exitCode = await COMMANDS[command].run(input, flags, await rendererFor(command, flags));
   }
-  process.exit(await COMMANDS[command].run(input, flags, await rendererFor(command, flags)));
 } catch (e) {
   if (!(e instanceof CannotFinish)) throw e;
   console.error(e.message);
-  process.exit(2);
+  process.exitCode = 2;
 }
