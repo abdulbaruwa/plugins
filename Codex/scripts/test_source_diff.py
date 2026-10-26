@@ -173,6 +173,28 @@ class SourceDiffTests(unittest.TestCase):
         self.assertEqual(result.returncode, 2)
         self.assertIn("not an ancestor", result.stderr)
 
+    def test_upstream_override_preserves_drift_with_a_reviewed_local_source_patch(self):
+        self.write("alpha/skills/main/SKILL.md", "reviewed native source correction")
+        local_source = self.save("local source correction")
+        self.inventory["plugins"][0]["reviewedSourceCommit"] = local_source
+        self.inventory_file()
+        local_head = self.save("record local review")
+        self.assertFalse(report(self.root, "HEAD")["needsReview"])
+
+        # Cursor's branch cannot contain our local patch. Keep the ancestry
+        # rejection, and compare that branch with its recorded upstream base.
+        self.git("checkout", "--detach", self.base)
+        self.inventory_file()
+        self.write("alpha/skills/main/SKILL.md", "new upstream alpha correction")
+        self.write("beta/skills/main/SKILL.md", "new upstream beta correction")
+        self.save("new upstream corrections")
+        self.assertEqual(self.check("--check").returncode, 2)
+        upstream = self.check("--base", self.base, "--json")
+        self.assertEqual(upstream.returncode, 0)
+        self.assertEqual({p["originalName"] for p in json.loads(upstream.stdout)["plugins"]}, {"alpha", "beta"})
+        self.git("checkout", "--detach", local_head)
+        self.assertFalse(report(self.root, "HEAD")["needsReview"])
+
     def test_reports_only_committed_source_and_is_read_only(self):
         self.write("alpha/skills/main/SKILL.md", "uncommitted source edit")
         before = self.git("status", "--porcelain=v1")

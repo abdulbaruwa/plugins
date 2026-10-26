@@ -1,6 +1,5 @@
 {
   "name": "google-cloud-bigquery",
-  "version": "1.0.0-codex.2",
   "description": "Explore datasets and tables and run SQL queries.",
   "author": {
     "name": "Cursor",
@@ -19,6 +18,7 @@
     "datasets",
     "mcp"
   ],
+  "version": "1.1.0-codex.1",
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "extensions": {
     "com.openai": {
@@ -28,7 +28,8 @@
         "developerName": "Cursor (community Codex port)",
         "category": "Productivity",
         "logo": "./assets/logo.png"
-      }
+      },
+      "onboardingSkill": "./skills/setup-google-cloud-bigquery/SKILL.md"
     }
   }
 }

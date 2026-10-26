@@ -603,7 +603,7 @@ ${firstParty.map((p) => row([`[${p.displayName}](${p.source.slice(2)}/)`, notes(
 
 ## MCP integrations
 
-Remote servers sign in through \`/mcp\` the first time you use them, and plugins that need a token prompt for it when you enable them. Claude Code signs in with dynamic client registration and a \`localhost\` callback. Every server below advertises dynamic registration, but some providers add their own gate: Square allowlists MCP clients, and Greenhouse and Workable allowlist redirect URIs (those two plugins pin \`${redirect}\`, the URL their admins allowlist).
+OAuth servers may sign in through \`/mcp\`; plugins with a required token prompt for it when enabled. Verify the provider's registration and redirect requirements before use. Claude Code uses a \`localhost\` callback, and some providers add an allowlist gate: Square allowlists clients, while Greenhouse and Workable pin \`${redirect}\` for their admins to allowlist. Static packaging does not establish authentication, entitlement, or live tool coverage.
 
 ${row(["Plugin", "Description", "Asks for"])}
 ${row(["---", "---", "---"])}

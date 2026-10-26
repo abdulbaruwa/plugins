@@ -1,6 +1,6 @@
 # pstack for Codex
 
-Community adaptation of `pstack` at upstream version `0.15.28`. Original authors and MIT license are preserved. This is not an official Cursor or OpenAI distribution.
+Community adaptation of `pstack` at upstream version `0.15.32`. Original authors and MIT license are preserved. This is not an official Cursor or OpenAI distribution.
 
 if you want to go fast, go deep first. pstack helps you write less, but higher quality code. rigorous agent workflows you can parallelize with confidence.
 
@@ -27,3 +27,5 @@ codex plugin add pstack@cursor-plugins-codex
 ```
 
 Use the installed skill catalog to invoke a packaged skill, such as `$pstack:architect`. Full names avoid collisions with skills from other plugins.
+
+New explicit workflows: `$statechart` explains TLA+ results using self-contained chart scripts; `$ketchup-video` produces an evidence-based video when native rendering is available. `$sharpen` now rewrites the prompt without starting implementation.

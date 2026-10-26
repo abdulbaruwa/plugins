@@ -1,0 +1,24 @@
+{
+  "name": "pitchbook",
+  "displayName": "PitchBook",
+  "version": "1.0.0+claude.68de6572",
+  "description": "Research private companies, deals, investors, and funds.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://pitchbook.com",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "pitchbook",
+    "private markets",
+    "private equity",
+    "venture capital",
+    "deals",
+    "investors",
+    "funds",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png"
+}

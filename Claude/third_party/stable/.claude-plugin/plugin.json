@@ -1,0 +1,32 @@
+{
+  "name": "stable",
+  "displayName": "Stable",
+  "version": "1.0.0+claude.a0f49763",
+  "description": "Find mail, read scanned documents, and call Stable API endpoints.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://usestable.com",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "stable",
+    "mail",
+    "virtual mailbox",
+    "documents",
+    "scans",
+    "api",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png",
+  "userConfig": {
+    "STABLE_API_KEY": {
+      "type": "string",
+      "title": "Stable API key",
+      "description": "API key from the Stable dashboard (https://dashboard.usestable.com/settings/api-keys).",
+      "required": true,
+      "sensitive": true
+    }
+  }
+}

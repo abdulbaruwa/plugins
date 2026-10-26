@@ -5,7 +5,8 @@ Follow [the fork update workflow](../Codex/UPDATING.md) in a fresh worktree from
 Check the ports independently. The Codex source report maps original plugin changes against its inventory checkpoint. Claude's generated-output and override-lock checks protect a different adaptation, so a clean Codex report does not establish that Claude is current:
 
 ```sh
-python3 Codex/scripts/source_diff.py --head upstream/main
+CODEX_UPSTREAM_BASE=$(python3 -c 'import json; from pathlib import Path; print(json.loads(Path("Codex/inventory.json").read_text())["sourceCommit"])')
+python3 Codex/scripts/source_diff.py --base "$CODEX_UPSTREAM_BASE" --head upstream/main
 node Claude/scripts/build.mjs --check
 ```
 

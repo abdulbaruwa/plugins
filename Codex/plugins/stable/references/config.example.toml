@@ -1,0 +1,3 @@
+# Setup evidence only: verify native registration, credentials, and redirect before use.
+[mcp_servers.stable]
+url = "https://mcp.usestable.com/mcp"
