@@ -9,4 +9,6 @@ Read ../../references/codex-runtime.md. Start with the user's outcome and a chec
 
 Route design questions to ../architect/SKILL.md, runtime questions to ../how/SKILL.md, rationale to ../why/SKILL.md, and evidence review to ../interrogate/SKILL.md. For complex work, choose the matching playbook from playbooks/ and state the scope. Apply ../unslop/SKILL.md to public prose. Maintain a decision trail only when it helps a reviewer understand unattended or consequential work.
 
+Choose autopilot-full only with merge authority, autopilot-stack when the user lands the PRs, and orchestrate for a standing program with native workers and durable evidence. Interrogate is an explicit adversarial review workflow, not a mandatory ceremony for every PR.
+
 Delegate independent passes only when available and authorized. Parent intelligence is the default; no Cursor model matrix is installed. Progress within existing authorization, preserve unrelated work, and stop at the user's actual gates. A native goal or automation requires an explicit request. Return the result, evidence, remaining limitations, and the principles that changed a specific choice.
