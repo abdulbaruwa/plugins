@@ -1,6 +1,6 @@
 # Claude Code port
 
-Claude Code versions of the Cursor plugins in this repository, as one marketplace: **16** workflow plugins and **61** MCP integrations.
+Claude Code versions of the Cursor plugins in this repository, as one marketplace: **16** workflow plugins and **66** MCP integrations.
 
 > [!IMPORTANT]
 > Everything in `plugins/`, `third_party/`, `.claude-plugin/`, and this README is generated. To change a plugin, edit [`scripts/port.config.mjs`](scripts/port.config.mjs) or add a file under [`overrides/<plugin>/`](overrides/), then rebuild.
@@ -95,7 +95,7 @@ The PR review helpers require Python 3.9 or later and create separate artifacts 
 
 ## MCP integrations
 
-Remote servers sign in through `/mcp` the first time you use them, and plugins that need a token prompt for it when you enable them. Claude Code signs in with dynamic client registration and a `localhost` callback. Every server below advertises dynamic registration, but some providers add their own gate: Square allowlists MCP clients, and Greenhouse and Workable allowlist redirect URIs (those two plugins pin `http://localhost:8787/callback`, the URL their admins allowlist).
+OAuth servers may sign in through `/mcp`; plugins with a required token prompt for it when enabled. Verify the provider's registration and redirect requirements before use. Claude Code uses a `localhost` callback, and some providers add an allowlist gate: Square allowlists clients, while Greenhouse and Workable pin `http://localhost:8787/callback` for their admins to allowlist. Static packaging does not establish authentication, entitlement, or live tool coverage.
 
 | Plugin | Description | Asks for |
 | --- | --- | --- |
@@ -139,12 +139,14 @@ Remote servers sign in through `/mcp` the first time you use them, and plugins t
 | [Xero](third_party/xero/) | Read and write invoices, contacts, reports, and payroll. | `XERO_CLIENT_ID`, `XERO_CLIENT_SECRET` |
 | [Attio](third_party/attio/) | Search and update CRM records, lists, notes, and tasks. | — |
 | [Hunter](third_party/hunter/) | Find and verify emails, discover companies, and save leads. | `HUNTER_API_KEY` |
+| [Stable](third_party/stable/) | Find mail, read scanned documents, and call Stable API endpoints. | `STABLE_API_KEY` |
 | [Gamma](third_party/gamma/) | Generate presentations, documents, and webpages. | — |
 | [Webull](third_party/webull/) | View accounts, positions, orders, watchlists, and market data. | — |
 | [S&P Global](third_party/sp-global/) | Query S&P Capital IQ financials, prices, and transcripts. | — |
 | [Interactive Brokers](third_party/interactive-brokers/) | Review positions, balances, P&L, and draft trade instructions. | — |
 | [Meltwater](third_party/meltwater/) | Search media and social mentions and pull analytics. | — |
 | [Daloopa](third_party/daloopa/) | Pull source-linked fundamentals, KPIs, filings, and prices. | — |
+| [PitchBook](third_party/pitchbook/) | Research private companies, deals, investors, and funds. | — |
 | [Excalidraw](third_party/excalidraw/) | Draw and export hand-drawn diagrams from chat. | — |
 | [Statsig](third_party/statsig/) | Inspect and manage feature gates, experiments, dynamic configs, and metrics. | — |
 | [Robinhood](third_party/robinhood/) | View portfolios, positions, orders, watchlists, and market data, and trade in a Robinhood Agentic account. | — |
@@ -160,6 +162,9 @@ Remote servers sign in through `/mcp` the first time you use them, and plugins t
 | [Finary](third_party/finary/) | Read your net worth, accounts, holdings, spending, and budgets. | — |
 | [TikTok for Business](third_party/tiktok-for-business/) | Manage TikTok ad campaigns, ad groups, ads, audiences, creatives, and reports. | — |
 | [Gusto](third_party/gusto/) | Work with payroll, employees, contractors, time off, and reports. | — |
+| [Lark](third_party/lark/) | Search, create, and update Lark Suite docs, and read Lark messages and groups. | — |
+| [Feishu](third_party/feishu/) | Search, create, and update Feishu docs, and read Feishu messages and groups. | — |
+| [Framer](third_party/framer/) | Design, build, and edit your Framer sites, pages, and CMS content. | — |
 
 ## Add these servers yourself
 
@@ -167,6 +172,9 @@ These servers require provider-specific endpoint, registration, redirect, or sec
 
 | Server | Why | Command |
 | --- | --- | --- |
+| databricks-genie-one | Requires your bare workspace hostname and a registered Databricks client ID; dynamic registration is unsupported. Preserve ai-gateway/offline_access scopes and verify native redirect support. A secret is optional, not required. | `claude mcp add-json databricks-genie-one '{"type":"http","url":"https://<databricks-host>/ai-gateway/mcp-services/system.ai.genie_one_mcp","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"ai-gateway offline_access"}}'` |
+| jobber | Requires your own Jobber OAuth client ID and secret with the native redirect registered. Clients, requests, and quotes are writable; jobs, invoices, and visits are read-only. | `claude mcp add --transport http jobber https://mcp.getjobber.com/mcp --client-id <your-client-id> --callback-port 8787 --client-secret` |
+| vanta | Select mcp.vanta.com (US), mcp.eu.vanta.com (Europe), or mcp.aus.vanta.com (Australia) before adding the server. No region is inferred. Verify provider-supported dynamic registration and native redirect/tool access; connectivity is unverified. | `claude mcp add --transport http vanta https://<vanta-mcp-host>/mcp --client-id <your-client-id> --callback-port 8787` |
 | highlevel | Upstream uses a client-specific Cursor v2 endpoint. This recipe selects the separately documented universal endpoint, with fewer tools; verify provider-supported client registration, redirect support, and the required tools before adding it. | `claude mcp add --transport http highlevel https://services.leadconnectorhq.com/mcp/ --client-id <your-client-id> --callback-port 8787` |
 | meta-ads | Upstream uses Cursor's registered Meta app ID and no dynamic client registration. Register a Meta OAuth client with your own allowed redirect URI; do not reuse Cursor's app ID. | `claude mcp add --transport http meta-ads https://mcp.facebook.com/ads --client-id <your-client-id> --callback-port 8787` |
 | quickbooks-online | Intuit now publishes an MCP endpoint, but the upstream setup relies on Cursor-owned OAuth credentials. Verify provider-supported Claude Code client registration and redirect support first; connectivity is unverified. | `claude mcp add --transport http quickbooks-online https://mcp-e2e.quickbooks.intuit.com/mcp --client-id <your-client-id> --callback-port 8787` |
@@ -175,10 +183,10 @@ These servers require provider-specific endpoint, registration, redirect, or sec
 | hubspot | Needs your own HubSpot app client ID and secret. | `claude mcp add --transport http hubspot https://mcp.hubspot.com --client-id <your-client-id> --callback-port 8787 --client-secret` |
 | gmail | Google offers no dynamic client registration. Create a Desktop OAuth client in Google Cloud with the Gmail API enabled. | `claude mcp add --transport http gmail https://gmailmcp.googleapis.com/mcp/v1 --client-id <your-client-id> --callback-port 8787 --client-secret` |
 | google-calendar | Google offers no dynamic client registration. Create a Desktop OAuth client in Google Cloud with the Calendar API enabled. | `claude mcp add --transport http google-calendar https://calendarmcp.googleapis.com/mcp/v1 --client-id <your-client-id> --callback-port 8787 --client-secret` |
-| google-cloud-bigquery | Google offers no dynamic client registration. Create a Desktop OAuth client in Google Cloud with the BigQuery API enabled. | `claude mcp add --transport http google-cloud-bigquery https://bigquery.googleapis.com/mcp --client-id <your-client-id> --callback-port 8787 --client-secret` |
+| google-cloud-bigquery | Upstream now requires a team-owned Google client ID and secret. Verify a provider-supported native app type, redirect, and BigQuery scope; Cursor's web-app callback and backend secret storage do not transfer. Queries may be billed to the selected project, and execute_sql can write when IAM permits. | `claude mcp add --transport http google-cloud-bigquery https://bigquery.googleapis.com/mcp --client-id <your-client-id> --callback-port 8787 --client-secret` |
 | salesforce | Needs your org's MCP URL and an External Client App consumer key (Connected Apps are not supported; enable JWT-based access tokens). | `claude mcp add-json salesforce '{"type":"http","url":"<salesforce-mcp-url>","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"mcp_api refresh_token"}}'` |
 | salesforce-headless-360 | Needs your org's MCP URL and an External Client App consumer key and secret (Connected Apps are not supported). | `claude mcp add-json salesforce-headless-360 '{"type":"http","url":"<salesforce-mcp-url>","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"mcp_api refresh_token"}}' --client-secret` |
-| x | X's MCP uses a fixed client ID whose allowed redirect URIs are not documented. Try X's client ID from the Cursor plugin's `mcp.json` first; if sign-in fails, register your own X app. | `claude mcp add-json x '{"type":"http","url":"https://api.x.com/mcp","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"tweet.read users.read follows.read space.read mute.read like.read list.read list.write block.read block.write bookmark.read bookmark.write dm.read dm.write calls.read calls.write media.write developer.billing.write developer.write offline.access"}}'` |
+| x | X's MCP uses a fixed client ID whose allowed redirect URIs are not documented. Try X's client ID from the Cursor plugin's `mcp.json` first; if sign-in fails, register your own X app. | `claude mcp add-json x '{"type":"http","url":"https://api.x.com/mcp","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"tweet.read users.read follows.read space.read mute.read like.read list.read list.write block.read block.write bookmark.read bookmark.write dm.read dm.write calls.read calls.write broadcast.read broadcast.write media.write developer.billing.write developer.write offline.access"}}'` |
 | x-ads | X's MCP uses a fixed client ID whose allowed redirect URIs are not documented. Try X's client ID from the Cursor plugin's `mcp.json` first; if sign-in fails, register your own X app. | `claude mcp add-json x-ads '{"type":"http","url":"https://ads-api.x.com/mcp","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"ads.read ads.write media.write offline.access"}}'` |
 
 ## Not ported
@@ -199,6 +207,7 @@ These servers require provider-specific endpoint, registration, redirect, or sec
 | zoom | Zoom accepts only a `127.0.0.1` loopback redirect and rejects `localhost`, and Claude Code always signs in through `http://localhost:<port>/callback`. |
 | google-docs | The MCP server is Cursor's hosted proxy (`api.cursor.com/rest-mcp`), which needs a Cursor account. |
 | google-ads | The MCP server is Cursor's hosted proxy (`api.cursor.com/rest-mcp`), which needs a Cursor account. |
+| power-bi | Grok Bot only and backed by Cursor's hosted REST MCP proxy; no native provider endpoint is supplied. |
 | google-drive | The MCP server is Cursor's hosted proxy (`api.cursor.com/rest-mcp`), which needs a Cursor account. |
 | google-sheets | The MCP server is Cursor's hosted proxy (`api.cursor.com/rest-mcp`), which needs a Cursor account. |
 | google-slides | The MCP server is Cursor's hosted proxy (`api.cursor.com/rest-mcp`), which needs a Cursor account. |

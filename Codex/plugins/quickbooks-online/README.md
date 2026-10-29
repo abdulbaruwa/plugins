@@ -1,6 +1,6 @@
 # QuickBooks Online for Codex
 
-Community adaptation of `third_party/quickbooks-online` at upstream version `1.1.0`. Original authors and MIT license are preserved. This is not an official Cursor or OpenAI distribution.
+Community adaptation of `third_party/quickbooks-online` at upstream version `1.1.1`. Original authors and MIT license are preserved. This is not an official Cursor or OpenAI distribution.
 
 Read invoices, bills, expenses, customers, accounts, and financial reports.
 

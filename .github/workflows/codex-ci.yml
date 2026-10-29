@@ -41,7 +41,8 @@ jobs:
         if: always()
         run: |
           git fetch --no-tags https://github.com/cursor/plugins.git main:refs/remotes/upstream/main
-          python Codex/scripts/source_diff.py --head upstream/main --json > "$RUNNER_TEMP/source-diff-upstream.json"
+          CODEX_UPSTREAM_BASE=$(python -c 'import json; from pathlib import Path; print(json.loads(Path("Codex/inventory.json").read_text())["sourceCommit"])')
+          python Codex/scripts/source_diff.py --base "$CODEX_UPSTREAM_BASE" --head upstream/main --json > "$RUNNER_TEMP/source-diff-upstream.json"
       - name: Upload source comparison reports
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

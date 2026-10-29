@@ -19,11 +19,14 @@ From a clean repository worktree with the validation environment installed:
 
 ```sh
 git fetch upstream main
-Codex/.venv/bin/python Codex/scripts/source_diff.py
-Codex/.venv/bin/python Codex/scripts/source_diff.py --json
+CODEX_UPSTREAM_BASE=$(Codex/.venv/bin/python -c 'import json; from pathlib import Path; print(json.loads(Path("Codex/inventory.json").read_text())["sourceCommit"])')
+Codex/.venv/bin/python Codex/scripts/source_diff.py --base "$CODEX_UPSTREAM_BASE" --head upstream/main
+Codex/.venv/bin/python Codex/scripts/source_diff.py --base "$CODEX_UPSTREAM_BASE" --head upstream/main --json
 ```
 
 The checker compares committed Git trees against `inventory.json`'s `sourceCommit`, resolving every target to an exact SHA. It reports source files changed without a version bump, catalog additions/removals/metadata changes, changed blocked plugins, and their corresponding Codex package paths. Renames appear as removed and added paths. Root-level source changes appear separately as advisory items. It fetches nothing, writes nothing, and installs nothing. Uncommitted original-source edits are outside the comparison; commit them on the update branch before checking an adopted source tree.
+
+When the fork carries a reviewed fix in an original source file, record its exact local source commit in that plugin's `reviewedSourceCommit`, after reconciling the fix into both ports. Keep the global `sourceCommit` on the reviewed upstream SHA. The adopted-source check uses those per-plugin checkpoints. For a comparison against Cursor's branch, pass `--base <inventory.sourceCommit> --head <exact-fetched-upstream-SHA>` instead: a local fork commit is not an ancestor of Cursor's branch. This compares all upstream changes since the upstream checkpoint, including changes behind partially reviewed rows, and does not suppress new drift. CI makes the same distinction. Do not remove the checker's ancestry guard or invent a checkpoint to clear a failure.
 
 `--head HEAD --check` checks the committed sources already adopted by the fork. Exit codes are 0 for a successful report, 1 for pending plugin/catalog reconciliation with `--check`, and 2 for malformed data or unavailable history. Plain reporting returns 0 even when drift exists. Missing revisions need a fetch/full history, not an invented baseline. `--base <commit>` overrides all recorded baselines for a one-off investigation.
 

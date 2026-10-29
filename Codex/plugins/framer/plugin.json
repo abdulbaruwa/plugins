@@ -1,0 +1,33 @@
+{
+  "name": "framer",
+  "description": "Design, build, and edit your Framer sites, pages, and CMS content.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://www.framer.com",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "framer",
+    "website",
+    "design",
+    "cms",
+    "no-code",
+    "mcp"
+  ],
+  "version": "1.0.0-codex.1",
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Framer",
+        "shortDescription": "Design, build, and edit your Framer sites, pages, and CMS content.",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Productivity",
+        "logo": "./assets/logo.png"
+      },
+      "onboardingSkill": "./skills/setup-framer/SKILL.md"
+    }
+  }
+}

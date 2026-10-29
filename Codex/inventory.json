@@ -1,6 +1,6 @@
 {
   "sourceCatalog": ".cursor-plugin/marketplace.json",
-  "sourceCommit": "d457567332aa6989e753ea289f30ea2bfbc80bc0",
+  "sourceCommit": "99b609a72323b70204eab407c622f436e858e112",
   "plugins": [
     {
       "originalName": "teaching",
@@ -149,12 +149,13 @@
       "originalName": "pstack",
       "name": "pstack",
       "source": "pstack",
-      "originalVersion": "0.15.28",
-      "originalSkills": 56,
+      "originalVersion": "0.15.32",
+      "originalSkills": 58,
       "proof": "Package validation and 368 bundled statechart compiler/renderer tests pass; live agent workflow and provider acceptance remain unproved.",
       "status": "adapted-skills",
       "reason": "Codex skill adaptation; Cursor hooks and automatic rules are not installed. Package updated to 0.15.36 independently of the adopted source tree; see portedSourceCommit and the package update decisions.",
       "path": "./plugins/pstack",
+      "reviewedSourceCommit": "991b71fd54c2c57ffe0b56969236b83678401fc8",
       "portedSourceCommit": "1ba91fc25c0977741dd0e267849e6234b037ed0a",
       "portedVersion": "0.15.36"
     },
@@ -371,7 +372,7 @@
       "originalName": "x",
       "name": "x",
       "source": "third_party/x",
-      "originalVersion": "2.7.0",
+      "originalVersion": "2.10.0",
       "originalSkills": 1,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "configuration-required",
@@ -932,11 +933,11 @@
       "originalName": "google-cloud-bigquery",
       "name": "google-cloud-bigquery",
       "source": "third_party/google-cloud-bigquery",
-      "originalVersion": "1.0.0",
+      "originalVersion": "1.1.0",
       "originalSkills": 0,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
-      "status": "mcp-bundle",
-      "reason": "Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified.",
+      "status": "configuration-required",
+      "reason": "Upstream now requires a team-owned Google OAuth client ID and secret, with the BigQuery scope and provider-supported redirect. Verify native client registration and credential storage; Cursor team-backend secret storage does not transfer. Queries can incur project charges, and execute_sql can write when IAM permits.",
       "path": "./plugins/google-cloud-bigquery"
     },
     {
@@ -1075,7 +1076,7 @@
       "originalName": "quickbooks-online",
       "name": "quickbooks-online",
       "source": "third_party/quickbooks-online",
-      "originalVersion": "1.1.0",
+      "originalVersion": "1.1.1",
       "originalSkills": 0,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "configuration-required",
@@ -1108,7 +1109,7 @@
       "originalName": "tailscale",
       "name": "tailscale",
       "source": "third_party/tailscale",
-      "originalVersion": "1.0.1",
+      "originalVersion": "1.0.3",
       "originalSkills": 1,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "blocked",
@@ -1222,7 +1223,7 @@
       "originalSkills": 0,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "configuration-required",
-      "reason": "Upstream uses HighLevel\u2019s client-specific Cursor endpoint. Confirm a provider-supported Codex endpoint and client registration before configuration; no connection is enabled.",
+      "reason": "Upstream uses HighLevel’s client-specific Cursor endpoint. Confirm a provider-supported Codex endpoint and client registration before configuration; no connection is enabled.",
       "path": "./plugins/highlevel"
     },
     {
@@ -1233,8 +1234,106 @@
       "originalSkills": 0,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "configuration-required",
-      "reason": "Upstream supplies Cursor\u2019s registered Meta OAuth app ID and no dynamic client registration. Register a provider-supported Codex client; no shared app ID or connection is enabled.",
+      "reason": "Upstream supplies Cursor’s registered Meta OAuth app ID and no dynamic client registration. Register a provider-supported Codex client; no shared app ID or connection is enabled.",
       "path": "./plugins/meta-ads"
+    },
+    {
+      "originalName": "feishu",
+      "name": "feishu",
+      "source": "third_party/feishu",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "originalVersion": "1.0.0",
+      "status": "mcp-bundle",
+      "reason": "Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified.",
+      "path": "./plugins/feishu"
+    },
+    {
+      "originalName": "lark",
+      "name": "lark",
+      "source": "third_party/lark",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "originalVersion": "1.0.0",
+      "status": "mcp-bundle",
+      "reason": "Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified.",
+      "path": "./plugins/lark"
+    },
+    {
+      "originalName": "pitchbook",
+      "name": "pitchbook",
+      "source": "third_party/pitchbook",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "originalVersion": "1.0.0",
+      "status": "mcp-bundle",
+      "reason": "Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified.",
+      "path": "./plugins/pitchbook"
+    },
+    {
+      "originalName": "databricks-genie-one",
+      "name": "databricks-genie-one",
+      "source": "third_party/databricks-genie-one",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "originalVersion": "1.0.1",
+      "status": "configuration-required",
+      "reason": "Supply a bare workspace hostname and your own Databricks OAuth client ID. Dynamic registration is unsupported; a client secret is optional, and ai-gateway/offline_access scopes are required. Verify native redirect support before connecting.",
+      "path": "./plugins/databricks-genie-one"
+    },
+    {
+      "originalName": "framer",
+      "name": "framer",
+      "source": "third_party/framer",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "originalVersion": "1.0.0",
+      "status": "configuration-required",
+      "reason": "Framer accepts localhost or HTTPS OAuth redirects, while native client callback compatibility is unverified. Verify the exact redirect and supported registration before connecting; never substitute Cursor hosted placement. Publishing a site requires explicit user authority.",
+      "path": "./plugins/framer"
+    },
+    {
+      "originalName": "jobber",
+      "name": "jobber",
+      "source": "third_party/jobber",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "originalVersion": "1.0.0",
+      "status": "configuration-required",
+      "reason": "Register your own Jobber OAuth client ID and required secret with a native supported redirect. Only clients, requests, and quotes are writable in the documented integration; jobs, invoices, and visits are read-only.",
+      "path": "./plugins/jobber"
+    },
+    {
+      "originalName": "stable",
+      "name": "stable",
+      "source": "third_party/stable",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "originalVersion": "1.0.0",
+      "status": "configuration-required",
+      "reason": "Configure x-api-key from the STABLE_API_KEY environment variable using the supported native secret/header mapping. No credential interpolation is copied into a portable connection. The execute-request tool may write; honor the requested action and authorization.",
+      "path": "./plugins/stable"
+    },
+    {
+      "originalName": "vanta",
+      "name": "vanta",
+      "source": "third_party/vanta",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "originalVersion": "1.1.0",
+      "status": "configuration-required",
+      "reason": "Ask the user to select mcp.vanta.com (United States), mcp.eu.vanta.com (Europe), or mcp.aus.vanta.com (Australia). Do not infer a region. Verify native authentication and tool permissions before configuring that exact host.",
+      "path": "./plugins/vanta"
+    },
+    {
+      "originalName": "power-bi",
+      "name": "power-bi",
+      "source": "third_party/power-bi",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "No native runtime acceptance; source is host-specific.",
+      "status": "blocked",
+      "reason": "Grok Bot only with Cursor hosted REST MCP proxy; no supported native provider endpoint is supplied."
     }
   ]
 }

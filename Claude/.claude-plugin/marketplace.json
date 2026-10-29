@@ -209,7 +209,7 @@
       "name": "pstack",
       "source": "./plugins/pstack",
       "description": "if you want to go fast, go deep first. pstack helps you write less, but higher quality code. rigorous agent workflows you can parallelize with confidence.",
-      "version": "0.15.28+claude.748f070c",
+      "version": "0.15.32+claude.9db44401",
       "author": {
         "name": "Lauren Tan"
       },
@@ -952,6 +952,23 @@
       ]
     },
     {
+      "name": "stable",
+      "source": "./third_party/stable",
+      "description": "Find mail, read scanned documents, and call Stable API endpoints.",
+      "version": "1.0.0+claude.a0f49763",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "stable",
+        "mail",
+        "documents",
+        "mcp"
+      ]
+    },
+    {
       "name": "gamma",
       "source": "./third_party/gamma",
       "description": "Generate presentations, documents, and webpages.",
@@ -1050,6 +1067,23 @@
         "daloopa",
         "finance",
         "research",
+        "mcp"
+      ]
+    },
+    {
+      "name": "pitchbook",
+      "source": "./third_party/pitchbook",
+      "description": "Research private companies, deals, investors, and funds.",
+      "version": "1.0.0+claude.68de6572",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "pitchbook",
+        "finance",
+        "private markets",
         "mcp"
       ]
     },
@@ -1303,6 +1337,58 @@
         "gusto",
         "payroll",
         "hr",
+        "mcp"
+      ]
+    },
+    {
+      "name": "lark",
+      "source": "./third_party/lark",
+      "description": "Search, create, and update Lark Suite docs, and read Lark messages and groups.",
+      "version": "1.0.0+claude.f8b28f36",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "lark",
+        "docs",
+        "messaging",
+        "mcp"
+      ]
+    },
+    {
+      "name": "feishu",
+      "source": "./third_party/feishu",
+      "description": "Search, create, and update Feishu docs, and read Feishu messages and groups.",
+      "version": "1.0.0+claude.d52496c3",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "feishu",
+        "docs",
+        "messaging",
+        "mcp"
+      ]
+    },
+    {
+      "name": "framer",
+      "source": "./third_party/framer",
+      "description": "Design, build, and edit your Framer sites, pages, and CMS content.",
+      "version": "1.0.0+claude.8d66a8e8",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "framer",
+        "design",
+        "website",
+        "cms",
         "mcp"
       ]
     }

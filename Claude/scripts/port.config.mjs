@@ -33,6 +33,7 @@ export const SKIP = {
   zoom: "Zoom accepts only a `127.0.0.1` loopback redirect and rejects `localhost`, and Claude Code always signs in through `http://localhost:<port>/callback`.",
   "google-docs": CURSOR_HOSTED,
   "google-ads": CURSOR_HOSTED,
+  "power-bi": "Grok Bot only and backed by Cursor's hosted REST MCP proxy; no native provider endpoint is supplied.",
   "google-drive": CURSOR_HOSTED,
   "google-sheets": CURSOR_HOSTED,
   "google-slides": CURSOR_HOSTED,
@@ -51,6 +52,9 @@ export const SKIP = {
 //   why     shown in the README
 //   secret  whether the provider's client needs a secret (default: the Cursor config has CLIENT_SECRET)
 export const MANUAL_MCP = {
+  "databricks-genie-one": { why: "Requires your bare workspace hostname and a registered Databricks client ID; dynamic registration is unsupported. Preserve ai-gateway/offline_access scopes and verify native redirect support. A secret is optional, not required.", secret: false },
+  "jobber": { why: "Requires your own Jobber OAuth client ID and secret with the native redirect registered. Clients, requests, and quotes are writable; jobs, invoices, and visits are read-only." },
+  "vanta": { why: "Select mcp.vanta.com (US), mcp.eu.vanta.com (Europe), or mcp.aus.vanta.com (Australia) before adding the server. No region is inferred. Verify provider-supported dynamic registration and native redirect/tool access; connectivity is unverified.", secret: false },
   "highlevel": { why: "Upstream uses a client-specific Cursor v2 endpoint. This recipe selects the separately documented universal endpoint, with fewer tools; verify provider-supported client registration, redirect support, and the required tools before adding it.", url: "https://services.leadconnectorhq.com/mcp/", secret: false },
   "meta-ads": { why: "Upstream uses Cursor's registered Meta app ID and no dynamic client registration. Register a Meta OAuth client with your own allowed redirect URI; do not reuse Cursor's app ID.", secret: false },
   "quickbooks-online": { why: "Intuit now publishes an MCP endpoint, but the upstream setup relies on Cursor-owned OAuth credentials. Verify provider-supported Claude Code client registration and redirect support first; connectivity is unverified.", secret: false },
@@ -59,7 +63,7 @@ export const MANUAL_MCP = {
   hubspot: { why: "Needs your own HubSpot app client ID and secret." },
   gmail: { why: "Google offers no dynamic client registration. Create a Desktop OAuth client in Google Cloud with the Gmail API enabled.", secret: true },
   "google-calendar": { why: "Google offers no dynamic client registration. Create a Desktop OAuth client in Google Cloud with the Calendar API enabled.", secret: true },
-  "google-cloud-bigquery": { why: "Google offers no dynamic client registration. Create a Desktop OAuth client in Google Cloud with the BigQuery API enabled.", secret: true },
+  "google-cloud-bigquery": { why: "Upstream now requires a team-owned Google client ID and secret. Verify a provider-supported native app type, redirect, and BigQuery scope; Cursor's web-app callback and backend secret storage do not transfer. Queries may be billed to the selected project, and execute_sql can write when IAM permits.", secret: true },
   salesforce: { why: "Needs your org's MCP URL and an External Client App consumer key (Connected Apps are not supported; enable JWT-based access tokens)." },
   "salesforce-headless-360": { why: "Needs your org's MCP URL and an External Client App consumer key and secret (Connected Apps are not supported)." },
   x: { why: "X's MCP uses a fixed client ID whose allowed redirect URIs are not documented. Try X's client ID from the Cursor plugin's `mcp.json` first; if sign-in fails, register your own X app." },
@@ -417,6 +421,8 @@ export const PLUGINS = {
     exclude: ["automations", "skills/make-bot-ui"],
     rewrites: [...PSTACK_MODELS, ...PSTACK_RUNTIME, ...SKILL_CREATOR, ...REFLECT_EVIDENCE],
     prepend: [
+      { file: "skills/statechart/SKILL.md", text: "Use an owned scratch directory outside the repo, and preserve evidence before cleanup. Read ../../docs/harness/claude-code.md for native tool and explicit-only routing. The scripts may install pinned Pele/resvg into a cache and download TLC/Java through mise; inspect available dependencies and disclose downloads before running. No browser is required. A model or bounded result is not proof of the whole system." },
+      { file: "skills/ketchup-video/SKILL.md", text: "Read the packaged ketchup skill by its absolute path when routing from this user-only skill. Use only rendering and artifact tools actually available in the session. Never claim a video or inspection without file evidence; use the stated failure path if rendering or attachment is unavailable." },
       {"file": "skills/poteto-mode/SKILL.md", "text": "Read ../../docs/harness/claude-code.md for this port's native tools, explicit-only skill routing, model fields, conversation identity, and prerequisite gates before following the runtime instructions below."},
       {"file": "skills/create-formal-verification-skill/SKILL.md", "text": "Run real-code negative controls in an isolated worktree or owned scratch checkout. Preserve unrelated changes, restore only your control edits, and retain evidence outside the disposable checkout. A generated-input fallback is testing, not a formal proof."},
       {"file": "skills/maintain-formal-verification-skill/SKILL.md", "text": "Run real-code negative controls in an isolated worktree or owned scratch checkout. Preserve unrelated changes, restore only your control edits, and retain evidence outside the disposable checkout. A generated-input fallback is testing, not a formal proof."},
@@ -427,6 +433,11 @@ export const PLUGINS = {
       },
     ],
     patches: [
+      {
+        file: "README.md",
+        find: "claude code leaves auto-update off for third-party marketplaces, so pstack stays on the version you installed. to turn it on, run `/plugin`, open the **marketplaces** tab, select `cursor-plugins`, and choose **enable auto-update**. to update once by hand, run `claude plugin update pstack@cursor-plugins`.",
+        replace: "this community port uses `cursor-plugins-claude`. for a GitHub-backed installation, inspect its update setting in `/plugin` and update with `claude plugin update pstack@cursor-plugins-claude` when supported. for the documented local-clone installation, fetch and reconcile the repository, rebuild with `node Claude/scripts/build.mjs`, and reload plugins or start a new session. this does not install or update the separate upstream root marketplace.",
+      },
       {
         file: "README.md",
         find: "in claude code:\n\n```bash\n/plugin marketplace add cursor/plugins\n/plugin install pstack@cursor-plugins\n```",
