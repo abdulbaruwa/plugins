@@ -151,11 +151,13 @@
       "source": "pstack",
       "originalVersion": "0.15.32",
       "originalSkills": 58,
-      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "proof": "Package validation and 368 bundled statechart compiler/renderer tests pass; live agent workflow and provider acceptance remain unproved.",
       "status": "adapted-skills",
-      "reason": "Codex skill adaptation; Cursor hooks and automatic rules are not installed.",
+      "reason": "Codex skill adaptation; Cursor hooks and automatic rules are not installed. Package updated to 0.15.36 independently of the adopted source tree; see portedSourceCommit and the package update decisions.",
       "path": "./plugins/pstack",
-      "reviewedSourceCommit": "991b71fd54c2c57ffe0b56969236b83678401fc8"
+      "reviewedSourceCommit": "991b71fd54c2c57ffe0b56969236b83678401fc8",
+      "portedSourceCommit": "1ba91fc25c0977741dd0e267849e6234b037ed0a",
+      "portedVersion": "0.15.36"
     },
     {
       "originalName": "dyl-stack",

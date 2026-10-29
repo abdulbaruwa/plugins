@@ -50,7 +50,7 @@ An independent manual review found and corrected stale Advisor/Thermos runtime r
 | cursor-sdk | [codex-sdk](plugins/codex-sdk/README.md) | adapted-skills | Native Codex SDK authoring workflow replaces Cursor SDK API guidance; original source API and examples are not copied. |
 | origin-apps | [origin-apps](plugins/origin-apps/README.md) | adapted-skills | Codex skill adaptation; Cursor hooks and automatic rules are not installed. |
 | orchestrate | [orchestrate](plugins/orchestrate/README.md) | adapted-skills | Codex skill adaptation; Cursor hooks and automatic rules are not installed. |
-| pstack | [pstack](plugins/pstack/README.md) | adapted-skills | Codex skill adaptation; Cursor hooks and automatic rules are not installed. |
+| pstack | [pstack](plugins/pstack/README.md) | adapted-skills | Codex adaptation through 0.15.36, including the statechart compiler and native orchestration. Cursor hooks and automatic rules are not installed. [Source decisions](plugins/pstack/references/upstream-update-0.15.36.md). |
 | dyl-stack | [dyl-stack](plugins/dyl-stack/README.md) | adapted-skills | Codex skill adaptation; Cursor hooks and automatic rules are not installed. |
 | grok-voice | [grok-voice](plugins/grok-voice/README.md) | adapted-skills | Codex skill adaptation; Cursor hooks and automatic rules are not installed. |
 | advisor | [advisor](plugins/advisor/README.md) | adapted-skills | Codex skill adaptation; Cursor hooks and automatic rules are not installed. |

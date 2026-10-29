@@ -46,6 +46,8 @@ Resolve source conflicts without discarding native enhancements. Inspect the sou
 
 Keep the historical `sourceCommit` until every affected source plugin and catalog change has been reviewed. For partial work, a plugin row may record `reviewedSourceCommit` as the exact source SHA actually reviewed. This clears that plugin's file drift without clearing other plugins; catalog changes still require the global checkpoint. A checkpoint records your completed review, not automatic proof that a fix was ported. Put the rationale and validation in the update PR. Never advance it just to make CI green.
 
+For a package-only refresh ahead of the maintained source tree, keep `sourceCommit`, `originalVersion`, and any adopted `reviewedSourceCommit` unchanged. Record the exact fetched upstream SHA as `portedSourceCommit` and its package version as `portedVersion`, with package-local reconciliation notes. These fields document an external package source; the source-diff checker deliberately does not use them to clear adopted-source or catalog drift. A later full sync must review that package against its recorded port before replacing it.
+
 When the update is reconciled, advance `sourceCommit` to the merged upstream SHA, refresh the affected rows' `source`, `originalVersion`, and compatibility notes, and bump only changed Codex package versions. Remove obsolete per-plugin checkpoints when the global source checkpoint catches up. Codex-local package revisions are independent of upstream versions. Preserve the native serving containment, task ownership, independent shipping verification, and diff-line regressions introduced by this port.
 
 Run the original validator and Codex checks:
