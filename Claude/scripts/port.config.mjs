@@ -169,7 +169,7 @@ const PSTACK_RUNTIME = [
   [/Use `environment: "local"` only when the worker needs access to something on the user's computer\./g, "Omit `isolation` only when the worker must work in the parent's checkout."],
   [/When a worker must start from a non-default pushed branch, pass `cloud_base_branch`\./g, "A worktree starts from the default branch, so a worker that must start from another pushed branch runs `git fetch origin <branch> && git checkout <branch>` first."],
   [/`environment: "cloud"`/g, '`isolation: "worktree"`'],
-  [/in the (?:current|root) agent's store \(path in the system prompt\)/g, "in a durable store outside the repo, `~/.claude/pstack/` (create it, and pass it to `orch` as `--store` or `ORCH_STORE`)"],
+  [/in the (?:current|root) agent's store \(path in the system prompt\)/g, "in a durable directory outside the repo, `~/.claude/pstack/` (create it when needed and keep tracker/evidence files there; no orchestration CLI is required)"],
   [/Each owner is a Cursor cloud agent/g, 'Each owner is a local Claude Code subagent in its own worktree (`isolation: "worktree"`)'],
   [/Assume the VM dies\./g, "Assume the session ends; subagents stop, while worktrees, pushed branches, and PRs survive."],
   [/the agent store's `docs\/`/g, "the pstack store's `docs/` (`~/.claude/pstack/docs/`)"],

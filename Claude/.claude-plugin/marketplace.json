@@ -209,7 +209,7 @@
       "name": "pstack",
       "source": "./plugins/pstack",
       "description": "if you want to go fast, go deep first. pstack helps you write less, but higher quality code. rigorous agent workflows you can parallelize with confidence.",
-      "version": "0.15.36+claude.99ae5875",
+      "version": "0.15.36+claude.38092e09",
       "author": {
         "name": "Lauren Tan"
       },
