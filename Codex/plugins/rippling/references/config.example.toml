@@ -1,0 +1,3 @@
+# Setup evidence only: resolve the endpoint and verify native OAuth before use.
+[mcp_servers.rippling]
+url = "<employee-remote-mcp-url>"

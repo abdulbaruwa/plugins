@@ -18,6 +18,9 @@ const CURSOR_HOSTED = "The MCP server is Cursor's hosted proxy (`api.cursor.com/
 
 // Plugins left out of the Claude marketplace, with the reason shown in Claude/README.md.
 export const SKIP = {
+  "business-central": "Cursor hosts and credentials this server; the source supplies no endpoint or portable implementation.",
+  "lark-base": CURSOR_HOSTED,
+  "onepay": "The source limits this connector to Grok Bot/sand. A Claude directory listing does not establish supported Claude Code registration or tool access.",
   "ralph-loop":
     "Claude Code's official marketplace has a `ralph-loop` plugin for the same workflow. Install that one: `/plugin install ralph-loop@claude-plugins-official`.",
   finance: "Grok Bot only (`minClientVersions.cursor` is `never`).",
@@ -52,6 +55,7 @@ export const SKIP = {
 //   why     shown in the README
 //   secret  whether the provider's client needs a secret (default: the Cursor config has CLIENT_SECRET)
 export const MANUAL_MCP = {
+  servicenow: { why: "Requires an active instance MCP server, its exact server name, and your own authorization-code OAuth client with a secret, JWT token format and mcp_server scope. Register the native redirect, verify sn_mcp_server.viewer plus tool ACLs, and preserve the documented 26 KB request/64 KB response limits." },
   "databricks-genie-one": { why: "Requires your bare workspace hostname and a registered Databricks client ID; dynamic registration is unsupported. Preserve ai-gateway/offline_access scopes and verify native redirect support. A secret is optional, not required.", secret: false },
   "jobber": { why: "Requires your own Jobber OAuth client ID and secret with the native redirect registered. Clients, requests, and quotes are writable; jobs, invoices, and visits are read-only." },
   "vanta": { why: "Select mcp.vanta.com (US), mcp.eu.vanta.com (Europe), or mcp.aus.vanta.com (Australia) before adding the server. No region is inferred. Verify provider-supported dynamic registration and native redirect/tool access; connectivity is unverified.", secret: false },
@@ -158,7 +162,6 @@ const PSTACK_RUNTIME = [
   [/The system prompt names the workspace's `agent-transcripts\/` directory\./g, `This project's transcripts are the \`*.jsonl\` files in ${TRANSCRIPT_DIR}).`],
   [/the active workspace's `agent-transcripts\/` directory \(the system prompt names (?:this|the) path/g, `this project's transcript directory, ${TRANSCRIPT_DIR}`],
   [/ and `readonly: true`\./g, ", briefed read-only: it must not edit files."],
-  [/, `readonly: true`, and/g, ", a read-only brief (no file edits), and"],
   [/ with `readonly: false` \(agent mode\)\. \*\*Do not use readonly\/Ask mode\.\*\* It strips MCP access/g, ". **Do not use `Explore` or a tool allowlist that drops the `mcp__*` tools.** That strips MCP access"],
   [/, agent mode \(`readonly: false`\)/g, ""],
   [/, and readonly strips MCPs\./g, ". `general-purpose` keeps the MCP tools it needs."],
@@ -166,18 +169,10 @@ const PSTACK_RUNTIME = [
   [/Use `environment: "local"` only when the worker needs access to something on the user's computer\./g, "Omit `isolation` only when the worker must work in the parent's checkout."],
   [/When a worker must start from a non-default pushed branch, pass `cloud_base_branch`\./g, "A worktree starts from the default branch, so a worker that must start from another pushed branch runs `git fetch origin <branch> && git checkout <branch>` first."],
   [/`environment: "cloud"`/g, '`isolation: "worktree"`'],
-  [/full Agent schema including `environment`/g, "full Agent schema including `isolation`"],
-  [/Agents are spawned, resumed, and drained only through the Agent tool\./g, "Agents are spawned with the Agent tool, continued with `SendMessage`, and drained from their completion notifications."],
-  [/Every spawn and every resume carries the standing orders verbatim\./g, "Every spawn and every `SendMessage` continuation carries the standing orders verbatim."],
-  [/Local spawns may reference the standing-orders file by store path\. Verbatim paste is for cloud spawns and every resume\./g, "Spawns may reference the standing-orders file by store path. Paste it verbatim into every `SendMessage` continuation."],
-  [/local agents are dead, cloud work is not\./g, "every subagent is gone; worktrees, pushed branches, and PRs survive."],
-  [/reattach cloud work by PR and branch/g, "reattach work by PR and branch"],
-  [/Never resume an agent to check on it\. A resume restarts an idle agent\./g, "Never message an agent just to check on it. A `SendMessage` wakes an idle agent."],
-  [/in the (?:current|root) agent's store \(path in the system prompt\)/g, "in a durable store outside the repo, `~/.claude/pstack/` (create it, and pass it to `orch` as `--store` or `ORCH_STORE`)"],
+  [/in the (?:current|root) agent's store \(path in the system prompt\)/g, "in a durable directory outside the repo, `~/.claude/pstack/` (create it when needed and keep tracker/evidence files there; no orchestration CLI is required)"],
   [/Each owner is a Cursor cloud agent/g, 'Each owner is a local Claude Code subagent in its own worktree (`isolation: "worktree"`)'],
   [/Assume the VM dies\./g, "Assume the session ends; subagents stop, while worktrees, pushed branches, and PRs survive."],
   [/the agent store's `docs\/`/g, "the pstack store's `docs/` (`~/.claude/pstack/docs/`)"],
-  [/the cloud agent's status in the Cursor dashboard/g, "the agent's last output"],
   [/on its own cloud VM at the PR head/g, "in its own worktree at the PR head"],
   [/4-6 options each, `allow_multiple: true`/g, 'up to 4 options each (the tool\'s limit; it adds an "Other" answer), `multiSelect: true`'],
   [/`git show origin\/main:pstack\/skills\/([^`]+)`/g, "`cat <pstack root>/skills/$1`"],
@@ -186,7 +181,6 @@ const PSTACK_RUNTIME = [
   [/`\/loop` is Cursor's built-in wake mechanism/g, "`/loop` is Claude Code's built-in wake mechanism"],
   [/\b(a|After a) Cursor restart\b/g, "$1 Claude Code restart"],
   [/\brestart Cursor\b/g, "restart Claude Code"],
-  [/Families go by prefix: `claude-\*`, and `grok-\*` with `cursor-grok-\*` and `composer-\*`\./g, "Models are the accepted aliases `opus`, `sonnet`, `haiku`, and `fable`; non-Claude source families map through this port's role defaults."],
   [/\.cursor\/worktrees\/myrepo\/x/g, ".claude/worktrees/x"],
   [/Cursor's built-in babysit skill/g, "any other installed babysit skill"],
   [/ or from Customize in the sidebar/g, " or from the `/plugin` browser"],
@@ -249,6 +243,11 @@ const CANVAS_WORDS = [
 //   mcpOAuth     extra `oauth` fields for every server in the plugin's .mcp.json
 //   notes        what differs from the Cursor version; shown in READMEs
 export const PLUGINS = {
+  lark: { notes: ["This retains Lark's own docs/messages endpoint. The separate Lark Base source uses a Cursor-hosted proxy and is excluded from this native marketplace."] },
+  questrade: { notes: ["Questrade's source describes portfolio/market-data access and trade discussion. It does not establish order execution, authenticated native access or account entitlements; discover actual tools before using them."] },
+  "ringcentral-chat": { notes: ["Separate team-chat endpoint. Sending messages or changing teams, tasks or notes requires the user's explicit instruction; package validation does not establish authenticated access."] },
+  "ringcentral-phone": { notes: ["Separate phone endpoint. Sending SMS requires the user's explicit instruction; package validation does not establish authenticated access or live call/SMS behavior."] },
+  rippling: { notes: ["Enter the employee's Remote MCP server URL from My IT → MCP connectors for the first-party workforce MCP, not the separate MCP Gateway. Do not substitute a company-wide API token. An admin access policy and active Rippling AI trial/subscription are required; verify native OAuth before claiming access. Discover the connected user's allowed codemode.* functions. Preview and obtain user authority for official time-off requests, draft hires and custom-object writes."] },
   advisor: {
     notes: [
       "Claude Code has a built-in advisor (`/advisor`) on the Anthropic API; prefer it there. This plugin runs as `/advisor:advisor` and suits Bedrock, Google Cloud, and Foundry, or when you want explicit checkpoints and a consult log.",
@@ -421,16 +420,12 @@ export const PLUGINS = {
     exclude: ["automations", "skills/make-bot-ui"],
     rewrites: [...PSTACK_MODELS, ...PSTACK_RUNTIME, ...SKILL_CREATOR, ...REFLECT_EVIDENCE],
     prepend: [
-      { file: "skills/statechart/SKILL.md", text: "Use an owned scratch directory outside the repo, and preserve evidence before cleanup. Read ../../docs/harness/claude-code.md for native tool and explicit-only routing. The scripts may install pinned Pele/resvg into a cache and download TLC/Java through mise; inspect available dependencies and disclose downloads before running. No browser is required. A model or bounded result is not proof of the whole system." },
+      { file: "skills/statechart/SKILL.md", text: "Use an owned scratch directory outside the repo, and preserve evidence before cleanup. Read ../../docs/harness/claude-code.md for native tool and explicit-only routing. The TypeScript launcher needs a supported Node, Bun, or Deno runtime. It uses existing TLA2TOOLS/JAVA when supplied, otherwise mise may download TLC/Java. Optional SVG rendering uses Pele 1.9.0 in an owned cache outside the repo; inspect dependencies and disclose downloads before running. No browser is required. A model or bounded result is not proof of the whole system." },
       { file: "skills/ketchup-video/SKILL.md", text: "Read the packaged ketchup skill by its absolute path when routing from this user-only skill. Use only rendering and artifact tools actually available in the session. Never claim a video or inspection without file evidence; use the stated failure path if rendering or attachment is unavailable." },
       {"file": "skills/poteto-mode/SKILL.md", "text": "Read ../../docs/harness/claude-code.md for this port's native tools, explicit-only skill routing, model fields, conversation identity, and prerequisite gates before following the runtime instructions below."},
       {"file": "skills/create-formal-verification-skill/SKILL.md", "text": "Run real-code negative controls in an isolated worktree or owned scratch checkout. Preserve unrelated changes, restore only your control edits, and retain evidence outside the disposable checkout. A generated-input fallback is testing, not a formal proof."},
       {"file": "skills/maintain-formal-verification-skill/SKILL.md", "text": "Run real-code negative controls in an isolated worktree or owned scratch checkout. Preserve unrelated changes, restore only your control edits, and retain evidence outside the disposable checkout. A generated-input fallback is testing, not a formal proof."},
       {"file": "skills/sharpen/SKILL.md", "text": "Keep the user's explicit scope, constraints, and approval gates. Propose changing a user-owned constraint instead of silently relaxing it."},
-      {
-        file: "skills/poteto-mode/playbooks/orchestrate.md",
-        text: "> **Claude Code port.** This playbook was written for Cursor, where workers run as cloud agents on their own VMs and survive the coordinator. Here every worker is a local subagent in a worktree on this machine, and every subagent ends with the session; only worktrees, pushed branches, and PRs survive a restart. Read \"cloud\" below as \"worktree\", and size waves for one machine.",
-      },
     ],
     patches: [
       {

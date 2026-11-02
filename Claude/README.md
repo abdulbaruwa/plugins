@@ -1,6 +1,6 @@
 # Claude Code port
 
-Claude Code versions of the Cursor plugins in this repository, as one marketplace: **16** workflow plugins and **66** MCP integrations.
+Claude Code versions of the Cursor plugins in this repository, as one marketplace: **16** workflow plugins and **70** MCP integrations.
 
 > [!IMPORTANT]
 > Everything in `plugins/`, `third_party/`, `.claude-plugin/`, and this README is generated. To change a plugin, edit [`scripts/port.config.mjs`](scripts/port.config.mjs) or add a file under [`overrides/<plugin>/`](overrides/), then rebuild.
@@ -165,6 +165,10 @@ OAuth servers may sign in through `/mcp`; plugins with a required token prompt f
 | [Lark](third_party/lark/) | Search, create, and update Lark Suite docs, and read Lark messages and groups. | — |
 | [Feishu](third_party/feishu/) | Search, create, and update Feishu docs, and read Feishu messages and groups. | — |
 | [Framer](third_party/framer/) | Design, build, and edit your Framer sites, pages, and CMS content. | — |
+| [RingCentral Phone](third_party/ringcentral-phone/) | Read call activity, AI call notes, SMS, voicemail, and fax, and send SMS. | — |
+| [RingCentral Chat](third_party/ringcentral-chat/) | Read team chats and posts, send messages, and manage teams, tasks, and notes. | — |
+| [Rippling](third_party/rippling/) | Look up people, time off, and company policy in Rippling, and file time-off requests and draft hires. | `RIPPLING_MCP_URL` |
+| [Questrade](third_party/questrade/) | Read your Questrade portfolio, get live market data, and discuss potential trades. | — |
 
 ## Add these servers yourself
 
@@ -172,6 +176,7 @@ These servers require provider-specific endpoint, registration, redirect, or sec
 
 | Server | Why | Command |
 | --- | --- | --- |
+| servicenow | Requires an active instance MCP server, its exact server name, and your own authorization-code OAuth client with a secret, JWT token format and mcp_server scope. Register the native redirect, verify sn_mcp_server.viewer plus tool ACLs, and preserve the documented 26 KB request/64 KB response limits. | `claude mcp add-json servicenow '{"type":"http","url":"https://<servicenow-host>/sncapps/mcp-server/mcp/<servicenow-mcp-server>","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"mcp_server"}}' --client-secret` |
 | databricks-genie-one | Requires your bare workspace hostname and a registered Databricks client ID; dynamic registration is unsupported. Preserve ai-gateway/offline_access scopes and verify native redirect support. A secret is optional, not required. | `claude mcp add-json databricks-genie-one '{"type":"http","url":"https://<databricks-host>/ai-gateway/mcp-services/system.ai.genie_one_mcp","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"ai-gateway offline_access"}}'` |
 | jobber | Requires your own Jobber OAuth client ID and secret with the native redirect registered. Clients, requests, and quotes are writable; jobs, invoices, and visits are read-only. | `claude mcp add --transport http jobber https://mcp.getjobber.com/mcp --client-id <your-client-id> --callback-port 8787 --client-secret` |
 | vanta | Select mcp.vanta.com (US), mcp.eu.vanta.com (Europe), or mcp.aus.vanta.com (Australia) before adding the server. No region is inferred. Verify provider-supported dynamic registration and native redirect/tool access; connectivity is unverified. | `claude mcp add --transport http vanta https://<vanta-mcp-host>/mcp --client-id <your-client-id> --callback-port 8787` |
@@ -193,6 +198,9 @@ These servers require provider-specific endpoint, registration, redirect, or sec
 
 | Plugin | Reason |
 | --- | --- |
+| business-central | Cursor hosts and credentials this server; the source supplies no endpoint or portable implementation. |
+| lark-base | The MCP server is Cursor's hosted proxy (`api.cursor.com/rest-mcp`), which needs a Cursor account. |
+| onepay | The source limits this connector to Grok Bot/sand. A Claude directory listing does not establish supported Claude Code registration or tool access. |
 | ralph-loop | Claude Code's official marketplace has a `ralph-loop` plugin for the same workflow. Install that one: `/plugin install ralph-loop@claude-plugins-official`. |
 | finance | Grok Bot only (`minClientVersions.cursor` is `never`). |
 | shopify-store | Grok Bot only (`minClientVersions.cursor` is `never`). |

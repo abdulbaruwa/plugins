@@ -1,8 +1,8 @@
 # Codex plugin port
 
-A standalone Codex marketplace adapted from this repository's 121 Cursor plugin entries. Packages and tooling live under `Codex/`, with validation in `.github/workflows/codex-ci.yml`. The original plugin folders retain the upstream implementation.
+A standalone Codex marketplace adapted from this repository's 129 Cursor plugin entries. Packages and tooling live under `Codex/`, with validation in `.github/workflows/codex-ci.yml`. The original plugin folders retain the upstream implementation.
 
-The port exposes **102 packages**: 17 adapted workflow plugins, 61 provider MCP bundles, and 24 setup workflows requiring credentials, tenant details, or provider registration. Nineteen host-specific or unimplemented entries are excluded. Read the [full compatibility review](COMPATIBILITY.md) before assuming feature parity or a connected service.
+The port exposes **107 packages**: 17 adapted workflow plugins, 64 provider MCP bundles, and 26 setup workflows requiring credentials, tenant details, or provider registration. Twenty-two host-specific or unimplemented entries are excluded. Read the [full compatibility review](COMPATIBILITY.md) before assuming feature parity or a connected service.
 
 This is a community port. Original author metadata and each plugin's MIT license are preserved. It is not an official Cursor or OpenAI release.
 

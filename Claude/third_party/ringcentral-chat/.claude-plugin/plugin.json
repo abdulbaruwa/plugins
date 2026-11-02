@@ -1,0 +1,21 @@
+{
+  "name": "ringcentral-chat",
+  "displayName": "RingCentral Chat",
+  "version": "1.0.0+claude.ee766245",
+  "description": "Read team chats and posts, send messages, and manage teams, tasks, and notes.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://www.ringcentral.com",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "ringcentral",
+    "ringcentral chat",
+    "chat",
+    "team messaging",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png"
+}
