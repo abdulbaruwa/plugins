@@ -157,8 +157,8 @@ try {
     if (tmp) fs.rmSync(tmp, { recursive: true, force: true });
     janitor?.kill("SIGKILL");
   }
-  process.exit(exitCode);
+  process.exitCode = exitCode;
 } catch (error) {
   console.error(messageOf(error));
-  process.exit(2);
+  process.exitCode = 2;
 }

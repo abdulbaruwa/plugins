@@ -77,6 +77,27 @@ function copyCase(name: string, edit: (dir: string) => void = () => {}) {
   return dir;
 }
 
+test("a large report drains completely through a pipe before the command exits", () => {
+  const dir = copyCase("CounterRules", (d) =>
+    fs.writeFileSync(
+      path.join(d, "view.mjs"),
+      'export const state = v => "x".repeat(100_000) + JSON.stringify(v);\n',
+    ),
+  );
+  const r = run(dir);
+  try {
+    assert.equal(r.status, 1);
+    assert.equal(r.stderr, "");
+    assert.ok(Buffer.byteLength(r.report) > 500_000);
+    const expected = `${r.report}\nWrote ${r.out}\n`;
+    assert.equal(Buffer.byteLength(r.stdout), Buffer.byteLength(expected));
+    assert.ok(r.stdout === expected);
+  } finally {
+    fs.rmSync(path.dirname(dir), { recursive: true, force: true });
+    fs.rmSync(path.dirname(r.out), { recursive: true, force: true });
+  }
+});
+
 const named = (report: string) => {
   const files: string[] = [];
   for (const [file] of report.matchAll(/\btlc-\w+\.out\b/g))
@@ -451,18 +472,32 @@ for (const signal of ["SIGINT", "SIGTERM"] satisfies NodeJS.Signals[]) {
     `${signal} while the command writes its files stops it, and it writes nothing`,
     { timeout: 60_000 },
     () =>
-      signalWhile(signal, () => ({
-        dir: gridCase(150),
-        reached: (parent) => {
-          for (const f of fs.readdirSync(parent, { recursive: true, encoding: "utf8" }))
-            if (
-              path.basename(f) === "chart.mmd" &&
-              fs.statSync(path.join(parent, f), { throwIfNoEntry: false })?.size
-            )
-              return true;
-          return false;
-        },
-      })),
+      signalWhile(signal, (fakes) => {
+        const writing = path.join(fakes, "writing");
+        const dir = copyCase("Login", (d) =>
+          fs.writeFileSync(
+            path.join(d, "view.mjs"),
+            `import fs from "node:fs";\n` +
+              `const open = fs.openSync, write = fs.writeSync;\n` +
+              `let chart;\n` +
+              `fs.openSync = (file, ...args) => {\n` +
+              `  const fd = open(file, ...args);\n` +
+              `  if (String(file).endsWith("/chart.mmd")) chart = fd;\n` +
+              `  return fd;\n` +
+              `};\n` +
+              `fs.writeSync = (fd, ...args) => {\n` +
+              `  const size = write(fd, ...args);\n` +
+              `  if (fd === chart) {\n` +
+              `    fs.writeFileSync(${JSON.stringify(writing)}, "");\n` +
+              `    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 30_000);\n` +
+              `  }\n` +
+              `  return size;\n` +
+              `};\n` +
+              `export const state = v => JSON.stringify(v);\n`,
+          ),
+        );
+        return { dir, reached: () => fs.existsSync(writing) };
+      }),
   );
 }
 
