@@ -1111,7 +1111,7 @@
       "originalSkills": 1,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "blocked",
-      "reason": "Grok Bot 1.0.6 uses one-click personal tailnets and its own bot-computer routing; the tag sign-in path is retired. No native Codex endpoint is supplied.",
+      "reason": "The Tailscale plugin 1.0.6 uses Grok Bot's one-click personal tailnets and bot-computer routing; the tag sign-in path is retired. No native Codex endpoint is supplied.",
       "path": null
     },
     {

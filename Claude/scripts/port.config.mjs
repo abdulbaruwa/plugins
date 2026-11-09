@@ -245,7 +245,6 @@ const CANVAS_WORDS = [
 //   mcpOAuth     extra `oauth` fields for every server in the plugin's .mcp.json
 //   notes        what differs from the Cursor version; shown in READMEs
 export const PLUGINS = {
-  fitmetrics: { notes: ["Use the required sensitive FitMetrics key from Settings → Integrations → MCP → Create API Key → Other MCP app. FitMetrics Scale and scoped coach/client/tool permissions are required. This package uses the provider bearer-key path, with no claim of native OAuth support. Writes require provider enablement and the user's authority for the exact change or outbound message."] },
   lark: { notes: ["This retains Lark's own docs/messages endpoint. The separate Lark Base source uses a Cursor-hosted proxy and is excluded from this native marketplace."] },
   questrade: { notes: ["Questrade's source describes portfolio/market-data access and trade discussion. It does not establish order execution, authenticated native access or account entitlements; discover actual tools before using them."] },
   "ringcentral-chat": { notes: ["Separate team-chat endpoint. Sending messages or changing teams, tasks or notes requires the user's explicit instruction; package validation does not establish authenticated access."] },

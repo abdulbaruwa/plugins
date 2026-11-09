@@ -137,7 +137,7 @@ An independent manual review found and corrected stale Advisor/Thermos runtime r
 | quickbooks-online | [quickbooks-online](plugins/quickbooks-online/README.md) | configuration-required | Intuit now publishes an MCP endpoint, but upstream relies on Cursor-owned OAuth credentials. Verify a provider-supported Codex OAuth client before setup; no connection is enabled. |
 | workday | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
 | square | [square](plugins/square/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
-| tailscale | tailscale | blocked | Grok Bot 1.0.6 uses one-click personal tailnets and its own bot-computer routing; the tag sign-in path is retired. No native Codex endpoint is supplied. |
+| tailscale | tailscale | blocked | The Tailscale plugin 1.0.6 uses Grok Bot's one-click personal tailnets and bot-computer routing; the tag sign-in path is retired. No native Codex endpoint is supplied. |
 | google-ads | — | blocked | Cursor-hosted REST MCP gateway; no native Codex service replacement is supplied. |
 | gopuff | gopuff | blocked | Grok Bot/sand only, with the fixed mcp-grok-bot OAuth client. Branding metadata changed; no supported native Codex registration is supplied. |
 | whatsapp-business | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |

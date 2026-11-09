@@ -1463,7 +1463,7 @@
       "name": "fitmetrics",
       "source": "./third_party/fitmetrics",
       "description": "Review Trainerize clients and check-ins, and update macros, messages, and programs.",
-      "version": "1.0.0+claude.3108f638",
+      "version": "1.0.0+claude.0d57c330",
       "author": {
         "name": "Cursor",
         "email": "plugins@cursor.com"
