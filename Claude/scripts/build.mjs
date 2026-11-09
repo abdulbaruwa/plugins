@@ -509,8 +509,13 @@ function manualMcpRecipe(name, spec) {
   const secret = server.auth?.CLIENT_SECRET;
   const needsSecret = spec.secret ?? Boolean(secret && !/:-\}$/.test(secret));
   const port = config.OAUTH_CALLBACK_PORT;
-  if (server.auth?.scopes) {
-    const oauth = { clientId: "<your-client-id>", callbackPort: port, scopes: server.auth.scopes.join(" ") };
+  const sourceScopes = server.auth?.scopes;
+  if (spec.scopes?.some((scope) => !sourceScopes?.includes(scope))) {
+    throw new Error(`${name}: manual MCP example requests a scope absent from upstream`);
+  }
+  const scopes = spec.scopes ?? sourceScopes;
+  if (scopes) {
+    const oauth = { clientId: "<your-client-id>", callbackPort: port, scopes: scopes.join(" ") };
     return `claude mcp add-json ${id} '${JSON.stringify({ type: "http", url, oauth })}'${needsSecret ? " --client-secret" : ""}`;
   }
   return `claude mcp add --transport http ${id} ${url} --client-id <your-client-id> --callback-port ${port}${needsSecret ? " --client-secret" : ""}`;

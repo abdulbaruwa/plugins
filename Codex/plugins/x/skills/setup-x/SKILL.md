@@ -9,4 +9,6 @@ Read ../../references/upstream-mcp.json as upstream configuration evidence. It i
 
 Verify supported authentication against current official Codex MCP and provider documentation before editing configuration. If ../../references/config.example.toml exists, use it as the starting point, preserving unrelated settings. Keep credentials in the environment or client credential store. Resolve templated URLs to the actual tenant endpoint. For registered OAuth clients, register one for Codex; upstream application IDs belong to the upstream application. Do not substitute dynamic registration for a provider that requires a registered client.
 
+Select only the scopes required for the requested features. Upstream now lists `tweet.write`; omit it for read-only use, and obtain the user's agreement before requesting or adding it through a supported native reconnection. Granting a scope does not approve a post or other write. Verify the tool and account after reconnecting.
+
 Configure the server when necessary details are available. Start OAuth with the supported client flow or check that credential variables are set without printing values. Test a read-only tool and report the result. Missing credentials or registration mean incomplete setup. This package does not provide a connected service before setup.

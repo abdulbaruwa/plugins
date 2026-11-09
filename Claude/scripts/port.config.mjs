@@ -25,7 +25,8 @@ export const SKIP = {
     "Claude Code's official marketplace has a `ralph-loop` plugin for the same workflow. Install that one: `/plugin install ralph-loop@claude-plugins-official`.",
   finance: "Grok Bot only (`minClientVersions.cursor` is `never`).",
   "shopify-store": "Grok Bot only (`minClientVersions.cursor` is `never`).",
-  tailscale: "Grok Bot only: joins Grok Bot to a tailnet.",
+  tailscale: "Grok Bot only: one-click personal tailnets and bot-computer routing rely on the Grok runtime.",
+  tesla: "Grok Bot/sand only. Cursor supplies the REST proxy and vehicle key pairing; no portable Tesla endpoint is supplied.",
   gopuff: "Grok Bot only, with a fixed mcp-grok-bot OAuth client; no supported Claude Code registration is supplied.",
   "x-money": "Grok Bot only (`minClientVersions.cursor` is `never`).",
   workday: "No MCP config in the Cursor plugin; Cursor wires the server up on its side.",
@@ -54,6 +55,7 @@ export const SKIP = {
 // Claude/README.md prints provider-specific qualifications and manual templates.
 //   why     shown in the README
 //   secret  whether the provider's client needs a secret (default: the Cursor config has CLIENT_SECRET)
+//   scopes  a subset of upstream OAuth scopes for the example (default: upstream scopes)
 export const MANUAL_MCP = {
   servicenow: { why: "Requires an active instance MCP server, its exact server name, and your own authorization-code OAuth client with a secret, JWT token format and mcp_server scope. Register the native redirect, verify sn_mcp_server.viewer plus tool ACLs, and preserve the documented 26 KB request/64 KB response limits." },
   "databricks-genie-one": { why: "Requires your bare workspace hostname and a registered Databricks client ID; dynamic registration is unsupported. Preserve ai-gateway/offline_access scopes and verify native redirect support. A secret is optional, not required.", secret: false },
@@ -70,7 +72,7 @@ export const MANUAL_MCP = {
   "google-cloud-bigquery": { why: "Upstream now requires a team-owned Google client ID and secret. Verify a provider-supported native app type, redirect, and BigQuery scope; Cursor's web-app callback and backend secret storage do not transfer. Queries may be billed to the selected project, and execute_sql can write when IAM permits.", secret: true },
   salesforce: { why: "Needs your org's MCP URL and an External Client App consumer key (Connected Apps are not supported; enable JWT-based access tokens)." },
   "salesforce-headless-360": { why: "Needs your org's MCP URL and an External Client App consumer key and secret (Connected Apps are not supported)." },
-  x: { why: "X's MCP uses a fixed client ID whose allowed redirect URIs are not documented. Try X's client ID from the Cursor plugin's `mcp.json` first; if sign-in fails, register your own X app." },
+  x: { why: "Requires a provider-supported native OAuth client and redirect; the example requests read scopes only. See [native X setup, posting and Chat](X.md) for explicit write opt-in and connection limits.", scopes: ["tweet.read", "users.read"] },
   "x-ads": { why: "X's MCP uses a fixed client ID whose allowed redirect URIs are not documented. Try X's client ID from the Cursor plugin's `mcp.json` first; if sign-in fails, register your own X app." },
 };
 
@@ -243,6 +245,7 @@ const CANVAS_WORDS = [
 //   mcpOAuth     extra `oauth` fields for every server in the plugin's .mcp.json
 //   notes        what differs from the Cursor version; shown in READMEs
 export const PLUGINS = {
+  fitmetrics: { notes: ["Use the required sensitive FitMetrics key from Settings → Integrations → MCP → Create API Key → Other MCP app. FitMetrics Scale and scoped coach/client/tool permissions are required. This package uses the provider bearer-key path, with no claim of native OAuth support. Writes require provider enablement and the user's authority for the exact change or outbound message."] },
   lark: { notes: ["This retains Lark's own docs/messages endpoint. The separate Lark Base source uses a Cursor-hosted proxy and is excluded from this native marketplace."] },
   questrade: { notes: ["Questrade's source describes portfolio/market-data access and trade discussion. It does not establish order execution, authenticated native access or account entitlements; discover actual tools before using them."] },
   "ringcentral-chat": { notes: ["Separate team-chat endpoint. Sending messages or changing teams, tasks or notes requires the user's explicit instruction; package validation does not establish authenticated access."] },

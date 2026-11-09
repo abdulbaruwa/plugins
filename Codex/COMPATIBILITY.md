@@ -1,6 +1,6 @@
 # Codex compatibility review
 
-Reviewed source commit `ae5650febf4320793844c12c4adaa937f417f8da` on 2 November 2026. All 129 entries in the source catalog are accounted for. This is a community adaptation, not an official Cursor or OpenAI distribution.
+Reviewed source commit `6b0300214a09fd6029cfb7077043125758cd1fd2` on 9 November 2026. All 131 entries in the source catalog are accounted for. This is a community adaptation, not an official Cursor or OpenAI distribution.
 
 ## Coverage
 
@@ -8,8 +8,8 @@ Reviewed source commit `ae5650febf4320793844c12c4adaa937f417f8da` on 2 November 
 | --- | ---: | --- |
 | Adapted skills | 17 | Packaged workflows with Codex runtime substitutions. Behavior is not forward-tested end to end. |
 | MCP bundles | 64 | Literal provider endpoints or local server launchers in the portable schema. Not authenticated or live-tested. |
-| Configuration required | 26 | Setup skill and source evidence; no MCP connection is loaded until supported configuration is supplied. |
-| Blocked | 22 | No installable package is exposed. Needs a service replacement or implementation. |
+| Configuration required | 27 | Setup skill and source evidence; no MCP connection is loaded until supported configuration is supplied. |
+| Blocked | 23 | No installable package is exposed. Needs a service replacement or implementation. |
 
 ## Material differences
 
@@ -25,7 +25,7 @@ Reviewed source commit `ae5650febf4320793844c12c4adaa937f417f8da` on 2 November 
 
 ## Validation scope
 
-The current checks cover 107 packages, 135 skills, and 64 bundled MCP server definitions. The regression suite exercises malformed metadata, executable/cwd containment, isolated installed documentation, exact diff line mapping, concurrent PR artifacts, local serving boundaries, and chat-owned Ralph state. These checks run locally and do not connect external providers.
+The current checks cover 108 packages, 136 skills, and 64 bundled MCP server definitions. The regression suite exercises malformed metadata, executable/cwd containment, isolated installed documentation, exact diff line mapping, concurrent PR artifacts, local serving boundaries, and chat-owned Ralph state. These checks run locally and do not connect external providers.
 
 The validator checks manifests against vendored Agent Plugins 1.0.0 schemas, catalog paths and identity, resource containment, skill metadata and invocation policy, package-local Markdown reference integrity, TOML examples, safe literal MCP connections, component availability, and full source-catalog coverage. Tests exercise malformed packages and rejection of false portable credentials.
 
@@ -70,7 +70,7 @@ An independent manual review found and corrected stale Advisor/Thermos runtime r
 | hubspot | [hubspot](plugins/hubspot/README.md) | configuration-required | Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled. |
 | intercom | [intercom](plugins/intercom/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
 | zoom | [zoom](plugins/zoom/README.md) | configuration-required | Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled. |
-| x | [x](plugins/x/README.md) | configuration-required | Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled. |
+| x | [x](plugins/x/README.md) | configuration-required | Manual native OAuth. Posting is opt-in with tweet.write and exact approval; native Chat contact lookup is documented without Grok helpers. No placeholder connection is enabled. |
 | clay | [clay](plugins/clay/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
 | circleback | [circleback](plugins/circleback/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
 | docusign | [docusign](plugins/docusign/README.md) | configuration-required | Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled. |
@@ -137,7 +137,7 @@ An independent manual review found and corrected stale Advisor/Thermos runtime r
 | quickbooks-online | [quickbooks-online](plugins/quickbooks-online/README.md) | configuration-required | Intuit now publishes an MCP endpoint, but upstream relies on Cursor-owned OAuth credentials. Verify a provider-supported Codex OAuth client before setup; no connection is enabled. |
 | workday | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
 | square | [square](plugins/square/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
-| tailscale | tailscale | blocked | Grok Bot tailnet joins and approval routing require the Grok runtime. The source adds user/agent onboarding clarification; no native Codex registration or management endpoint is supplied. |
+| tailscale | tailscale | blocked | Grok Bot 1.0.6 uses one-click personal tailnets and its own bot-computer routing; the tag sign-in path is retired. No native Codex endpoint is supplied. |
 | google-ads | — | blocked | Cursor-hosted REST MCP gateway; no native Codex service replacement is supplied. |
 | gopuff | gopuff | blocked | Grok Bot/sand only, with the fixed mcp-grok-bot OAuth client. Branding metadata changed; no supported native Codex registration is supplied. |
 | whatsapp-business | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
@@ -166,3 +166,5 @@ An independent manual review found and corrected stale Advisor/Thermos runtime r
 | ringcentral-phone | [ringcentral-phone](plugins/ringcentral-phone/README.md) | mcp-bundle | Packages the separate RingCentral phone endpoint for calls, AI notes, SMS, voicemail and fax. Sending SMS requires the user's explicit instruction. Authentication, tool availability and live behavior are unverified. |
 | rippling | [rippling](plugins/rippling/README.md) | configuration-required | Ask for the employee's Remote MCP server URL from Rippling → My IT → MCP connectors. Verify that it is the first-party Rippling workforce MCP, not the separate MCP Gateway or another host. Do not substitute a company-wide API token. An admin access policy and active Rippling AI trial/subscription are required. Use employee OAuth and verify the provider-supported native client flow; there is no upstream client ID or secret to copy. Discover the connected user's authorized codemode.* functions rather than inventing them. Preview and obtain user authority for official time-off requests, draft hires, and custom-object writes before executing them. |
 | servicenow | [servicenow](plugins/servicenow/README.md) | configuration-required | Ask for the bare instance hostname and the exact MCP server name from its active server record. Do not infer a tenant or activate a server. An administrator must register a native authorization-code OAuth client with a secret, JWT token format and the mcp_server scope; dynamic registration is unsupported. Register the actual Codex redirect and keep the secret in the supported credential store. The connecting user needs sn_mcp_server.viewer and each tool's ACL. Preserve the provider's 26 KB request and 64 KB response limits. Preview writes and obtain user authority for the exact published tool before execution. |
+| tesla | tesla | blocked | Grok Bot/sand only. The source uses the Cursor REST proxy, OAuth and vehicle key pairing; it supplies no portable Tesla endpoint. |
+| fitmetrics | [fitmetrics](plugins/fitmetrics/README.md) | configuration-required | FitMetrics Scale and a scoped key are required. Native setup maps an environment variable to the provider bearer header; no connection is enabled by the package. |

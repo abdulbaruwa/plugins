@@ -1458,6 +1458,23 @@
         "trading",
         "mcp"
       ]
+    },
+    {
+      "name": "fitmetrics",
+      "source": "./third_party/fitmetrics",
+      "description": "Review Trainerize clients and check-ins, and update macros, messages, and programs.",
+      "version": "1.0.0+claude.3108f638",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "fitmetrics",
+        "fitness",
+        "coaching",
+        "mcp"
+      ]
     }
   ]
 }

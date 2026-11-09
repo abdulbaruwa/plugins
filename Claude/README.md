@@ -1,6 +1,6 @@
 # Claude Code port
 
-Claude Code versions of the Cursor plugins in this repository, as one marketplace: **16** workflow plugins and **70** MCP integrations.
+Claude Code versions of the Cursor plugins in this repository, as one marketplace: **16** workflow plugins and **71** MCP integrations.
 
 > [!IMPORTANT]
 > Everything in `plugins/`, `third_party/`, `.claude-plugin/`, and this README is generated. To change a plugin, edit [`scripts/port.config.mjs`](scripts/port.config.mjs) or add a file under [`overrides/<plugin>/`](overrides/), then rebuild.
@@ -169,6 +169,7 @@ OAuth servers may sign in through `/mcp`; plugins with a required token prompt f
 | [RingCentral Chat](third_party/ringcentral-chat/) | Read team chats and posts, send messages, and manage teams, tasks, and notes. | — |
 | [Rippling](third_party/rippling/) | Look up people, time off, and company policy in Rippling, and file time-off requests and draft hires. | `RIPPLING_MCP_URL` |
 | [Questrade](third_party/questrade/) | Read your Questrade portfolio, get live market data, and discuss potential trades. | — |
+| [FitMetrics](third_party/fitmetrics/) | Review Trainerize clients and check-ins, and update macros, messages, and programs. | `FITMETRICS_API_KEY` |
 
 ## Add these servers yourself
 
@@ -191,7 +192,7 @@ These servers require provider-specific endpoint, registration, redirect, or sec
 | google-cloud-bigquery | Upstream now requires a team-owned Google client ID and secret. Verify a provider-supported native app type, redirect, and BigQuery scope; Cursor's web-app callback and backend secret storage do not transfer. Queries may be billed to the selected project, and execute_sql can write when IAM permits. | `claude mcp add --transport http google-cloud-bigquery https://bigquery.googleapis.com/mcp --client-id <your-client-id> --callback-port 8787 --client-secret` |
 | salesforce | Needs your org's MCP URL and an External Client App consumer key (Connected Apps are not supported; enable JWT-based access tokens). | `claude mcp add-json salesforce '{"type":"http","url":"<salesforce-mcp-url>","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"mcp_api refresh_token"}}'` |
 | salesforce-headless-360 | Needs your org's MCP URL and an External Client App consumer key and secret (Connected Apps are not supported). | `claude mcp add-json salesforce-headless-360 '{"type":"http","url":"<salesforce-mcp-url>","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"mcp_api refresh_token"}}' --client-secret` |
-| x | X's MCP uses a fixed client ID whose allowed redirect URIs are not documented. Try X's client ID from the Cursor plugin's `mcp.json` first; if sign-in fails, register your own X app. | `claude mcp add-json x '{"type":"http","url":"https://api.x.com/mcp","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"tweet.read users.read follows.read space.read mute.read like.read list.read list.write block.read block.write bookmark.read bookmark.write dm.read dm.write calls.read calls.write broadcast.read broadcast.write media.write developer.billing.write developer.write offline.access"}}'` |
+| x | Requires a provider-supported native OAuth client and redirect; the example requests read scopes only. See [native X setup, posting and Chat](X.md) for explicit write opt-in and connection limits. | `claude mcp add-json x '{"type":"http","url":"https://api.x.com/mcp","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"tweet.read users.read"}}'` |
 | x-ads | X's MCP uses a fixed client ID whose allowed redirect URIs are not documented. Try X's client ID from the Cursor plugin's `mcp.json` first; if sign-in fails, register your own X app. | `claude mcp add-json x-ads '{"type":"http","url":"https://ads-api.x.com/mcp","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"ads.read ads.write media.write offline.access"}}'` |
 
 ## Not ported
@@ -204,7 +205,8 @@ These servers require provider-specific endpoint, registration, redirect, or sec
 | ralph-loop | Claude Code's official marketplace has a `ralph-loop` plugin for the same workflow. Install that one: `/plugin install ralph-loop@claude-plugins-official`. |
 | finance | Grok Bot only (`minClientVersions.cursor` is `never`). |
 | shopify-store | Grok Bot only (`minClientVersions.cursor` is `never`). |
-| tailscale | Grok Bot only: joins Grok Bot to a tailnet. |
+| tailscale | Grok Bot only: one-click personal tailnets and bot-computer routing rely on the Grok runtime. |
+| tesla | Grok Bot/sand only. Cursor supplies the REST proxy and vehicle key pairing; no portable Tesla endpoint is supplied. |
 | gopuff | Grok Bot only, with a fixed mcp-grok-bot OAuth client; no supported Claude Code registration is supplied. |
 | x-money | Grok Bot only (`minClientVersions.cursor` is `never`). |
 | workday | No MCP config in the Cursor plugin; Cursor wires the server up on its side. |

@@ -1,6 +1,6 @@
 {
   "sourceCatalog": ".cursor-plugin/marketplace.json",
-  "sourceCommit": "ae5650febf4320793844c12c4adaa937f417f8da",
+  "sourceCommit": "6b0300214a09fd6029cfb7077043125758cd1fd2",
   "plugins": [
     {
       "originalName": "teaching",
@@ -370,11 +370,11 @@
       "originalName": "x",
       "name": "x",
       "source": "third_party/x",
-      "originalVersion": "2.10.0",
+      "originalVersion": "2.11.1",
       "originalSkills": 1,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "configuration-required",
-      "reason": "Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled.",
+      "reason": "Manual native OAuth. Posting is opt-in with tweet.write and exact approval; native Chat contact lookup is documented without Grok helpers. No placeholder connection is enabled.",
       "path": "./plugins/x"
     },
     {
@@ -1107,11 +1107,11 @@
       "originalName": "tailscale",
       "name": "tailscale",
       "source": "third_party/tailscale",
-      "originalVersion": "1.0.4",
+      "originalVersion": "1.0.6",
       "originalSkills": 1,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "blocked",
-      "reason": "Grok Bot tailnet joins and approval routing require the Grok runtime. The source adds user/agent onboarding clarification; no native Codex registration or management endpoint is supplied.",
+      "reason": "Grok Bot 1.0.6 uses one-click personal tailnets and its own bot-computer routing; the tag sign-in path is retired. No native Codex endpoint is supplied.",
       "path": null
     },
     {
@@ -1409,6 +1409,28 @@
       "status": "mcp-bundle",
       "reason": "Packages Questrade's own endpoint for account, balance, position and market-data tools. Trading is described as discussion; do not infer order execution. Authentication, account entitlements, tool schemas and live behavior are unverified.",
       "path": "./plugins/questrade"
+    },
+    {
+      "originalName": "tesla",
+      "name": "tesla",
+      "source": "third_party/tesla",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "status": "blocked",
+      "reason": "Grok Bot/sand only. The source uses the Cursor REST proxy, OAuth and vehicle key pairing; it supplies no portable Tesla endpoint.",
+      "path": null
+    },
+    {
+      "originalName": "fitmetrics",
+      "name": "fitmetrics",
+      "source": "third_party/fitmetrics",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "status": "configuration-required",
+      "reason": "FitMetrics Scale and a scoped key are required. Native setup maps an environment variable to the provider bearer header; no connection is enabled by the package.",
+      "path": "./plugins/fitmetrics"
     }
   ]
 }
