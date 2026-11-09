@@ -1227,6 +1227,78 @@
         "authentication": "ON_INSTALL"
       },
       "category": "Productivity"
+    },
+    {
+      "name": "questrade",
+      "source": {
+        "source": "local",
+        "path": "./plugins/questrade"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "ringcentral-chat",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ringcentral-chat"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "ringcentral-phone",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ringcentral-phone"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "rippling",
+      "source": {
+        "source": "local",
+        "path": "./plugins/rippling"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "servicenow",
+      "source": {
+        "source": "local",
+        "path": "./plugins/servicenow"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "fitmetrics",
+      "source": {
+        "source": "local",
+        "path": "./plugins/fitmetrics"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
     }
   ]
 }

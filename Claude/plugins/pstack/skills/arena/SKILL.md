@@ -1,48 +1,42 @@
 ---
 name: arena
-description: "Spawn N parallel candidates at the same task, pick a base, graft the strongest parts of the losers into it. Use for /arena, 'arena this', 'throw it in the arena', or when one attempt at a non-trivial artifact would lock in the wrong shape."
+description: "Compare independent candidate approaches against a concrete rubric, select a base, and verify a synthesis."
 disable-model-invocation: true
 ---
 
 # Arena
 
-Open a todolist with one entry per phase (Frame, Fan out, Cross-judge, Pick, Graft, Verify) before launching anything.
+Read ../../docs/harness/claude-code.md for native tools, aliases, invocation policy, and ownership. Open a task list when the tool is available, covering Frame, Fan out, Cross-judge, Pick, Graft, and Verify.
 
 ## Phase A: Frame
 
-Every candidate gets the same prompt, so the prompt is the contract.
-
-1. State the artifact each candidate is producing.
-2. Derive the rubric, 3-6 concrete gradeable criteria for what success looks like on *this* task. It is the picker's tool in Phase D. Candidates only see the task.
-3. Pick the runners. Use the `arena runners` line in `~/.claude/rules/pstack-models.md`. If the rule or that line is missing, default to one each on `opus` and `sonnet`. An `auto` or `inherit-parent` entry in this line or the cross-judge line means the parent model, so omit `model` for it. If the Agent tool rejects a configured entry, run that seat on its family's default and say so. Models are the accepted aliases `opus`, `sonnet`, `haiku`, and `fable`; non-Claude source families map through this port's role defaults. A refused `composer-*` entry runs on `sonnet`. With no family match, use `opus`. If it rejects a default, use the closest valid slug of the same family from its error message. Spawn more runners when the arena covers multiple design directions. Use the same model N times when the work is generation-bound rather than judgment-sensitive. Pick each subagent's reasoning level and fast or standard speed for the job, per the Subagents section of the **poteto-mode** skill.
-4. Give each candidate its own output location (a git worktree where possible, otherwise `/tmp/arena-<slug>/candidate-<n>/`), per the **separate-before-serializing-shared-state** principle skill.
+1. State the artifact every candidate must produce and the user's constraints.
+2. Define three to six observable scoring criteria. The rubric is for judging in Phase C/D; candidates receive the same task without the rubric.
+3. Pick runners from the configured `arena runners` role, or the port's defaults of `opus` and `sonnet`. Use only supported native aliases; inherited entries omit the model field. Keep the configured number of seats. If an alias is rejected, use a supported configured alternative only within the user's authority, or drop that seat and disclose why; do not invent a model ID. If fewer than two candidates remain, add another run on a supported remaining alias, or use sequential independent attempts, and say so. Honor a user-configured single seat. Delegation and alternative model selection require authority and actual session support. A sequential comparison is not a parallel agent run.
+4. Give each candidate its own output location, preferably an owned worktree. Each standalone brief includes the same task, source grounding, absolute required skill paths, allowed/prohibited paths and actions, expected artifact, and acceptance evidence.
 
 ## Phase B: Fan out
 
-Spawn all N subagents in one message with `run_in_background: true`, each with the task, the path to the shared grounding, its own output path, and instructions to produce the artifact and a short rationale naming the alternatives it considered and what it rejected.
-
-If a candidate produces no output, proceed with N-1 and note the dropout.
+Use the native Agent tool when authorized, with the configured supported aliases and isolated outputs. Bound concurrency to the actual session and this machine. Otherwise generate candidates sequentially and disclose the limitation. Candidates see the task and grounding, not the scoring rubric, other candidates, or competing model identities. Ask each for its artifact and a short rationale naming alternatives considered and rejected. If a candidate produces no artifact, proceed with the remaining candidates and report the dropout.
 
 ## Phase C: Cross-judge
 
-After all Phase B candidates complete, choose one model from the `arena cross-judge pool` line in `~/.claude/rules/pstack-models.md`. If the rule or that line is missing, choose from `opus` and `sonnet`. Prefer a different model family from the parent's. Spawn one readonly judge subagent on that model. It sees the rubric and the candidates by path label, scores each criterion, and recommends a base with rationale. It runs in parallel with your reading in Phase D. Don't spawn it while candidates are still writing.
+Wait until all candidates finish writing. Choose one judge from the ordered `arena cross-judge pool` only when an authorized, supported model from a different family than the parent's is actually available. Inherited and same-family entries never judge. Claude aliases select models within one family, so a second Claude alias does not satisfy this requirement. If no different-family model runs, skip this phase and disclose the limit; do not silently relax the requirement or invent model IDs. If the parent's family cannot be established, disclose that the family check did not run.
+
+The judge is read-only. Its brief contains the rubric and completed artifacts identified only by neutral path labels, without candidate model names, identities, or other candidates' rationales. It scores each criterion and recommends a base with evidence. It runs alongside the parent's reading in Phase D, never while candidates are still writing.
 
 ## Phase D: Pick a base
 
-Read every candidate end to end before picking. Score each against the rubric criterion by criterion, not on holistic feel, and compare with the cross-judge. Agreement on the base confirms the pick. Disagreement means one of you is biased or the rubric was ambiguous. Read both rationales before deciding.
-
-Pick the base a future maintainer can extend most easily without breaking invariants. When two feel tied, prefer the cleaner boundary or smaller API, per the Laziness Protocol.
+Read every completed artifact end to end and score each criterion against actual evidence. Compare with the cross-judge only when one ran. Resolve a disagreement by reading both rationales and the artifacts again. Prefer a base a maintainer can extend safely, with a smaller coherent API when otherwise tied.
 
 ## Phase E: Graft
 
-Walk each losing candidate once more for what is worth porting into the base, usually one or two things per candidate, not most of it. Fold each graft in by hand, per the **redesign-from-first-principles** principle skill, so the result stays coherent under one mental model. Don't paste mechanically.
-
-If the candidates converge on one shape, that is strong agreement. Note it and ship the consensus shape. No graft is needed. If they wildly diverge, Phase A was under-specified. Reframe and re-run rather than averaging the divergence.
+Review the losing candidates for a few useful elements and integrate them coherently into the selected base. Do not paste incompatible designs together. If the candidates converge, record that agreement; if they diverge because the task is ambiguous, reframe before combining them.
 
 ## Phase F: Verify
 
-Verify the synthesized artifact like any other output, per the **prove-it-works** principle skill. If verification finds a problem the arena missed, either Phase A was wrong (re-frame and re-run) or a candidate caught it and you missed the graft (go back to Phase E). Don't paper over it.
+Verify the synthesized artifact against the task's acceptance checks. If proof exposes a missed candidate finding, revisit the graft; if it exposes a bad task contract, reframe. CI or a typecheck alone does not establish behavior. Respect existing approval and shipping gates.
 
 ## Outputs
 
-One synthesized artifact, with a short synthesis note alongside naming the base and why, the cross-judge's verdict, each graft with its source candidate, what was rejected and why, any convergence or dropouts, and the verification result.
+Report the selected base, rubric scores, cross-judge result or explicit skip, grafts and rejected alternatives, convergence or dropped candidates, and concrete verification evidence. State when delegation, runtime proof, or different-family review was unavailable.

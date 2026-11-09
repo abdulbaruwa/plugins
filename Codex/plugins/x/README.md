@@ -1,8 +1,8 @@
 # X for Codex
 
-Community adaptation of `third_party/x` at upstream version `2.10.0`. Original authors and MIT license are preserved. This is not an official Cursor or OpenAI distribution.
+Community adaptation of `third_party/x` at upstream version `2.11.1`. Original authors and MIT license are preserved. This is not an official Cursor or OpenAI distribution.
 
-Search posts, read timelines, pull trends, manage bookmarks, and access X Chat.
+Search and read X, and use supported account tools. Posting is opt-in: it requires a native connection with `tweet.write`, the actual posting tool, and approval for each exact post.
 
 Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled.
 

@@ -1,7 +1,7 @@
 {
   "name": "lark",
   "displayName": "Lark",
-  "version": "1.0.0+claude.f8b28f36",
+  "version": "1.0.0+claude.2fef9584",
   "description": "Search, create, and update Lark Suite docs, and read Lark messages and groups.",
   "author": {
     "name": "Cursor",

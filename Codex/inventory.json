@@ -1,6 +1,6 @@
 {
   "sourceCatalog": ".cursor-plugin/marketplace.json",
-  "sourceCommit": "99b609a72323b70204eab407c622f436e858e112",
+  "sourceCommit": "6b0300214a09fd6029cfb7077043125758cd1fd2",
   "plugins": [
     {
       "originalName": "teaching",
@@ -149,15 +149,13 @@
       "originalName": "pstack",
       "name": "pstack",
       "source": "pstack",
-      "originalVersion": "0.15.32",
+      "originalVersion": "0.15.36",
       "originalSkills": 58,
       "proof": "Package validation and 368 bundled statechart compiler/renderer tests pass; live agent workflow and provider acceptance remain unproved.",
       "status": "adapted-skills",
-      "reason": "Codex skill adaptation; Cursor hooks and automatic rules are not installed. Package updated to 0.15.36 independently of the adopted source tree; see portedSourceCommit and the package update decisions.",
+      "reason": "Codex adaptation through 0.15.36 retained byte-for-byte, including native orchestration, statechart output draining and cancellation regressions. The maintained source tree now catches up with that reviewed package.",
       "path": "./plugins/pstack",
-      "reviewedSourceCommit": "991b71fd54c2c57ffe0b56969236b83678401fc8",
-      "portedSourceCommit": "1ba91fc25c0977741dd0e267849e6234b037ed0a",
-      "portedVersion": "0.15.36"
+      "reviewedSourceCommit": "631af2e8980d14e999dd4de675ee9461f33c5278"
     },
     {
       "originalName": "dyl-stack",
@@ -372,11 +370,11 @@
       "originalName": "x",
       "name": "x",
       "source": "third_party/x",
-      "originalVersion": "2.10.0",
+      "originalVersion": "2.11.1",
       "originalSkills": 1,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "configuration-required",
-      "reason": "Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled.",
+      "reason": "Manual native OAuth. Posting is opt-in with tweet.write and exact approval; native Chat contact lookup is documented without Grok helpers. No placeholder connection is enabled.",
       "path": "./plugins/x"
     },
     {
@@ -1109,11 +1107,11 @@
       "originalName": "tailscale",
       "name": "tailscale",
       "source": "third_party/tailscale",
-      "originalVersion": "1.0.3",
+      "originalVersion": "1.0.6",
       "originalSkills": 1,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "blocked",
-      "reason": "Grok Bot personal/company tailnet enrollment and tag:grokbot policy have no Codex implementation supplied.",
+      "reason": "The Tailscale plugin 1.0.6 uses Grok Bot's one-click personal tailnets and bot-computer routing; the tag sign-in path is retired. No native Codex endpoint is supplied.",
       "path": null
     },
     {
@@ -1135,7 +1133,7 @@
       "originalSkills": 0,
       "proof": "Static source review only; no authenticated service or behavioral acceptance run.",
       "status": "blocked",
-      "reason": "Grok Bot-only integration with a fixed mcp-grok-bot OAuth client; no supported Codex client setup is supplied.",
+      "reason": "Grok Bot/sand only, with the fixed mcp-grok-bot OAuth client. Branding metadata changed; no supported native Codex registration is supplied.",
       "path": null
     },
     {
@@ -1223,7 +1221,7 @@
       "originalSkills": 0,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "configuration-required",
-      "reason": "Upstream uses HighLevel’s client-specific Cursor endpoint. Confirm a provider-supported Codex endpoint and client registration before configuration; no connection is enabled.",
+      "reason": "Upstream uses HighLevel\u2019s client-specific Cursor endpoint. Confirm a provider-supported Codex endpoint and client registration before configuration; no connection is enabled.",
       "path": "./plugins/highlevel"
     },
     {
@@ -1234,7 +1232,7 @@
       "originalSkills": 0,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "configuration-required",
-      "reason": "Upstream supplies Cursor’s registered Meta OAuth app ID and no dynamic client registration. Register a provider-supported Codex client; no shared app ID or connection is enabled.",
+      "reason": "Upstream supplies Cursor\u2019s registered Meta OAuth app ID and no dynamic client registration. Register a provider-supported Codex client; no shared app ID or connection is enabled.",
       "path": "./plugins/meta-ads"
     },
     {
@@ -1256,7 +1254,7 @@
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "originalVersion": "1.0.0",
       "status": "mcp-bundle",
-      "reason": "Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified.",
+      "reason": "Provider docs/messages endpoint retained. The new separate Lark Base integration is a Cursor-hosted proxy and is excluded; authentication and live behavior remain unverified.",
       "path": "./plugins/lark"
     },
     {
@@ -1334,6 +1332,105 @@
       "proof": "No native runtime acceptance; source is host-specific.",
       "status": "blocked",
       "reason": "Grok Bot only with Cursor hosted REST MCP proxy; no supported native provider endpoint is supplied."
+    },
+    {
+      "originalName": "business-central",
+      "name": "business-central",
+      "source": "third_party/business-central",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "status": "blocked",
+      "reason": "Cursor hosts and credentials the server; no endpoint or portable implementation is supplied."
+    },
+    {
+      "originalName": "lark-base",
+      "name": "lark-base",
+      "source": "third_party/lark-base",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "status": "blocked",
+      "reason": "Cursor-hosted REST MCP proxy with team-owned Lark credentials; no native provider endpoint is supplied."
+    },
+    {
+      "originalName": "ringcentral-phone",
+      "name": "ringcentral-phone",
+      "source": "third_party/ringcentral-phone",
+      "originalVersion": "1.1.0",
+      "originalSkills": 0,
+      "status": "mcp-bundle",
+      "reason": "Packages the separate RingCentral phone endpoint for calls, AI notes, SMS, voicemail and fax. Sending SMS requires the user's explicit instruction. Authentication, tool availability and live behavior are unverified.",
+      "path": "./plugins/ringcentral-phone"
+    },
+    {
+      "originalName": "ringcentral-chat",
+      "name": "ringcentral-chat",
+      "source": "third_party/ringcentral-chat",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "status": "mcp-bundle",
+      "reason": "Packages the separate RingCentral team-chat endpoint. It can send messages and manage teams, tasks and notes; outbound actions require the user's explicit instruction. Authentication, tool availability and live behavior are unverified.",
+      "path": "./plugins/ringcentral-chat"
+    },
+    {
+      "originalName": "servicenow",
+      "name": "servicenow",
+      "source": "third_party/servicenow",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "status": "configuration-required",
+      "reason": "Ask for the bare instance hostname and the exact MCP server name from its active server record. Do not infer a tenant or activate a server. An administrator must register a native authorization-code OAuth client with a secret, JWT token format and the mcp_server scope; dynamic registration is unsupported. Register the actual Codex redirect and keep the secret in the supported credential store. The connecting user needs sn_mcp_server.viewer and each tool's ACL. Preserve the provider's 26 KB request and 64 KB response limits. Preview writes and obtain user authority for the exact published tool before execution.",
+      "path": "./plugins/servicenow"
+    },
+    {
+      "originalName": "rippling",
+      "name": "rippling",
+      "source": "third_party/rippling",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "status": "configuration-required",
+      "reason": "Ask for the employee's Remote MCP server URL from Rippling \u2192 My IT \u2192 MCP connectors. Verify that it is the first-party Rippling workforce MCP, not the separate MCP Gateway or another host. Do not substitute a company-wide API token. An admin access policy and active Rippling AI trial/subscription are required. Use employee OAuth and verify the provider-supported native client flow; there is no upstream client ID or secret to copy. Discover the connected user's authorized codemode.* functions rather than inventing them. Preview and obtain user authority for official time-off requests, draft hires, and custom-object writes before executing them.",
+      "path": "./plugins/rippling"
+    },
+    {
+      "originalName": "onepay",
+      "name": "onepay",
+      "source": "third_party/onepay",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "status": "blocked",
+      "reason": "Source is restricted to Grok Bot/sand. Claude and ChatGPT directory listings do not establish Codex-native registration or live tool support."
+    },
+    {
+      "originalName": "questrade",
+      "name": "questrade",
+      "source": "third_party/questrade",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "status": "mcp-bundle",
+      "reason": "Packages Questrade's own endpoint for account, balance, position and market-data tools. Trading is described as discussion; do not infer order execution. Authentication, account entitlements, tool schemas and live behavior are unverified.",
+      "path": "./plugins/questrade"
+    },
+    {
+      "originalName": "tesla",
+      "name": "tesla",
+      "source": "third_party/tesla",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "status": "blocked",
+      "reason": "Grok Bot/sand only. The source uses the Cursor REST proxy, OAuth and vehicle key pairing; it supplies no portable Tesla endpoint.",
+      "path": null
+    },
+    {
+      "originalName": "fitmetrics",
+      "name": "fitmetrics",
+      "source": "third_party/fitmetrics",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "status": "configuration-required",
+      "reason": "FitMetrics Scale and a scoped key are required. Native setup maps an environment variable to the provider bearer header; no connection is enabled by the package.",
+      "path": "./plugins/fitmetrics"
     }
   ]
 }

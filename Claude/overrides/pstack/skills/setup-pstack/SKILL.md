@@ -28,7 +28,7 @@ The default role-to-model mapping is the rule shape shown in step 5 below. If `~
 
 **(b) Apply it.** The budget sets the tier of each role and the effort written on the `# budget` line:
 
-| Budget | Code roles | Judgment and prose roles | Panels (two families for a real second opinion) | Effort |
+| Budget | Code roles | Judgment and prose roles | Panels (independent aliases; one model family) | Effort |
 | --- | --- | --- | --- | --- |
 | `unlimited` | `opus` | `opus` | `opus, sonnet` | `max` |
 | `large` | `sonnet` | `opus` | `opus, sonnet` | `xhigh` |
@@ -39,7 +39,7 @@ Code roles are `feature, refactoring`, `bug-fix`, `perf-issue`, `hillclimb`, `ho
 
 On a re-run, a role is hand-set when its value is `inherit-parent` or `auto`, or differs from what the table gives that role under the rule's old `# budget` line (with no `# budget` line, compare against `large`). Keep hand-set roles as they are, and give every other role the new budget's value.
 
-**(c) Show the roles and confirm.** Show every role with its model, and list each line step 2 dropped. Ask whether to accept as-is or change specific roles. For each role the user wants to change, ask with AskUserQuestion, which allows at most four options: offer `opus`, `sonnet`, `haiku`, and `inherit-parent`, and say that `fable` or `auto` can be typed as the other answer. For panel roles the value is a list, and one subagent runs per entry, alias entries included, so the list length sets the count. `arena cross-judge pool` is also a list, but Arena selects one value from it that differs from the parent's model when possible. `swarm workers` is the default model for every worker unless a race or comparison assigns another model per arm.
+**(c) Show the roles and confirm.** Show every role with its model, and list each line step 2 dropped. Ask whether to accept as-is or change specific roles. For each role the user wants to change, ask with AskUserQuestion, which allows at most four options: offer `opus`, `sonnet`, `haiku`, and `inherit-parent`, and say that `fable` or `auto` can be typed as the other answer. For panel roles the value is a list, and one subagent runs per entry, alias entries included, so the list length sets the count. `arena cross-judge pool` is also an ordered list, but Arena requires one judge from a different model family. Claude aliases belong to one family; do not present a different alias as family diversity. Inherited entries never judge. If no authorized different-family model is available in the actual session, Arena skips its cross-judge and discloses that limit. `swarm workers` is the default model for every worker unless a race or comparison assigns another model per arm.
 
 ### 4. Validate
 

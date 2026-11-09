@@ -1,15 +1,15 @@
 # Codex compatibility review
 
-Reviewed source commit `99b609a72323b70204eab407c622f436e858e112` on 26 October 2026. All 121 entries in the source catalog are accounted for. This is a community adaptation, not an official Cursor or OpenAI distribution.
+Reviewed source commit `6b0300214a09fd6029cfb7077043125758cd1fd2` on 9 November 2026. All 131 entries in the source catalog are accounted for. This is a community adaptation, not an official Cursor or OpenAI distribution.
 
 ## Coverage
 
 | Class | Count | Meaning |
 | --- | ---: | --- |
 | Adapted skills | 17 | Packaged workflows with Codex runtime substitutions. Behavior is not forward-tested end to end. |
-| MCP bundles | 61 | Literal provider endpoints or local server launchers in the portable schema. Not authenticated or live-tested. |
-| Configuration required | 24 | Setup skill and source evidence; no MCP connection is loaded until supported configuration is supplied. |
-| Blocked | 19 | No installable package is exposed. Needs a service replacement or implementation. |
+| MCP bundles | 64 | Literal provider endpoints or local server launchers in the portable schema. Not authenticated or live-tested. |
+| Configuration required | 27 | Setup skill and source evidence; no MCP connection is loaded until supported configuration is supplied. |
+| Blocked | 23 | No installable package is exposed. Needs a service replacement or implementation. |
 
 ## Material differences
 
@@ -25,11 +25,11 @@ Reviewed source commit `99b609a72323b70204eab407c622f436e858e112` on 26 October 
 
 ## Validation scope
 
-The current checks cover 102 packages, 133 skills, and 61 bundled MCP server definitions. The regression suite exercises malformed metadata, executable/cwd containment, isolated installed documentation, exact diff line mapping, concurrent PR artifacts, local serving boundaries, and chat-owned Ralph state. These checks run locally and do not connect external providers.
+The current checks cover 108 packages, 136 skills, and 64 bundled MCP server definitions. The regression suite exercises malformed metadata, executable/cwd containment, isolated installed documentation, exact diff line mapping, concurrent PR artifacts, local serving boundaries, and chat-owned Ralph state. These checks run locally and do not connect external providers.
 
 The validator checks manifests against vendored Agent Plugins 1.0.0 schemas, catalog paths and identity, resource containment, skill metadata and invocation policy, package-local Markdown reference integrity, TOML examples, safe literal MCP connections, component availability, and full source-catalog coverage. Tests exercise malformed packages and rejection of false portable credentials.
 
-The historical discovery snapshot used Codex CLI 0.157.1 to list the previous 88 packages with a process-scoped local marketplace override. The 19 October update adds six packages and is validated statically; it has not been installed or connected by the weekly automation. The 26 October update adds eight packages, converts BigQuery to setup-only, and adds statechart and ketchup-video; it is also not installed or connected by the automation. The recorded historical names are in client-discovery.json. No account marketplace configuration or installation was changed. This proves catalog discovery only. Installation, actual skill decisions, SDK execution, OAuth, payments, provider connectivity, and deployed behavior require separate acceptance runs. No external services were connected or written during this port.
+The historical discovery snapshot used Codex CLI 0.157.1 to list the previous 88 packages with a process-scoped local marketplace override. The 19 October update adds six packages and is validated statically; it has not been installed or connected by the weekly automation. The 26 October update adds eight packages, converts BigQuery to setup-only, and adds statechart and ketchup-video; it is also not installed or connected by the automation. The 2 November update adds five packages and reconciles the original source tree with the previously reviewed 0.15.36 Codex package. It does not install or connect any plugin. The recorded historical names are in client-discovery.json. No account marketplace configuration or installation was changed. This proves catalog discovery only. Installation, actual skill decisions, SDK execution, OAuth, payments, provider connectivity, and deployed behavior require separate acceptance runs. No external services were connected or written during this port.
 
 An independent manual review found and corrected stale Advisor/Thermos runtime references, PR pagination and filename-key bugs, and a missing runtime preference read. Resource paths damaged during invocation-syntax conversion were restored, and a regression check now rejects that corruption. Two attempts to run `codex review --uncommitted` failed before review with the configured model/account compatibility error; no automated review verdict is claimed.
 
@@ -50,7 +50,7 @@ An independent manual review found and corrected stale Advisor/Thermos runtime r
 | cursor-sdk | [codex-sdk](plugins/codex-sdk/README.md) | adapted-skills | Native Codex SDK authoring workflow replaces Cursor SDK API guidance; original source API and examples are not copied. |
 | origin-apps | [origin-apps](plugins/origin-apps/README.md) | adapted-skills | Codex skill adaptation; Cursor hooks and automatic rules are not installed. |
 | orchestrate | [orchestrate](plugins/orchestrate/README.md) | adapted-skills | Codex skill adaptation; Cursor hooks and automatic rules are not installed. |
-| pstack | [pstack](plugins/pstack/README.md) | adapted-skills | Codex adaptation through 0.15.36, including the statechart compiler and native orchestration. Cursor hooks and automatic rules are not installed. [Source decisions](plugins/pstack/references/upstream-update-0.15.36.md). |
+| pstack | [pstack](plugins/pstack/README.md) | adapted-skills | Codex adaptation through 0.15.36 retained byte-for-byte, including native orchestration, statechart output draining and cancellation regressions. The maintained source tree now catches up with that reviewed package. |
 | dyl-stack | [dyl-stack](plugins/dyl-stack/README.md) | adapted-skills | Codex skill adaptation; Cursor hooks and automatic rules are not installed. |
 | grok-voice | [grok-voice](plugins/grok-voice/README.md) | adapted-skills | Codex skill adaptation; Cursor hooks and automatic rules are not installed. |
 | advisor | [advisor](plugins/advisor/README.md) | adapted-skills | Codex skill adaptation; Cursor hooks and automatic rules are not installed. |
@@ -70,7 +70,7 @@ An independent manual review found and corrected stale Advisor/Thermos runtime r
 | hubspot | [hubspot](plugins/hubspot/README.md) | configuration-required | Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled. |
 | intercom | [intercom](plugins/intercom/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
 | zoom | [zoom](plugins/zoom/README.md) | configuration-required | Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled. |
-| x | [x](plugins/x/README.md) | configuration-required | Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled. |
+| x | [x](plugins/x/README.md) | configuration-required | Manual native OAuth. Posting is opt-in with tweet.write and exact approval; native Chat contact lookup is documented without Grok helpers. No placeholder connection is enabled. |
 | clay | [clay](plugins/clay/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
 | circleback | [circleback](plugins/circleback/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
 | docusign | [docusign](plugins/docusign/README.md) | configuration-required | Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled. |
@@ -137,9 +137,9 @@ An independent manual review found and corrected stale Advisor/Thermos runtime r
 | quickbooks-online | [quickbooks-online](plugins/quickbooks-online/README.md) | configuration-required | Intuit now publishes an MCP endpoint, but upstream relies on Cursor-owned OAuth credentials. Verify a provider-supported Codex OAuth client before setup; no connection is enabled. |
 | workday | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
 | square | [square](plugins/square/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
-| tailscale | — | blocked | Grok Bot personal/company tailnet enrollment and tag:grokbot policy have no Codex implementation supplied. |
+| tailscale | tailscale | blocked | The Tailscale plugin 1.0.6 uses Grok Bot's one-click personal tailnets and bot-computer routing; the tag sign-in path is retired. No native Codex endpoint is supplied. |
 | google-ads | — | blocked | Cursor-hosted REST MCP gateway; no native Codex service replacement is supplied. |
-| gopuff | — | blocked | Grok Bot-only integration with a fixed mcp-grok-bot OAuth client; no supported Codex client setup is supplied. |
+| gopuff | gopuff | blocked | Grok Bot/sand only, with the fixed mcp-grok-bot OAuth client. Branding metadata changed; no supported native Codex registration is supplied. |
 | whatsapp-business | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
 | zoho-books | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
 | zoho-crm | — | blocked | Metadata only; no MCP endpoint or implementation supplied. |
@@ -150,7 +150,7 @@ An independent manual review found and corrected stale Advisor/Thermos runtime r
 | highlevel | [highlevel](plugins/highlevel/README.md) | configuration-required | Upstream uses HighLevel’s client-specific Cursor endpoint. Confirm a provider-supported Codex endpoint and client registration before configuration; no connection is enabled. |
 | meta-ads | [meta-ads](plugins/meta-ads/README.md) | configuration-required | Upstream supplies Cursor’s registered Meta OAuth app ID and no dynamic client registration. Register a provider-supported Codex client; no shared app ID or connection is enabled. |
 | feishu | [feishu](plugins/feishu/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
-| lark | [lark](plugins/lark/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
+| lark | [lark](plugins/lark/README.md) | mcp-bundle | Provider docs/messages endpoint retained. The new separate Lark Base integration is a Cursor-hosted proxy and is excluded; authentication and live behavior remain unverified. |
 | pitchbook | [pitchbook](plugins/pitchbook/README.md) | mcp-bundle | Provider endpoint and portable MCP transport packaged; authentication and live behavior are unverified. |
 | databricks-genie-one | [databricks-genie-one](plugins/databricks-genie-one/README.md) | configuration-required | Supply a bare workspace hostname and your own Databricks OAuth client ID. Dynamic registration is unsupported; a client secret is optional, and ai-gateway/offline_access scopes are required. Verify native redirect support before connecting. |
 | framer | [framer](plugins/framer/README.md) | configuration-required | Framer accepts localhost or HTTPS OAuth redirects, while native client callback compatibility is unverified. Verify the exact redirect and supported registration before connecting; never substitute Cursor hosted placement. Publishing a site requires explicit user authority. |
@@ -158,3 +158,13 @@ An independent manual review found and corrected stale Advisor/Thermos runtime r
 | stable | [stable](plugins/stable/README.md) | configuration-required | Configure x-api-key from the STABLE_API_KEY environment variable using the supported native secret/header mapping. No credential interpolation is copied into a portable connection. The execute-request tool may write; honor the requested action and authorization. |
 | vanta | [vanta](plugins/vanta/README.md) | configuration-required | Ask the user to select mcp.vanta.com (United States), mcp.eu.vanta.com (Europe), or mcp.aus.vanta.com (Australia). Do not infer a region. Verify native authentication and tool permissions before configuring that exact host. |
 | power-bi | — | blocked | Grok Bot only with Cursor hosted REST MCP proxy; no supported native provider endpoint is supplied. |
+| business-central | business-central | blocked | Cursor hosts and credentials the server; no endpoint or portable implementation is supplied. |
+| lark-base | lark-base | blocked | Cursor-hosted REST MCP proxy with team-owned Lark credentials; no native provider endpoint is supplied. |
+| onepay | onepay | blocked | Source is restricted to Grok Bot/sand. Claude and ChatGPT directory listings do not establish Codex-native registration or live tool support. |
+| questrade | [questrade](plugins/questrade/README.md) | mcp-bundle | Packages Questrade's own endpoint for account, balance, position and market-data tools. Trading is described as discussion; do not infer order execution. Authentication, account entitlements, tool schemas and live behavior are unverified. |
+| ringcentral-chat | [ringcentral-chat](plugins/ringcentral-chat/README.md) | mcp-bundle | Packages the separate RingCentral team-chat endpoint. It can send messages and manage teams, tasks and notes; outbound actions require the user's explicit instruction. Authentication, tool availability and live behavior are unverified. |
+| ringcentral-phone | [ringcentral-phone](plugins/ringcentral-phone/README.md) | mcp-bundle | Packages the separate RingCentral phone endpoint for calls, AI notes, SMS, voicemail and fax. Sending SMS requires the user's explicit instruction. Authentication, tool availability and live behavior are unverified. |
+| rippling | [rippling](plugins/rippling/README.md) | configuration-required | Ask for the employee's Remote MCP server URL from Rippling → My IT → MCP connectors. Verify that it is the first-party Rippling workforce MCP, not the separate MCP Gateway or another host. Do not substitute a company-wide API token. An admin access policy and active Rippling AI trial/subscription are required. Use employee OAuth and verify the provider-supported native client flow; there is no upstream client ID or secret to copy. Discover the connected user's authorized codemode.* functions rather than inventing them. Preview and obtain user authority for official time-off requests, draft hires, and custom-object writes before executing them. |
+| servicenow | [servicenow](plugins/servicenow/README.md) | configuration-required | Ask for the bare instance hostname and the exact MCP server name from its active server record. Do not infer a tenant or activate a server. An administrator must register a native authorization-code OAuth client with a secret, JWT token format and the mcp_server scope; dynamic registration is unsupported. Register the actual Codex redirect and keep the secret in the supported credential store. The connecting user needs sn_mcp_server.viewer and each tool's ACL. Preserve the provider's 26 KB request and 64 KB response limits. Preview writes and obtain user authority for the exact published tool before execution. |
+| tesla | tesla | blocked | Grok Bot/sand only. The source uses the Cursor REST proxy, OAuth and vehicle key pairing; it supplies no portable Tesla endpoint. |
+| fitmetrics | [fitmetrics](plugins/fitmetrics/README.md) | configuration-required | FitMetrics Scale and a scoped key are required. Native setup maps an environment variable to the provider bearer header; no connection is enabled by the package. |
