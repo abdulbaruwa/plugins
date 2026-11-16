@@ -1,3 +1,0 @@
-# Setup evidence only: verify native registration, credentials, and redirect before use.
-[mcp_servers.framer]
-url = "https://mcp.framer.com/mcp"

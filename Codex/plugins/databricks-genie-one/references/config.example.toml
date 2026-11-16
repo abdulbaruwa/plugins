@@ -1,3 +1,0 @@
-# Setup evidence only: verify native registration, credentials, and redirect before use.
-[mcp_servers.databricks-genie-one]
-url = "https://<workspace-host>/ai-gateway/mcp-services/system.ai.genie_one_mcp"

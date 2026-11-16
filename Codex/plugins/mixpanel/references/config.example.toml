@@ -1,0 +1,3 @@
+# Setup evidence only: resolve endpoint and qualify native authentication first.
+[mcp_servers.mixpanel]
+url = "https://<selected-region-host>/mcp"

@@ -209,7 +209,7 @@
       "name": "pstack",
       "source": "./plugins/pstack",
       "description": "if you want to go fast, go deep first. pstack helps you write less, but higher quality code. rigorous agent workflows you can parallelize with confidence.",
-      "version": "0.15.36+claude.38092e09",
+      "version": "0.15.42+claude.85b00bf5",
       "author": {
         "name": "Lauren Tan"
       },
@@ -1375,24 +1375,6 @@
       ]
     },
     {
-      "name": "framer",
-      "source": "./third_party/framer",
-      "description": "Design, build, and edit your Framer sites, pages, and CMS content.",
-      "version": "1.0.0+claude.8d66a8e8",
-      "author": {
-        "name": "Cursor",
-        "email": "plugins@cursor.com"
-      },
-      "category": "integrations",
-      "tags": [
-        "framer",
-        "design",
-        "website",
-        "cms",
-        "mcp"
-      ]
-    },
-    {
       "name": "ringcentral-phone",
       "source": "./third_party/ringcentral-phone",
       "description": "Read call activity, AI call notes, SMS, voicemail, and fax, and send SMS.",
@@ -1473,6 +1455,91 @@
         "fitmetrics",
         "fitness",
         "coaching",
+        "mcp"
+      ]
+    },
+    {
+      "name": "metricool",
+      "source": "./third_party/metricool",
+      "description": "Plan and publish social posts, pull metrics and reports, and manage inbox, reviews, and ads across your Metricool brands.",
+      "version": "1.0.0+claude.10db7005",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "metricool",
+        "social-media",
+        "marketing",
+        "mcp"
+      ]
+    },
+    {
+      "name": "eight-sleep",
+      "source": "./third_party/eight-sleep",
+      "description": "Connect your Eight Sleep account to see your sleep scores, stages and heart metrics, check your Pod's status and temperature settings, and manage your alarms and your side of the Pod, with your approval for each change.",
+      "version": "1.0.0+claude.3559e838",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "eight-sleep",
+        "sleep",
+        "health",
+        "mcp"
+      ]
+    },
+    {
+      "name": "paypal",
+      "source": "./third_party/paypal",
+      "description": "Work with invoices, orders, refunds, subscriptions, disputes, and transactions in PayPal.",
+      "version": "1.0.0+claude.1399cac7",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "paypal",
+        "payments",
+        "commerce",
+        "mcp"
+      ]
+    },
+    {
+      "name": "engine",
+      "source": "./third_party/engine",
+      "description": "Search and book hotels, shorten or cancel stays, and check support cases in Engine.",
+      "version": "1.0.0+claude.22adecb2",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "engine",
+        "travel",
+        "booking",
+        "mcp"
+      ]
+    },
+    {
+      "name": "squarespace",
+      "source": "./third_party/squarespace",
+      "description": "Brainstorm business names and check domain availability, pricing, and checkout links on Squarespace.",
+      "version": "1.0.0+claude.af2f3600",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "squarespace",
+        "domains",
+        "branding",
         "mcp"
       ]
     }

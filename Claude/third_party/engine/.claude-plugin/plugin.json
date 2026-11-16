@@ -1,0 +1,26 @@
+{
+  "name": "engine",
+  "displayName": "Engine",
+  "version": "1.0.0+claude.22adecb2",
+  "description": "Search and book hotels, shorten or cancel stays, and check support cases in Engine.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://mcp.engine.com/docs/",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "engine",
+    "hotel engine",
+    "business travel",
+    "corporate travel",
+    "hotels",
+    "lodging",
+    "booking",
+    "travel management",
+    "support",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png"
+}

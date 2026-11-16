@@ -15,4 +15,4 @@ I want a deeper version of this task, not a bigger one. Before rewriting it, do 
 
 Then rewrite my prompt to ask for exactly that.
 
-Leave choices that are mine to make open instead of deciding them.
+Have the rewritten prompt ask the agent to prototype choices that experiments can settle and recommend an option from the observed evidence. Leave product or preference choices that no experiment settles for the user. Rewriting the prompt does not authorize running those experiments now.

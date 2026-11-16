@@ -1,6 +1,6 @@
 {
   "sourceCatalog": ".cursor-plugin/marketplace.json",
-  "sourceCommit": "6b0300214a09fd6029cfb7077043125758cd1fd2",
+  "sourceCommit": "bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7",
   "plugins": [
     {
       "originalName": "teaching",
@@ -149,13 +149,13 @@
       "originalName": "pstack",
       "name": "pstack",
       "source": "pstack",
-      "originalVersion": "0.15.36",
+      "originalVersion": "0.15.42",
       "originalSkills": 58,
-      "proof": "Package validation and 368 bundled statechart compiler/renderer tests pass; live agent workflow and provider acceptance remain unproved.",
+      "proof": "Packaging and regression results are recorded in the update PR; no live agent/provider acceptance is claimed.",
       "status": "adapted-skills",
-      "reason": "Codex adaptation through 0.15.36 retained byte-for-byte, including native orchestration, statechart output draining and cancellation regressions. The maintained source tree now catches up with that reviewed package.",
+      "reason": "Adopts 0.15.42 compiler/diagnostic fixes and streamlined How/Why while retaining optional native research resources, inherited models, prompt-only Sharpen and shipping/ownership safeguards.",
       "path": "./plugins/pstack",
-      "reviewedSourceCommit": "631af2e8980d14e999dd4de675ee9461f33c5278"
+      "reviewedSourceCommit": "29b07674a297cd0579709ab5d92e2b7f4ee35c79"
     },
     {
       "originalName": "dyl-stack",
@@ -260,11 +260,11 @@
       "originalName": "gong",
       "name": "gong",
       "source": "third_party/gong",
-      "originalVersion": "1.0.0",
+      "originalVersion": "1.1.0",
       "originalSkills": 0,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "configuration-required",
-      "reason": "Credentials, OAuth client registration, or tenant URL require Codex-native setup. No placeholder MCP connection is enabled.",
+      "reason": "Own-client setup requires a provider-supported HTTPS redirect. Grok optional client registration does not transfer; stop when native callback support cannot satisfy Gong.",
       "path": "./plugins/gong"
     },
     {
@@ -1269,39 +1269,6 @@
       "path": "./plugins/pitchbook"
     },
     {
-      "originalName": "databricks-genie-one",
-      "name": "databricks-genie-one",
-      "source": "third_party/databricks-genie-one",
-      "originalSkills": 0,
-      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
-      "originalVersion": "1.0.1",
-      "status": "configuration-required",
-      "reason": "Supply a bare workspace hostname and your own Databricks OAuth client ID. Dynamic registration is unsupported; a client secret is optional, and ai-gateway/offline_access scopes are required. Verify native redirect support before connecting.",
-      "path": "./plugins/databricks-genie-one"
-    },
-    {
-      "originalName": "framer",
-      "name": "framer",
-      "source": "third_party/framer",
-      "originalSkills": 0,
-      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
-      "originalVersion": "1.0.0",
-      "status": "configuration-required",
-      "reason": "Framer accepts localhost or HTTPS OAuth redirects, while native client callback compatibility is unverified. Verify the exact redirect and supported registration before connecting; never substitute Cursor hosted placement. Publishing a site requires explicit user authority.",
-      "path": "./plugins/framer"
-    },
-    {
-      "originalName": "jobber",
-      "name": "jobber",
-      "source": "third_party/jobber",
-      "originalSkills": 0,
-      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
-      "originalVersion": "1.0.0",
-      "status": "configuration-required",
-      "reason": "Register your own Jobber OAuth client ID and required secret with a native supported redirect. Only clients, requests, and quotes are writable in the documented integration; jobs, invoices, and visits are read-only.",
-      "path": "./plugins/jobber"
-    },
-    {
       "originalName": "stable",
       "name": "stable",
       "source": "third_party/stable",
@@ -1431,6 +1398,125 @@
       "status": "configuration-required",
       "reason": "FitMetrics Scale and a scoped key are required. Native setup maps an environment variable to the provider bearer header; no connection is enabled by the package.",
       "path": "./plugins/fitmetrics"
+    },
+    {
+      "originalName": "eight-sleep",
+      "name": "eight-sleep",
+      "source": "third_party/eight-sleep",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "status": "mcp-bundle",
+      "reason": "Requires your Eight Sleep account and Pod. Confirm read_sleep/read_device access; write_device requires explicit agreement and a supported reconnect. Confirm every exact change on the user's own side; do not change a partner's side or offer diagnoses. Alarms/schedules depend on membership and the app timezone. Cover connectivity, online/away limits and queued offline alarm writes matter. Respect 60 calls/minute, 10 changes/5 minutes and 50 changes/day.",
+      "proof": "Static packaging only; authentication and live provider behavior are unverified.",
+      "path": "./plugins/eight-sleep"
+    },
+    {
+      "originalName": "engine",
+      "name": "engine",
+      "source": "third_party/engine",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "status": "mcp-bundle",
+      "reason": "Hotel booking tools act for the signed-in member. Bookings charge the saved card or direct bill. Show member, hotel, dates, full price and cancellation terms and get exact approval before booking; preview shortening/cancellation first. Check booking status or offer the provider website after an uncertain result, never blindly retry. Native OAuth and live booking acceptance remain unverified.",
+      "proof": "Static packaging only; authentication and live provider behavior are unverified.",
+      "path": "./plugins/engine"
+    },
+    {
+      "originalName": "metricool",
+      "name": "metricool",
+      "source": "third_party/metricool",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "status": "mcp-bundle",
+      "reason": "Uses provider OAuth PKCE/DCR; no X-Mc-Auth header is copied. MCP is available on all plans but plan limits apply. Confirm brand, network, content and effects before publishing, messages, reviews or Smartlinks. Ad changes require specific spending authority. Package validation does not establish authentication or publishing acceptance.",
+      "proof": "Static packaging only; authentication and live provider behavior are unverified.",
+      "path": "./plugins/metricool"
+    },
+    {
+      "originalName": "paypal",
+      "name": "paypal",
+      "source": "third_party/paypal",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "status": "mcp-bundle",
+      "reason": "The packaged endpoint is PRODUCTION, not sandbox. Requires a PayPal business account and supported OAuth PKCE/DCR. Financial actions, refunds, disputes, subscriptions, invoices and reminders need authority for the exact account, amount, recipient and effect. No commerce feature header, shopping capability or local token server is added. Static checks do not establish authenticated access.",
+      "proof": "Static packaging only; authentication and live provider behavior are unverified.",
+      "path": "./plugins/paypal"
+    },
+    {
+      "originalName": "squarespace",
+      "name": "squarespace",
+      "source": "third_party/squarespace",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "status": "mcp-bundle",
+      "reason": "Public domain naming/search tools can be used without authentication. Show sponsored labels, first-year and renewal prices, and distinguish an unknown available:null result from unavailable. A checkout link is not a purchase. Commerce is separately client-qualified through CIMD; do not claim native Commerce tools or replace CIMD with DCR.",
+      "proof": "Static packaging only; authentication and live provider behavior are unverified.",
+      "path": "./plugins/squarespace"
+    },
+    {
+      "originalName": "databricks-genie",
+      "name": "databricks-genie",
+      "source": "third_party/databricks-genie",
+      "originalVersion": "1.1.0",
+      "originalSkills": 0,
+      "status": "configuration-required",
+      "reason": "Renamed from databricks-genie-one; the endpoint still ends in system.ai.genie_one_mcp. Requires the bare workspace hostname and an admin-registered native OAuth client with ai-gateway/offline_access; no DCR. The secret is optional. Verify native redirect support and signed-in user access; do not modify existing saved configuration as part of this rename.",
+      "proof": "Static packaging only; authentication and live provider behavior are unverified.",
+      "path": "./plugins/databricks-genie"
+    },
+    {
+      "originalName": "front",
+      "name": "front",
+      "source": "third_party/front",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "status": "configuration-required",
+      "reason": "An admin must create a confidential Front app with the MCP feature, own client ID and secret, feature:mcp scope and actual native callback. DCR is unsupported. Resource read/write/send permissions are separate; request minimum access and reconnect after permission changes. Confirm exact recipients and content for sends. Distinguish drafts and internal comments, honor inbox/user permissions and rate-limit waits.",
+      "proof": "Static packaging only; authentication and live provider behavior are unverified.",
+      "path": "./plugins/front"
+    },
+    {
+      "originalName": "mixpanel",
+      "name": "mixpanel",
+      "source": "third_party/mixpanel",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "status": "configuration-required",
+      "reason": "Select the organization's US mcp.mixpanel.com, EU mcp-eu.mixpanel.com or IN mcp-in.mixpanel.com host; never infer or change residency. Uses OAuth PKCE/DCR, not a service-account header. Verify project access and admin AI/MCP enablement, which may take 15 minutes; query limits apply. Confirm each dashboard, metadata, cohort, experiment or flag write. Keep unverified-entity markers; unsupported audience targeting is not supplied.",
+      "proof": "Static packaging only; authentication and live provider behavior are unverified.",
+      "path": "./plugins/mixpanel"
+    },
+    {
+      "originalName": "netsuite",
+      "name": "netsuite",
+      "source": "third_party/netsuite",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "status": "configuration-required",
+      "reason": "Require an authorized account-specific AI Connector Service URL: /all or the exact /suiteapp/<applicationid> suffix. Account ID uses domain form (lowercase, underscores to hyphens). Qualify native DCR client name/redirect and only mcp scope. Admin must enable SuiteScript/OAuth, tools SuiteApp and pending integration; standard records need REST Web Services. Use a dedicated non-admin role with MCP Connection, OAuth access-token and SuiteApp folder permissions. Honor ACLs, exact write authority, concurrency limits and the provider's ePHI exclusion.",
+      "proof": "Static packaging only; authentication and live provider behavior are unverified.",
+      "path": "./plugins/netsuite"
+    },
+    {
+      "originalName": "runta",
+      "name": "runta",
+      "source": "third_party/runta",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "status": "configuration-required",
+      "reason": "Uses Client ID Metadata Documents (CIMD), not DCR. Stop until native CIMD support and the actual client identity/organization consent are verified; no ID, secret or API key should be invented. Preserve runtime:read/runtime:manage scopes and organization roles. Commands, runtime changes/deletion, checkpoint restores and port publication require concrete authority; published URLs are public. Accepted lifecycle requests require status checks before claiming completion. Do not expose credentials, copy local files or claim secret/billing/member-management tools.",
+      "proof": "Static packaging only; authentication and live provider behavior are unverified.",
+      "path": "./plugins/runta"
+    },
+    {
+      "originalName": "google-analytics",
+      "name": "google-analytics",
+      "source": "third_party/google-analytics",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "status": "blocked",
+      "reason": "Grok Bot/Cursor-hosted REST proxy; no portable provider implementation is supplied."
     }
   ]
 }

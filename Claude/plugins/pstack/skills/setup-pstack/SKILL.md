@@ -15,7 +15,7 @@ Claude Code subagents take a model alias in the Agent tool's `model` parameter: 
 
 ### 2. Load current state
 
-The default role-to-model mapping is the rule shape shown in step 5 below. If `~/.claude/rules/pstack-models.md` already exists, read it and treat its `# budget` line and its role values as the current choices. Otherwise start from those defaults. A line whose role is not in step 5, such as `how critics`, is from a retired role. Drop it.
+The default role-to-model mapping is the rule shape shown in step 5 below. If `~/.claude/rules/pstack-models.md` already exists, read it and treat its `# budget` line and its role values as the current choices. Otherwise start from those defaults. Retain existing hand-set or unrecognized role lines as legacy preferences rather than silently deleting them. How now uses one inherited explanation agent, and Why reads the record directly; their former role lines are not used by those skills. Native aliases and existing budgets are retained; do not apply Cursor's defaults:2 vendor/slug migration to this rule.
 
 ### 3. Budget, map, and confirm
 
@@ -35,11 +35,11 @@ The default role-to-model mapping is the rule shape shown in step 5 below. If `~
 | `medium` | `sonnet` | `sonnet` | `sonnet, haiku` | `high` |
 | `small` | `haiku` | `sonnet` | `sonnet, haiku` | `medium` |
 
-Code roles are `feature, refactoring`, `bug-fix`, `perf-issue`, `hillclimb`, `how explorer`, `why investigators`, `reflect tooling`, and `swarm workers`. Judgment and prose roles are `judgment and prose`, `hardest tasks`, `how explainer`, `why synthesizer`, and `reflect judgment, divergent, synthesizer`. Panels are `arena runners`, `arena cross-judge pool`, `architect runners`, and `interrogate reviewers`.
+Code roles are `feature, refactoring`, `bug-fix`, `perf-issue`, `hillclimb`, `reflect tooling`, and `swarm workers`. Judgment and prose roles are `judgment and prose`, `hardest tasks`, and `reflect judgment, divergent, synthesizer`. Panels are `arena runners`, `arena cross-judge pool`, `architect runners`, and `interrogate reviewers`.
 
 On a re-run, a role is hand-set when its value is `inherit-parent` or `auto`, or differs from what the table gives that role under the rule's old `# budget` line (with no `# budget` line, compare against `large`). Keep hand-set roles as they are, and give every other role the new budget's value.
 
-**(c) Show the roles and confirm.** Show every role with its model, and list each line step 2 dropped. Ask whether to accept as-is or change specific roles. For each role the user wants to change, ask with AskUserQuestion, which allows at most four options: offer `opus`, `sonnet`, `haiku`, and `inherit-parent`, and say that `fable` or `auto` can be typed as the other answer. For panel roles the value is a list, and one subagent runs per entry, alias entries included, so the list length sets the count. `arena cross-judge pool` is also an ordered list, but Arena requires one judge from a different model family. Claude aliases belong to one family; do not present a different alias as family diversity. Inherited entries never judge. If no authorized different-family model is available in the actual session, Arena skips its cross-judge and discloses that limit. `swarm workers` is the default model for every worker unless a race or comparison assigns another model per arm.
+**(c) Show the roles and confirm.** Show every role with its model, and list each line step 2 dropped. Ask whether to accept as-is or change specific roles. For each role the user wants to change, ask with AskUserQuestion, which allows at most four options: offer `opus`, `sonnet`, `haiku`, and `inherit-parent`, and say that `fable` or `auto` can be typed as the other answer. For panel roles the value is a list, and one subagent runs per entry, alias entries included, so the list length sets the count. `arena cross-judge pool` is also an ordered list, but Arena requires one judge from a different model family. Claude aliases belong to one family; do not present a different alias as family diversity. Inherited entries never judge. If no authorized different-vendor model is available in the actual session, Arena skips its cross-judge and discloses that limit. `swarm workers` is the default model for every worker unless a race or comparison assigns another model per arm.
 
 ### 4. Validate
 
@@ -47,7 +47,7 @@ Every value must be `opus`, `sonnet`, `haiku`, `fable`, `inherit-parent`, or `au
 
 ### 5. Write the rule
 
-Write `~/.claude/rules/pstack-models.md` with a `# budget` line naming the chosen label and its effort, and one line per role, using the same labels poteto-mode uses. Overwrite the whole file so re-runs stay idempotent. Shape:
+Write `~/.claude/rules/pstack-models.md` with a `# budget` line naming the chosen label and its effort, and one line per role, using the same labels poteto-mode uses. Write the current role lines and append preserved legacy preferences, keeping hand-set choices intact. Shape:
 
 ```
 # pstack model configuration (overrides skill defaults). One line per role. Delete a line to fall back to the skill default.
@@ -60,10 +60,6 @@ perf-issue: sonnet
 hillclimb: sonnet
 judgment and prose: opus
 hardest tasks: opus
-how explorer: sonnet
-how explainer: opus
-why investigators: sonnet
-why synthesizer: opus
 reflect tooling: sonnet
 reflect judgment, divergent, synthesizer: opus
 arena runners: opus, sonnet

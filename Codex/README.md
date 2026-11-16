@@ -1,8 +1,8 @@
 # Codex plugin port
 
-A standalone Codex marketplace adapted from this repository's 131 Cursor plugin entries. Packages and tooling live under `Codex/`, with validation in `.github/workflows/codex-ci.yml`. The original plugin folders retain the upstream implementation.
+A standalone Codex marketplace adapted from this repository's 139 Cursor plugin entries. Packages and tooling live under `Codex/`, with validation in `.github/workflows/codex-ci.yml`. The original plugin folders retain the upstream implementation.
 
-The port exposes **108 packages**: 17 adapted workflow plugins, 64 provider MCP bundles, and 27 setup workflows requiring credentials, tenant details, or provider registration. Twenty-three host-specific or unimplemented entries are excluded. Read the [full compatibility review](COMPATIBILITY.md) before assuming feature parity or a connected service.
+The port exposes **115 packages**: 17 adapted workflow plugins, 69 provider MCP bundles, and 29 setup workflows requiring credentials, tenant details, or provider registration. Twenty-four host-specific or unimplemented entries are excluded. Read the [full compatibility review](COMPATIBILITY.md) before assuming feature parity or a connected service.
 
 This is a community port. Original author metadata and each plugin's MIT license are preserved. It is not an official Cursor or OpenAI release.
 
@@ -61,3 +61,5 @@ New plugin packages use the portable root manifest supported by [OpenAI's plugin
 When updating a port, compare it with the named source version, preserve attribution and invocation policy, update its compatibility entry, and rerun validation. Changes to the original catalog are reported as inventory drift instead of silently broadening the port.
 
 See [Keeping the Codex port current](UPDATING.md) for the fork/remotes, read-only source-diff checker, reconciliation checkpoints, and Codex CI workflow.
+
+The 16 November catalog retires upstream Framer and Jobber entries and renames Databricks Genie One to Databricks Genie. See [migration notes](../PORT-MIGRATIONS.md); this repository update does not uninstall existing packages or change saved client configuration.

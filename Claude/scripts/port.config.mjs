@@ -18,6 +18,9 @@ const CURSOR_HOSTED = "The MCP server is Cursor's hosted proxy (`api.cursor.com/
 
 // Plugins left out of the Claude marketplace, with the reason shown in Claude/README.md.
 export const SKIP = {
+  "google-analytics": CURSOR_HOSTED,
+  gong: "Gong 1.1.0 requires HTTPS redirects; this port's localhost OAuth recipe cannot satisfy that requirement. Grok auto-registration does not establish Claude Code support.",
+  runta: "Runta requires Client ID Metadata Documents, not DCR. Native Claude Code client metadata and consent support have not been qualified; no automatic connection is exposed.",
   "business-central": "Cursor hosts and credentials this server; the source supplies no endpoint or portable implementation.",
   "lark-base": CURSOR_HOSTED,
   "onepay": "The source limits this connector to Grok Bot/sand. A Claude directory listing does not establish supported Claude Code registration or tool access.",
@@ -57,15 +60,16 @@ export const SKIP = {
 //   secret  whether the provider's client needs a secret (default: the Cursor config has CLIENT_SECRET)
 //   scopes  a subset of upstream OAuth scopes for the example (default: upstream scopes)
 export const MANUAL_MCP = {
+  front: { why: "An administrator creates a confidential Front app with the MCP feature, own client ID/secret, feature:mcp scope and the native redirect. Read/write/send permissions are separate; request minimum access and reconnect after permissions change. Preview exact recipients/content before sending." },
+  mixpanel: { why: "Select the organization's US (mcp.mixpanel.com), EU (mcp-eu.mixpanel.com), or IN (mcp-in.mixpanel.com) host; never infer or switch residency. Provider supports PKCE/DCR, so omit explicit client credentials when supported by the actual native connection. Org admin MCP enablement, project permissions and query limits apply.", url: "https://<selected-region-host>/mcp", secret: false },
+  netsuite: { why: "Use the authorized account-specific AI Connector Service URL, /all or the exact SuiteApp suffix. Verify native DCR client identity/redirect and only the mcp scope. Admin must enable SuiteScript/OAuth and the integration, install tools and assign a dedicated non-admin role with MCP/ACL permissions. Preserve ePHI exclusion; no endpoint or native registration is assumed.", secret: false },
   servicenow: { why: "Requires an active instance MCP server, its exact server name, and your own authorization-code OAuth client with a secret, JWT token format and mcp_server scope. Register the native redirect, verify sn_mcp_server.viewer plus tool ACLs, and preserve the documented 26 KB request/64 KB response limits." },
-  "databricks-genie-one": { why: "Requires your bare workspace hostname and a registered Databricks client ID; dynamic registration is unsupported. Preserve ai-gateway/offline_access scopes and verify native redirect support. A secret is optional, not required.", secret: false },
-  "jobber": { why: "Requires your own Jobber OAuth client ID and secret with the native redirect registered. Clients, requests, and quotes are writable; jobs, invoices, and visits are read-only." },
+  "databricks-genie": { why: "Requires your bare workspace hostname and a registered Databricks client ID; dynamic registration is unsupported. Preserve ai-gateway/offline_access scopes and verify native redirect support. A secret is optional, not required.", secret: false },
   "vanta": { why: "Select mcp.vanta.com (US), mcp.eu.vanta.com (Europe), or mcp.aus.vanta.com (Australia) before adding the server. No region is inferred. Verify provider-supported dynamic registration and native redirect/tool access; connectivity is unverified.", secret: false },
   "highlevel": { why: "Upstream uses a client-specific Cursor v2 endpoint. This recipe selects the separately documented universal endpoint, with fewer tools; verify provider-supported client registration, redirect support, and the required tools before adding it.", url: "https://services.leadconnectorhq.com/mcp/", secret: false },
   "meta-ads": { why: "Upstream uses Cursor's registered Meta app ID and no dynamic client registration. Register a Meta OAuth client with your own allowed redirect URI; do not reuse Cursor's app ID.", secret: false },
   "quickbooks-online": { why: "Intuit now publishes an MCP endpoint, but the upstream setup relies on Cursor-owned OAuth credentials. Verify provider-supported Claude Code client registration and redirect support first; connectivity is unverified.", secret: false },
   docusign: { why: "Needs your own Docusign integration key and secret." },
-  gong: { why: "Needs your own Gong OAuth client ID and secret." },
   hubspot: { why: "Needs your own HubSpot app client ID and secret." },
   gmail: { why: "Google offers no dynamic client registration. Create a Desktop OAuth client in Google Cloud with the Gmail API enabled.", secret: true },
   "google-calendar": { why: "Google offers no dynamic client registration. Create a Desktop OAuth client in Google Cloud with the Calendar API enabled.", secret: true },
@@ -149,8 +153,9 @@ export const DEFAULT_REWRITE_SETS = ["env", "tools", "install", "paths"];
 // Claude Code subagents take a model alias, so code roles go to sonnet and
 // judgment/prose roles to opus; a second opinion pairs the two.
 const PSTACK_MODELS = [
-  [/\bclaude-opus-5-5-(?:max|xhigh|high|medium|low)(?![-\w])/g, "opus"],
-  [/\bgrok-4\.7-(?:xhigh|high|medium|low)-fast(?![-\w])/g, "sonnet"],
+  [/\bclaude-fable-5-2-(?:max|xhigh|high|medium|low)(?:-fast)?(?![-\w])/g, "sonnet"],
+  [/\bclaude-opus-5-5-(?:max|xhigh|high|medium|low)(?:-fast)?(?![-\w])/g, "opus"],
+  [/\bgemini-4-carbon-(?:max|xhigh|high|medium|low)(?:-fast)?(?![-\w])/g, "sonnet"],
 ];
 
 const SLUG = "the absolute project path with every non-alphanumeric character as `-`";
@@ -163,8 +168,6 @@ const PSTACK_RUNTIME = [
   [/~\/\.cursor\/projects\/\*\//g, "~/.claude/projects/*/"],
   [/The system prompt names the workspace's `agent-transcripts\/` directory\./g, `This project's transcripts are the \`*.jsonl\` files in ${TRANSCRIPT_DIR}).`],
   [/the active workspace's `agent-transcripts\/` directory \(the system prompt names (?:this|the) path/g, `this project's transcript directory, ${TRANSCRIPT_DIR}`],
-  [/ and `readonly: true`\./g, ", briefed read-only: it must not edit files."],
-  [/ with `readonly: false` \(agent mode\)\. \*\*Do not use readonly\/Ask mode\.\*\* It strips MCP access/g, ". **Do not use `Explore` or a tool allowlist that drops the `mcp__*` tools.** That strips MCP access"],
   [/, agent mode \(`readonly: false`\)/g, ""],
   [/, and readonly strips MCPs\./g, ". `general-purpose` keeps the MCP tools it needs."],
   [/agent mode \(readonly strips MCP\)/g, "an agent type that keeps MCP tools (`general-purpose` or `pstack:poteto-agent`)"],
@@ -422,6 +425,8 @@ export const PLUGINS = {
     exclude: ["automations", "skills/make-bot-ui"],
     rewrites: [...PSTACK_MODELS, ...PSTACK_RUNTIME, ...SKILL_CREATOR, ...REFLECT_EVIDENCE],
     prepend: [
+      { file: "skills/how/SKILL.md", text: "Use one native general-purpose explanation agent only when delegation is authorized; otherwise explain directly. The brief is read-only even if its agent type has write tools. Inherit the session model and keep the answer grounded in the scoped code." },
+      { file: "skills/why/SKILL.md", text: "Read only the authorized project and record. Connected research does not authorize sending messages or changing code. State missing sources and distinguish authors' statements from inference." },
       { file: "skills/statechart/SKILL.md", text: "Use an owned scratch directory outside the repo, and preserve evidence before cleanup. Read ../../docs/harness/claude-code.md for native tool and explicit-only routing. The TypeScript launcher needs a supported Node, Bun, or Deno runtime. It uses existing TLA2TOOLS/JAVA when supplied, otherwise mise may download TLC/Java. Optional SVG rendering uses Pele 1.9.0 in an owned cache outside the repo; inspect dependencies and disclose downloads before running. No browser is required. A model or bounded result is not proof of the whole system." },
       { file: "skills/ketchup-video/SKILL.md", text: "Read the packaged ketchup skill by its absolute path when routing from this user-only skill. Use only rendering and artifact tools actually available in the session. Never claim a video or inspection without file evidence; use the stated failure path if rendering or attachment is unavailable." },
       {"file": "skills/poteto-mode/SKILL.md", "text": "Read ../../docs/harness/claude-code.md for this port's native tools, explicit-only skill routing, model fields, conversation identity, and prerequisite gates before following the runtime instructions below."},
@@ -430,6 +435,7 @@ export const PLUGINS = {
       {"file": "skills/sharpen/SKILL.md", "text": "Keep the user's explicit scope, constraints, and approval gates. Propose changing a user-owned constraint instead of silently relaxing it."},
     ],
     patches: [
+      { file: "skills/how/SKILL.md", find: "Spawn one Task subagent with `subagent_type: generalPurpose` and `readonly: true` that explores and explains in one pass. Give it the user's question and this brief:", replace: "When authorized and available, spawn one native general-purpose explanation agent with an explicit read-only brief and inherited model. Give it the user's question and the following brief; otherwise perform that read-only explanation directly:" },
       {
         file: "README.md",
         find: "claude code leaves auto-update off for third-party marketplaces, so pstack stays on the version you installed. to turn it on, run `/plugin`, open the **marketplaces** tab, select `cursor-plugins`, and choose **enable auto-update**. to update once by hand, run `claude plugin update pstack@cursor-plugins`.",
@@ -445,11 +451,11 @@ export const PLUGINS = {
         find: "claude code installs a generated copy of pstack, including this readme and the guide, from [`harness/pstack/`](https://github.com/cursor/plugins/tree/main/harness/pstack) at the repository root. after you change pstack, run `node scripts/generate-pstack-harness-trees.mjs` from the repository root and commit the result. ci fails while the generated copy is out of date.",
         replace: "this community port is generated under `Claude/plugins/pstack/`. maintain it through `Claude/scripts/port.config.mjs` and `Claude/overrides/pstack/`, then run `node Claude/scripts/build.mjs` from the repository root and commit the generated output. `node Claude/scripts/build.mjs --check` checks output and override locks; review changed sources before updating any lock. the separate upstream `harness/pstack/` tree is not this port.",
       },
-      {"file": "skills/poteto-mode/SKILL.md", "find": "**Match the model to the job.** Before each spawn, start from the role's line or default and pick the reasoning level and speed the job needs. The `/setup-pstack` budget sets each role's starting level, xhigh by default. Raise it one step, up to max, for the hardest or subtlest work. Lower it one step for judgment and two or more steps for routine work. Use fast mode only when the job is urgent, meaning CI or trunk is red or a person is blocked on the result right now. Otherwise use standard speed, the same slug without `-fast`. Verification is the exception and stays on the `swarm workers` model and speed (`grok-4.7-xhigh-fast` by default). Change only the effort level and whether the slug is fast, and keep the family the role names, so a diverse panel stays diverse. If the family has no slug at that level and speed, use its nearest slug. A role on `auto` or `inherit-parent` stays on the parent model. If the Task tool rejects the adjusted slug, do not try another adjusted slug. Use the role's line or default and say so.", "replace": "**Match the model to the job.** Start from the configured role alias and budget. Keep `opus`, `sonnet`, `haiku`, `fable`, or inherited model selection; never construct aliases such as `sonnet-fast` or append an effort suffix. When the Agent tool exposes a separate `effort` parameter, choose a supported value for the task and honor the configured budget. Use a speed setting only when the actual session tool supports it. Omit unsupported fields and state the limitation. An inherited role remains inherited."},
+      {"file": "skills/poteto-mode/SKILL.md", "find": "**Match the model to the job.** Before each spawn, start from the role's line or default and pick the reasoning level and speed the job needs. The `/setup-pstack` budget sets each role's starting level, xhigh or high by default, and max for `hardest tasks`. Raise it one step, up to max, for the hardest or subtlest work. Lower it one step for judgment and two or more steps for routine work. Use fast mode only when the job is urgent, meaning CI or trunk is red or a person is blocked on the result right now. Otherwise use standard speed, the same slug without `-fast`. Verification is the exception and stays on the `swarm workers` model and speed (`claude-opus-5-5-high-fast` by default). Change only the effort level and whether the slug is fast, and keep the family the role names, so a diverse panel stays diverse. Fable (`claude-fable-*`) is its own family, apart from the other Claude models. If the family has no slug at that level and speed, use its nearest slug. Gemini has no xhigh, max, or fast slug, so a Gemini subagent runs at high, such as `gemini-4-carbon-high`, whenever the job calls for high or above. Fable 5.2 has no fast slug, so an urgent Fable 5.2 subagent runs at standard speed and keeps its level. A role on `auto` or `inherit-parent` stays on the parent model. If the Task tool rejects the adjusted slug, do not try another adjusted slug. Use the role's line or default and say so. If the Task tool rejects that too, continue with the calling skill's fallback. A slug counts as rejected once a Task error says that the model is not valid, or leaves the slug out of its list of valid slugs. Never pass a rejected slug, and skip any fallback whose slug is already rejected. When the calling skill has no fallback, use the closest valid slug of the role's family from the error's list of valid slugs, or omit `model` so the subagent runs on the parent model when the list has none. When the calling skill's fallback runs out of slugs without saying what to do next, omit `model` too. Say so in both cases.", "replace": "**Match the model to the job.** Start from the configured role alias and budget. Keep `opus`, `sonnet`, `haiku`, `fable`, or inherited model selection; never construct aliases such as `sonnet-fast` or append an effort suffix. When the Agent tool exposes a separate `effort` parameter, choose a supported value for the task and honor the configured budget. Use a speed setting only when the actual session tool supports it. Omit unsupported fields and state the limitation. An inherited role remains inherited."},
       {"file": "docs/guide/01-setup.md", "find": "In Claude Code, run `/plugin marketplace add cursor/plugins`, then `/plugin install pstack@cursor-plugins`. Claude Code prefixes plugin commands, so each command in this guide takes a `pstack:` prefix there, such as `/pstack:setup-pstack`, which writes its model rule to `~/.claude/rules/pstack-models.md`. The [Claude Code adapter](../harness/claude-code.md) covers the other differences.", "replace": "Use the community marketplace installed above. Commands take a `pstack:` prefix, such as `/pstack:setup-pstack`, and the [native Claude Code adapter](../harness/claude-code.md) explains this port's routing and session boundaries."},
       {
         file: "skills/poteto-help/SKILL.md",
-        find: "pstack is built for Cursor, and it also installs in Claude Code with `/plugin marketplace add cursor/plugins`, then `/plugin install pstack@cursor-plugins`. There, each command takes a `pstack:` prefix, such as `/pstack:poteto-mode`. The [Claude Code adapter](../../docs/harness/claude-code.md) maps the Cursor names, and a step that needs a Cursor-only feature, such as Bugbot or Automations, is skipped with a one-line note.\n\nOther tools can read the skills, because they use the Agent Skills format. But most workflow skills, including `/poteto-mode`, `/how`, `/why`, and `/teach`, spawn Cursor subagents with per-role models, and Custom Modes and `/loop` are Cursor features, so those parts may not work there.",
+        find: "pstack is built for Cursor, and it also installs in Claude Code with `/plugin marketplace add cursor/plugins`, then `/plugin install pstack@cursor-plugins`. There, each command takes a `pstack:` prefix, such as `/pstack:poteto-mode`. The [Claude Code adapter](../../docs/harness/claude-code.md) maps the Cursor names, and a step that needs a Cursor-only feature, such as Bugbot or Automations, is skipped with a one-line note.\n\nOther tools can read the skills, because they use the Agent Skills format. But most workflow skills, including `/poteto-mode`, `/how`, and `/teach`, spawn Cursor subagents, some with per-role models, and Custom Modes and `/loop` are Cursor features, so those parts may not work there.",
         replace: "This is the Claude Code port of pstack, which was built for Cursor. Workflow skills such as `/poteto-mode`, `/how`, `/why`, and `/teach` spawn Claude subagents with per-role models (`sonnet` for code and `opus` for judgment by default). Playbooks that fan out to Cursor cloud agents run as local subagents in worktrees here, and Cursor's Custom Modes have no Claude Code equivalent.",
       },
       {
@@ -483,11 +489,6 @@ export const PLUGINS = {
         replace: "so give the user the file's public copy: `https://github.com/abdulbaruwa/plugins/blob/main/Claude/plugins/pstack/` followed by its path.",
       },
       {
-        file: "skills/why/SKILL.md",
-        find: "Before spawning investigators, list the available MCPs from the Cursor environment. Use the available-tools map when present. Otherwise inspect the `mcps/` directory Cursor exposes for enabled MCP servers.",
-        replace: "Before spawning investigators, list the available MCP servers: the `mcp__<server>__*` tools in your tool list, including deferred tools that tool search can load.",
-      },
-      {
         file: "skills/reflect/SKILL.md",
         find: "Before fanning out, find this conversation's transcript in the `agent-transcripts/` directory the system prompt names. Do not glob across `~/.cursor/projects/*/`. That crosses workspace boundaries and reads private chats from unrelated projects.\n\n```bash\nls -t <agent-transcripts>/*.jsonl <agent-transcripts>/*/*.jsonl <agent-transcripts>/*/subagents/*.jsonl 2>/dev/null | head -10\n```\n\nThat covers the legacy flat (`<id>.jsonl`), current nested (`<id>/<id>.jsonl`), and subagent (`<parent>/subagents/<child>.jsonl`) layouts. For each candidate, read the first JSONL line. Take the file whose `message.content[0].text` contains the conversation's opening user prompt.",
         replace: `Before fanning out, find this conversation's transcript. \`<transcripts>\` is \`~/.claude/projects/<project-slug>\`, where the slug is ${SLUG}. Do not glob across \`~/.claude/projects/*/\`. That crosses workspace boundaries and reads private chats from unrelated projects.\n\n\`\`\`bash\nls -t <transcripts>/*.jsonl <transcripts>/*/subagents/*.jsonl 2>/dev/null | head -10\n\`\`\`\n\nThat covers sessions (\`<session-id>.jsonl\`) and subagents (\`<session-id>/subagents/agent-<id>.jsonl\`). For each candidate, find the first line with \`"type": "user"\`; its \`message.content\` is a string or a list of blocks. Take the file whose first user message contains the conversation's opening user prompt.`,
@@ -518,11 +519,6 @@ export const PLUGINS = {
         replace: "With no path, read `${CLAUDE_PLUGIN_ROOT}/skills/poteto-mode/SKILL.md`.",
       },
       {
-        file: "agents/comment-sicko.md",
-        find: "I run `/how`, `/why`, or both from the **how** and **why** skills on the named symbol or call.",
-        replace: "I read and follow `${CLAUDE_PLUGIN_ROOT}/skills/how/SKILL.md`, `${CLAUDE_PLUGIN_ROOT}/skills/why/SKILL.md`, or both (the **how** and **why** skills) on the named symbol or call.",
-      },
-      {
         file: "docs/guide/01-setup.md",
         find: "In a Cursor chat, run:\n\n```text\n/add-plugin pstack\n```\n\nCursor confirms the plugin is installed.",
         replace: `In Claude Code, add this marketplace and install the plugin:\n\n\`\`\`text\n/plugin marketplace add <path-to-repo>/Claude\n/plugin install pstack@${MARKETPLACE.name}\n\`\`\`\n\nClaude Code confirms the plugin is installed. Skills run as \`/pstack:<skill>\`, for example \`/pstack:setup-pstack\`; the short \`/setup-pstack\` also works when no other command uses the name.`,
@@ -534,7 +530,7 @@ export const PLUGINS = {
       },
       {
         file: "docs/guide/01-setup.md",
-        find: "The defaults run at `xhigh` reasoning, the same as the `large` budget. `unlimited` lifts each model to its highest tier, up to `max`. Opus goes to `max`. Grok tops out at `xhigh`, so it stays there. `medium` and `small` lower the reasoning and spend fewer tokens.",
+        find: "The defaults are the same as the `large` budget. Most roles run at `xhigh` reasoning. The hardest changes run at `max`, and the review panels and swarm workers run at `high`. `unlimited` raises each role one level, up to `max`. Gemini tops out at `high`, so it stays there. `medium` lowers each role one level and `small` lowers it two, and both spend fewer tokens.",
         replace: "The defaults (`sonnet` for code, `opus` for judgment and prose, `opus, sonnet` panels) match the `large` budget. `unlimited` moves the code roles to `opus` too. `medium` moves judgment to `sonnet`, `small` also moves code to `haiku`, and both run panels on `sonnet, haiku`, so they spend fewer tokens.",
       },
       {

@@ -21,7 +21,7 @@ Use the native Agent tool when authorized, with the configured supported aliases
 
 ## Phase C: Cross-judge
 
-Wait until all candidates finish writing. Choose one judge from the ordered `arena cross-judge pool` only when an authorized, supported model from a different family than the parent's is actually available. Inherited and same-family entries never judge. Claude aliases select models within one family, so a second Claude alias does not satisfy this requirement. If no different-family model runs, skip this phase and disclose the limit; do not silently relax the requirement or invent model IDs. If the parent's family cannot be established, disclose that the family check did not run.
+Wait until all candidates finish writing. Choose one judge from the ordered `arena cross-judge pool` only when an authorized, supported model from a different vendor than the parent's is actually available. Inherited and same-vendor entries never judge. Claude aliases select models within one family, so a second Claude alias does not satisfy this requirement. If no different-vendor model runs, skip this phase and disclose the limit; do not silently relax the requirement or invent model IDs. If the parent's vendor cannot be established, disclose that the family check did not run.
 
 The judge is read-only. Its brief contains the rubric and completed artifacts identified only by neutral path labels, without candidate model names, identities, or other candidates' rationales. It scores each criterion and recommends a base with evidence. It runs alongside the parent's reading in Phase D, never while candidates are still writing.
 
@@ -39,4 +39,4 @@ Verify the synthesized artifact against the task's acceptance checks. If proof e
 
 ## Outputs
 
-Report the selected base, rubric scores, cross-judge result or explicit skip, grafts and rejected alternatives, convergence or dropped candidates, and concrete verification evidence. State when delegation, runtime proof, or different-family review was unavailable.
+Report the selected base, rubric scores, cross-judge result or explicit skip, grafts and rejected alternatives, convergence or dropped candidates, and concrete verification evidence. State when delegation, runtime proof, or different-vendor review was unavailable.
