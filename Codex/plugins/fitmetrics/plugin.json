@@ -1,0 +1,36 @@
+{
+  "name": "fitmetrics",
+  "version": "1.0.0-codex.1",
+  "description": "Review Trainerize clients and check-ins, and update macros, messages, and programs.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://app.fitmetrics.ai/docs/faq/connect-ai-tools-to-fitmetrics-via-mcp-claude-chatgpt-openclaw-more",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "fitmetrics",
+    "trainerize",
+    "abc fitness",
+    "coaching",
+    "fitness",
+    "nutrition",
+    "workouts",
+    "check-ins",
+    "mcp"
+  ],
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "FitMetrics",
+        "shortDescription": "Review Trainerize clients and check-ins, and update macros, messages, and programs.",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Productivity",
+        "logo": "./assets/logo.svg"
+      },
+      "onboardingSkill": "./skills/setup-fitmetrics/SKILL.md"
+    }
+  }
+}

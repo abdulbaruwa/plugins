@@ -1,0 +1,34 @@
+{
+  "name": "databricks-genie",
+  "description": "Ask Databricks Genie questions about your workspace's data in plain language.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://github.com/cursor/plugins/tree/main/third_party/databricks-genie",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "databricks",
+    "genie",
+    "data",
+    "analytics",
+    "sql",
+    "lakehouse",
+    "mcp"
+  ],
+  "version": "1.1.0-codex.1",
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Databricks Genie",
+        "shortDescription": "Ask Databricks Genie questions about your workspace's data in plain language.",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Productivity",
+        "logo": "./assets/logo.png"
+      },
+      "onboardingSkill": "./skills/setup-databricks-genie/SKILL.md"
+    }
+  }
+}

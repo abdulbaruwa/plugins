@@ -209,7 +209,7 @@
       "name": "pstack",
       "source": "./plugins/pstack",
       "description": "if you want to go fast, go deep first. pstack helps you write less, but higher quality code. rigorous agent workflows you can parallelize with confidence.",
-      "version": "0.15.32+claude.9db44401",
+      "version": "0.15.42+claude.dc210059",
       "author": {
         "name": "Lauren Tan"
       },
@@ -1344,7 +1344,7 @@
       "name": "lark",
       "source": "./third_party/lark",
       "description": "Search, create, and update Lark Suite docs, and read Lark messages and groups.",
-      "version": "1.0.0+claude.f8b28f36",
+      "version": "1.0.0+claude.2fef9584",
       "author": {
         "name": "Cursor",
         "email": "plugins@cursor.com"
@@ -1375,20 +1375,171 @@
       ]
     },
     {
-      "name": "framer",
-      "source": "./third_party/framer",
-      "description": "Design, build, and edit your Framer sites, pages, and CMS content.",
-      "version": "1.0.0+claude.8d66a8e8",
+      "name": "ringcentral-phone",
+      "source": "./third_party/ringcentral-phone",
+      "description": "Read call activity, AI call notes, SMS, voicemail, and fax, and send SMS.",
+      "version": "1.1.0+claude.2c96b147",
       "author": {
         "name": "Cursor",
         "email": "plugins@cursor.com"
       },
       "category": "integrations",
       "tags": [
-        "framer",
-        "design",
-        "website",
-        "cms",
+        "ringcentral",
+        "phone",
+        "communications",
+        "mcp"
+      ]
+    },
+    {
+      "name": "ringcentral-chat",
+      "source": "./third_party/ringcentral-chat",
+      "description": "Read team chats and posts, send messages, and manage teams, tasks, and notes.",
+      "version": "1.0.0+claude.ee766245",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "ringcentral",
+        "chat",
+        "communications",
+        "mcp"
+      ]
+    },
+    {
+      "name": "rippling",
+      "source": "./third_party/rippling",
+      "description": "Look up people, time off, and company policy in Rippling, and file time-off requests and draft hires.",
+      "version": "1.0.0+claude.f026e023",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "rippling",
+        "hr",
+        "mcp"
+      ]
+    },
+    {
+      "name": "questrade",
+      "source": "./third_party/questrade",
+      "description": "Read your Questrade portfolio, get live market data, and discuss potential trades.",
+      "version": "1.0.0+claude.67842317",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "questrade",
+        "finance",
+        "trading",
+        "mcp"
+      ]
+    },
+    {
+      "name": "fitmetrics",
+      "source": "./third_party/fitmetrics",
+      "description": "Review Trainerize clients and check-ins, and update macros, messages, and programs.",
+      "version": "1.0.0+claude.0d57c330",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "fitmetrics",
+        "fitness",
+        "coaching",
+        "mcp"
+      ]
+    },
+    {
+      "name": "metricool",
+      "source": "./third_party/metricool",
+      "description": "Plan and publish social posts, pull metrics and reports, and manage inbox, reviews, and ads across your Metricool brands.",
+      "version": "1.0.0+claude.10db7005",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "metricool",
+        "social-media",
+        "marketing",
+        "mcp"
+      ]
+    },
+    {
+      "name": "eight-sleep",
+      "source": "./third_party/eight-sleep",
+      "description": "Connect your Eight Sleep account to see your sleep scores, stages and heart metrics, check your Pod's status and temperature settings, and manage your alarms and your side of the Pod, with your approval for each change.",
+      "version": "1.0.0+claude.3559e838",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "eight-sleep",
+        "sleep",
+        "health",
+        "mcp"
+      ]
+    },
+    {
+      "name": "paypal",
+      "source": "./third_party/paypal",
+      "description": "Work with invoices, orders, refunds, subscriptions, disputes, and transactions in PayPal.",
+      "version": "1.0.0+claude.1399cac7",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "paypal",
+        "payments",
+        "commerce",
+        "mcp"
+      ]
+    },
+    {
+      "name": "engine",
+      "source": "./third_party/engine",
+      "description": "Search and book hotels, shorten or cancel stays, and check support cases in Engine.",
+      "version": "1.0.0+claude.22adecb2",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "engine",
+        "travel",
+        "booking",
+        "mcp"
+      ]
+    },
+    {
+      "name": "squarespace",
+      "source": "./third_party/squarespace",
+      "description": "Brainstorm business names and check domain availability, pricing, and checkout links on Squarespace.",
+      "version": "1.0.0+claude.af2f3600",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "squarespace",
+        "domains",
+        "branding",
         "mcp"
       ]
     }

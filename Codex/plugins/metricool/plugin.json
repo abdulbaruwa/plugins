@@ -1,0 +1,35 @@
+{
+  "name": "metricool",
+  "description": "Plan and publish social posts, pull metrics and reports, and manage inbox, reviews, and ads across your Metricool brands.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://help.metricool.com/en/article/how-to-connect-metricools-mcp-1364s63/",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "metricool",
+    "social media",
+    "scheduling",
+    "publishing",
+    "analytics",
+    "reports",
+    "inbox",
+    "ads",
+    "mcp"
+  ],
+  "version": "1.0.0-codex.1",
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Metricool",
+        "shortDescription": "Plan and publish social posts, pull metrics and reports, and manage inbox, reviews, and ads across your Metricool brands.",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Productivity",
+        "logo": "./assets/logo.png"
+      }
+    }
+  }
+}

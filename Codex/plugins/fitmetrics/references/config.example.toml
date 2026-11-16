@@ -1,0 +1,4 @@
+# Manual setup example: set the key securely in the Codex process environment.
+[mcp_servers.fitmetrics]
+url = "https://app.fitmetrics.ai/mcp"
+bearer_token_env_var = "FITMETRICS_API_KEY"

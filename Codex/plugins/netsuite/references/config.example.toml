@@ -1,0 +1,3 @@
+# Setup evidence only: resolve endpoint and qualify native authentication first.
+[mcp_servers.netsuite]
+url = "https://<account-domain>.suitetalk.api.netsuite.com/services/mcp/v1/<selected-service>"

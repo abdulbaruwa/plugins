@@ -1,10 +1,10 @@
 ---
 name: how
-description: "Explain subsystem architecture and runtime flow from code evidence before changing it or onboarding a reader."
+description: "Explain subsystem architecture and runtime flow from code evidence."
 ---
 
 # How
 
-Read ../../references/codex-runtime.md. For a narrow question, trace the relevant entrypoint and explain it directly. For a cross-cutting subsystem, partition into 2 to 4 evidence slices using references/explorer-prompt.md. Delegate when available and authorized, or explore sequentially. Synthesize with references/explainer-prompt.md, checking file pointers and actual runtime paths.
+Read ../../references/codex-runtime.md. State your interpretation of an ambiguous scope. Use one read-only explanation delegate when native delegation is authorized and available; otherwise explore and explain directly. Inherit the parent model and give the delegate the question and code scope. Ask for a senior engineer's architectural explanation sufficient to build a working mental model.
 
-Explain the purpose, core concepts, flow, ownership, and gotchas at the level needed for a working mental model. Mark missing runtime evidence. Use ../why/SKILL.md for historical motivation rather than inferring intent from today's implementation.
+Present the explanation with only light clarity/context edits. Explain purpose, concepts, flow, ownership and gotchas with actual file evidence, and identify missing runtime proof. The preserved native references/explainer-prompt.md and references/explorer-prompt.md are optional aids; they do not mandate the retired multi-stage fan-out. Use ../why/SKILL.md for motivation.

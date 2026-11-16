@@ -1,0 +1,34 @@
+{
+  "name": "fitmetrics",
+  "displayName": "FitMetrics",
+  "version": "1.0.0+claude.0d57c330",
+  "description": "Review Trainerize clients and check-ins, and update macros, messages, and programs.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://app.fitmetrics.ai/docs/faq/connect-ai-tools-to-fitmetrics-via-mcp-claude-chatgpt-openclaw-more",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "fitmetrics",
+    "trainerize",
+    "abc fitness",
+    "coaching",
+    "fitness",
+    "nutrition",
+    "workouts",
+    "check-ins",
+    "mcp"
+  ],
+  "icon": "./assets/logo.svg",
+  "userConfig": {
+    "FITMETRICS_API_KEY": {
+      "type": "string",
+      "title": "FitMetrics API key",
+      "description": "Key from FitMetrics Settings → Integrations → MCP → Create API Key → Other MCP app. Requires the Scale package.",
+      "required": true,
+      "sensitive": true
+    }
+  }
+}

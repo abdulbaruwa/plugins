@@ -1,0 +1,24 @@
+{
+  "name": "squarespace",
+  "displayName": "Squarespace",
+  "version": "1.0.0+claude.af2f3600",
+  "description": "Brainstorm business names and check domain availability, pricing, and checkout links on Squarespace.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://developers.squarespace.com/mcp/overview",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "squarespace",
+    "domains",
+    "domain-search",
+    "naming",
+    "branding",
+    "website",
+    "commerce",
+    "mcp"
+  ],
+  "icon": "./assets/logo.svg"
+}
