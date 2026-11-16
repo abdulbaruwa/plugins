@@ -1,6 +1,8 @@
 """Run the established PR artifact contract against both generated Claude packages."""
 
 import importlib.util
+import json
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -59,3 +61,22 @@ class ClaudeOverrideTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ClaudeDynamicRegistrationTests(unittest.TestCase):
+    def test_dynamic_recipes_do_not_invent_credentials(self):
+        readme = (ROOT / "Claude/README.md").read_text()
+        for name in ("mixpanel", "netsuite"):
+            with self.subTest(provider=name):
+                row = next(line for line in readme.splitlines() if line.startswith(f"| {name} | "))
+                payload = re.search(r"add-json \S+ '([^']+)'", row)
+                self.assertIsNotNone(payload)
+                server = json.loads(payload.group(1))
+                self.assertEqual(server["type"], "http")
+                oauth = server["oauth"]
+                self.assertNotIn("clientId", oauth)
+                self.assertNotIn("clientSecret", oauth)
+                self.assertEqual(oauth["callbackPort"], 8787)
+                self.assertNotIn("--client-secret", row)
+                if name == "netsuite":
+                    self.assertEqual(oauth["scopes"], "mcp")
