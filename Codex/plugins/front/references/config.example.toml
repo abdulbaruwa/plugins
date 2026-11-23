@@ -1,3 +1,0 @@
-# Setup evidence only: resolve endpoint and qualify native authentication first.
-[mcp_servers.front]
-url = "https://mcp.frontapp.com/mcp"

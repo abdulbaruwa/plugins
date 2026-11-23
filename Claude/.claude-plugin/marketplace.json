@@ -209,7 +209,7 @@
       "name": "pstack",
       "source": "./plugins/pstack",
       "description": "if you want to go fast, go deep first. pstack helps you write less, but higher quality code. rigorous agent workflows you can parallelize with confidence.",
-      "version": "0.15.42+claude.dc210059",
+      "version": "0.15.46+claude.28b11507",
       "author": {
         "name": "Lauren Tan"
       },
@@ -1540,6 +1540,177 @@
         "squarespace",
         "domains",
         "branding",
+        "mcp"
+      ]
+    },
+    {
+      "name": "hospitable",
+      "source": "./third_party/hospitable",
+      "description": "Manage short-term rental properties, reservations, calendars, guest messages, tasks, payouts, and owner statements in Hospitable.",
+      "version": "1.0.0+claude.eef7c3fe",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "hospitable",
+        "property-management",
+        "hospitality",
+        "mcp"
+      ]
+    },
+    {
+      "name": "close",
+      "source": "./third_party/close",
+      "description": "Search and update leads, contacts, opportunities, tasks, and conversations in Close.",
+      "version": "1.0.0+claude.673973dd",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "close",
+        "crm",
+        "sales",
+        "mcp"
+      ]
+    },
+    {
+      "name": "factset",
+      "source": "./third_party/factset",
+      "description": "Query FactSet fundamentals, prices, estimates, ownership, and company data.",
+      "version": "1.0.0+claude.f3257776",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "factset",
+        "finance",
+        "mcp"
+      ]
+    },
+    {
+      "name": "rillet",
+      "source": "./third_party/rillet",
+      "description": "Query financial reports and manage customers, invoices, bills, contracts, and vendors in Rillet.",
+      "version": "1.0.0+claude.8c64f620",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "rillet",
+        "finance",
+        "accounting",
+        "mcp"
+      ]
+    },
+    {
+      "name": "item",
+      "source": "./third_party/item",
+      "description": "Search, create, and update CRM contacts, companies, and custom objects, run saved views, manage lists, notes, and tasks, and ask the Item assistant about your customer data.",
+      "version": "1.0.0+claude.8e49b125",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "item",
+        "crm",
+        "sales",
+        "mcp"
+      ]
+    },
+    {
+      "name": "hq",
+      "source": "./third_party/hq",
+      "description": "Read and capture company knowledge, projects, policies, files, and skills, message teammates and bots, and call governed integrations in HQ by Indigo.",
+      "version": "1.0.0+claude.84a186d3",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "hq",
+        "indigo",
+        "knowledge",
+        "mcp"
+      ]
+    },
+    {
+      "name": "createos",
+      "source": "./third_party/createos",
+      "description": "Deploy and manage projects, environments, deployments, domains, logs, cron jobs, security scans, templates, and sandboxes on NodeOps CreateOS.",
+      "version": "1.0.0+claude.34eb0c3a",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "createos",
+        "nodeops",
+        "deployment",
+        "cloud",
+        "mcp"
+      ]
+    },
+    {
+      "name": "fiscal-ai",
+      "source": "./third_party/fiscal-ai",
+      "description": "Pull source-linked financials, filings, ratios, prices, segments, KPIs, ownership, fund letters, and news from Fiscal.ai.",
+      "version": "1.0.0+claude.ab4b23a1",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "fiscal.ai",
+        "finance",
+        "equity research",
+        "mcp"
+      ]
+    },
+    {
+      "name": "lmty",
+      "source": "./third_party/lmty",
+      "description": "Read tracked competitors, competitive intelligence reports, change logs, evidence, social mentions, and market feeds for your products, and browse LMTY's public Markets, event timelines, and company, product, and person profiles.",
+      "version": "1.0.0+claude.1dd65dad",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "lmty",
+        "competitive-intelligence",
+        "market-research",
+        "product-marketing",
+        "mcp"
+      ]
+    },
+    {
+      "name": "sabre-developer-hub",
+      "source": "./third_party/sabre-developer-hub",
+      "description": "Search and read Sabre Developer Hub documentation, OpenAPI specs, and Sabre-published agent skills for travel APIs, SDKs, and product collections.",
+      "version": "1.0.0+claude.5c0f5645",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "sabre",
+        "travel",
+        "documentation",
         "mcp"
       ]
     }

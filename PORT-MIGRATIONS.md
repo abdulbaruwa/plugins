@@ -5,3 +5,11 @@
 - Gong 1.1.0 accepts only HTTPS redirects. Codex setup must stop unless its native callback qualifies; the old Claude localhost manual recipe is excluded. Grok auto-registration is not a native authentication guarantee.
 - Mixpanel setup requires an explicit US/EU/IN residency choice. NetSuite requires an account URL and native client qualification. Runta requires native CIMD support rather than DCR; it is gated in Codex setup and excluded from Claude's automatic/manual connection recipes until qualified.
 - PStack's source Fable/Opus/Gemini matrix and defaults:2 migration are not installed as Codex or Claude model settings. Existing native preferences remain authoritative. How/Why are streamlined; optional Codex research resources remain available. Sharpen still rewrites and stops; prototype recommendations do not authorize execution.
+
+## 23 November 2026
+
+- Front 1.1.1 uses Cursor-supplied OAuth identity and scope. The maintained ports keep native qualification boundaries. The old assertion that every native user must create the former confidential app is retired; no executable native registration recipe is supplied until current provider support is qualified. Existing saved user connections are not changed.
+- Intuit QuickBooks keeps the quickbooks-online package ID while its display name, metadata and logo refresh. Cursor/Grok scheduling and credentials do not establish native runtime support.
+- Expensify and Redo require native registration/redirect qualification; the conditional Claude Redo recipe preserves its allowlisted localhost:8787 callback. CreateOS uses a key supplied through native sensitive configuration; a deployment acceptance response is not deployment completion.
+- Google Search Console, SAP S/4HANA Cloud, Strava and Uber Courier remain excluded where the source supplies a hosted runtime, approved-client credentials or no portable implementation.
+- This repository update installs no plugins and changes no account credentials, client preferences or active services.

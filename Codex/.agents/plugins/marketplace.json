@@ -1130,7 +1130,7 @@
         "installation": "AVAILABLE",
         "authentication": "ON_INSTALL"
       },
-      "category": "Productivity"
+      "category": "Finance"
     },
     {
       "name": "feishu",
@@ -1377,6 +1377,150 @@
       "source": {
         "source": "local",
         "path": "./plugins/runta"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "close",
+      "source": {
+        "source": "local",
+        "path": "./plugins/close"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "factset",
+      "source": {
+        "source": "local",
+        "path": "./plugins/factset"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "fiscal-ai",
+      "source": {
+        "source": "local",
+        "path": "./plugins/fiscal-ai"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "hospitable",
+      "source": {
+        "source": "local",
+        "path": "./plugins/hospitable"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "hq",
+      "source": {
+        "source": "local",
+        "path": "./plugins/hq"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "item",
+      "source": {
+        "source": "local",
+        "path": "./plugins/item"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "lmty",
+      "source": {
+        "source": "local",
+        "path": "./plugins/lmty"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "rillet",
+      "source": {
+        "source": "local",
+        "path": "./plugins/rillet"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "sabre-developer-hub",
+      "source": {
+        "source": "local",
+        "path": "./plugins/sabre-developer-hub"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "createos",
+      "source": {
+        "source": "local",
+        "path": "./plugins/createos"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "expensify",
+      "source": {
+        "source": "local",
+        "path": "./plugins/expensify"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "redo",
+      "source": {
+        "source": "local",
+        "path": "./plugins/redo"
       },
       "policy": {
         "installation": "AVAILABLE",

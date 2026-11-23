@@ -1,0 +1,41 @@
+{
+  "name": "redo",
+  "description": "Look up orders and customers, create and process returns, work support tickets, review marketing campaigns and automations, manage fulfillment and inventory, and build analytics reports in Redo.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://developers.redo.com/docs/mcp-server/introduction",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "redo",
+    "returns",
+    "exchanges",
+    "ecommerce",
+    "shopify",
+    "orders",
+    "customer support",
+    "help desk",
+    "marketing",
+    "fulfillment",
+    "inventory",
+    "analytics",
+    "checkout",
+    "mcp"
+  ],
+  "version": "1.0.0-codex.1",
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Redo",
+        "shortDescription": "Look up orders and customers, create and process returns, work support tickets, review marketing campaigns and automations, manage fulfillment and inv",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Productivity",
+        "logo": "./assets/logo.png"
+      },
+      "onboardingSkill": "./skills/setup-redo/SKILL.md"
+    }
+  }
+}

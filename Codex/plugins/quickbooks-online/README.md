@@ -1,21 +1,7 @@
-# QuickBooks Online for Codex
+# Intuit QuickBooks for Codex
 
-Community adaptation of `third_party/quickbooks-online` at upstream version `1.1.1`. Original authors and MIT license are preserved. This is not an official Cursor or OpenAI distribution.
+Community adaptation of upstream 1.2.0. Original author, assets and license are retained.
 
-Read invoices, bills, expenses, customers, accounts, and financial reports.
+Intuit QuickBooks retains the quickbooks-online package ID. The source relies on Cursor-owned OAuth credentials and Grok Bot scheduling; qualify native own-client registration, redirect and actual tools before connecting. Keep company files isolated. Preview and obtain exact authority for financial writes, invoices, payment links, payroll and transaction imports. US/Canada payment links and account permissions apply. Packaging does not supply Grok scheduling, payroll, imports or financial-action acceptance.
 
-## Scope and proof
-
-Intuit now publishes an MCP endpoint, but upstream relies on Cursor-owned OAuth credentials. Verify a provider-supported Codex OAuth client before setup; no connection is enabled.
-
-Package validation establishes structure only. Authentication, tool availability, and live provider behavior require separate acceptance checks.
-
-## Installation
-
-Register the standalone marketplace with `codex plugin marketplace add <repository-path>/Codex`, then install this package:
-
-```sh
-codex plugin add quickbooks-online@cursor-plugins-codex
-```
-
-Run `$setup-quickbooks-online` to check native endpoint and OAuth registration requirements before connecting.
+No native connection is enabled. Run $setup-quickbooks-online after installation. [Upstream README](references/upstream-readme.md) records source evidence, not accepted native setup.

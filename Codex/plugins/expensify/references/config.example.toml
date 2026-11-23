@@ -1,0 +1,3 @@
+# Qualification only: verify native registration and exact redirect before using.
+[mcp_servers.expensify]
+url = "https://www.expensify.com/mcp"

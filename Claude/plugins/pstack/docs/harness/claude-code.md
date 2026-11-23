@@ -10,6 +10,8 @@ Most pstack skills are explicitly user-invocable. When another skill routes to o
 
 Use the role aliases and budget from `~/.claude/rules/pstack-models.md` when present and the port's stated defaults otherwise. Accepted model aliases are `opus`, `sonnet`, `haiku`, and `fable`; `auto` and `inherit-parent` omit the model field. Pass effort separately only when the Agent tool exposes it. Never create an alias by appending an effort or fast suffix, and do not claim different model families when both reviewers use the same model.
 
+The native `poteto-agent` file uses `model: inherit`; no Cursor slug is registered. Each authorized kickoff starts with the absolute package-local `skills/poteto-mode/worker.md` path and includes the operator's scope, constraints, ownership and evidence requirements. Worker guidance never waives required approvals or honest draft status.
+
 ## Ownership and lifecycle
 
 Use worktree isolation for independent writes and bound concurrency to this machine's capacity. Worktrees share ports, so coordinate application instances. A named source branch is checked out explicitly by its owner; it is not inferred from an upstream default branch. One designated writer owns dependent-branch topology. Preserve the shipping playbook's independent verdicts, exact heads and patch identity, explicit merge authority, and current-trunk landing checks.

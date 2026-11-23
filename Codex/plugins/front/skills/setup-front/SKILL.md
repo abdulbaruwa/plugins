@@ -1,10 +1,10 @@
 ---
 name: setup-front
-description: "Qualify and set up Front for Codex with provider-specific native authentication."
+description: "Qualify native Front registration and authorized tools before setup."
 ---
 
 # Set up Front
 
-An admin must create a confidential Front app with the MCP feature, own client ID and secret, feature:mcp scope and actual native callback. DCR is unsupported. Resource read/write/send permissions are separate; request minimum access and reconnect after permission changes. Confirm exact recipients and content for sends. Distinguish drafts and internal comments, honor inbox/user permissions and rate-limit waits.
+Front 1.1.1 removes credential fields because Cursor now supplies its OAuth client and scope. That does not establish DCR or native registration. Qualify the current provider-supported own-client identity and exact native redirect first; stop without a native recipe if unsupported. Preserve feature:mcp and minimum separate read/write/send permissions, reconnect after permission changes, current teammate/inbox ACLs and rate-limit waits (100/200/300 tools per minute by plan). Drafts and internal comments differ from immediate sends: confirm exact recipients/content before sending.
 
-Read ../../references/upstream-readme.md and ../../references/upstream-mcp.json as source evidence, not executable native configuration. Verify current official native/provider authentication before editing. Use ../../references/config.example.toml only after resolving placeholders and supported settings. Preserve unrelated configuration, keep secrets in the environment or credential store and never print values. Missing registration, identity or authentication support means stop and report incomplete setup. With user authority, test only a scoped read before claiming tools work.
+Read ../../references/upstream-readme.md and ../../references/upstream-mcp.json as source evidence, not active configuration. Preserve unrelated settings, keep credentials in the environment or credential store and never print them. Stop when native identity, callback or entitlement support is unproved. With user authority, test only a scoped read first.

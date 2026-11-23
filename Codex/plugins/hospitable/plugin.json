@@ -1,0 +1,38 @@
+{
+  "name": "hospitable",
+  "description": "Manage short-term rental properties, reservations, calendars, guest messages, tasks, payouts, and owner statements in Hospitable.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://help.hospitable.com/en/articles/14424057-connect-an-ai-agent-to-hospitable-using-mcp",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "hospitable",
+    "short-term rental",
+    "vacation rental",
+    "airbnb",
+    "vrbo",
+    "booking.com",
+    "property management",
+    "reservations",
+    "guest messaging",
+    "calendar",
+    "owner statements",
+    "mcp"
+  ],
+  "version": "1.0.0-codex.1",
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Hospitable",
+        "shortDescription": "Manage short-term rental properties, reservations, calendars, guest messages, tasks, payouts, and owner statements in Hospitable.",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Productivity",
+        "logo": "./assets/logo.png"
+      }
+    }
+  }
+}

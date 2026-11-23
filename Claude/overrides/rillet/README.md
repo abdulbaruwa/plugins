@@ -1,0 +1,5 @@
+# rillet for Claude Code
+
+Qualify native PKCE/DCR with read/write and an accepted HTTPS or localhost redirect; custom-scheme callbacks are rejected. The user chooses the organization and tools follow that role. Reports reflect live ledger data. Preview and obtain exact authority for financial writes, payments, contract changes and irreversible deletes; successful OAuth does not authorize those actions.
+
+Install only from the native marketplace. Native authentication, account entitlements and live behavior remain unverified. The source README linked in the banner records evidence; its Cursor/Grok client assumptions do not transfer.

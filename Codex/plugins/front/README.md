@@ -1,9 +1,7 @@
 # Front for Codex
 
-Community adaptation of upstream 1.0.0 from `third_party/front`. Original authors, assets and MIT license are retained.
+Community adaptation of upstream 1.1.1. Original author, assets and license are retained.
 
-An admin must create a confidential Front app with the MCP feature, own client ID and secret, feature:mcp scope and actual native callback. DCR is unsupported. Resource read/write/send permissions are separate; request minimum access and reconnect after permission changes. Confirm exact recipients and content for sends. Distinguish drafts and internal comments, honor inbox/user permissions and rate-limit waits.
+Front 1.1.1 removes credential fields because Cursor now supplies its OAuth client and scope. That does not establish DCR or native registration. Qualify the current provider-supported own-client identity and exact native redirect first; stop without a native recipe if unsupported. Preserve feature:mcp and minimum separate read/write/send permissions, reconnect after permission changes, current teammate/inbox ACLs and rate-limit waits (100/200/300 tools per minute by plan). Drafts and internal comments differ from immediate sends: confirm exact recipients/content before sending.
 
-Run `$front:setup-front` to complete supported configuration. No connection is enabled by this setup package.
-
-Register `<repository>/Codex` as the marketplace, then install `front@cursor-plugins-codex`. [Upstream README](references/upstream-readme.md) is reference evidence; its client-specific setup instructions do not override the native qualifications above. Provider authentication and live tools are unverified.
+No native connection is enabled. Run $setup-front after installation. [Upstream README](references/upstream-readme.md) records source evidence, not accepted native setup.

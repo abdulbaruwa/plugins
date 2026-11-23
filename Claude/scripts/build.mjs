@@ -266,8 +266,13 @@ function mergeHooks(base, extra) {
 }
 
 function convertMcp(mcp, manifest, settings) {
-  const vars = manifest.variables?.properties ?? {};
-  const required = new Set(manifest.variables?.required ?? []);
+  const sourceVars = manifest.variables?.properties ?? {};
+  const extraVars = settings.mcpVariables?.properties ?? {};
+  for (const name of Object.keys(extraVars)) {
+    if (Object.hasOwn(sourceVars, name)) throw new Error(`${manifest.name}: review the native MCP variable ${name}; upstream now declares it`);
+  }
+  const vars = { ...sourceVars, ...extraVars };
+  const required = new Set([...(manifest.variables?.required ?? []), ...(settings.mcpVariables?.required ?? [])]);
   const servers = {};
   for (const [id, server] of Object.entries(mcp.mcpServers ?? {})) {
     const unknown = Object.keys(server).filter((key) => !MCP_SERVER_KEYS.has(key));
@@ -503,6 +508,7 @@ const cell = (value) => String(value ?? "").replace(/\r?\n/g, " ").replace(/\|/g
 const row = (cells) => `| ${cells.map(cell).join(" | ")} |`;
 
 function manualMcpRecipe(name, spec) {
+  if (spec.registration === "qualification-only") return "No command: qualify native client registration and redirect support first.";
   const mcp = readJson(path.join(repoRoot, "third_party", name, "mcp.json"));
   const [[id, server]] = Object.entries(mcp.mcpServers);
   const url = (spec.url ?? server.url).replace(/\$\{([A-Z_]+)[^}]*\}/g, (_, v) => `<${v.toLowerCase().replace(/_/g, "-")}>`);

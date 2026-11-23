@@ -1,6 +1,6 @@
 # Claude Code port
 
-Claude Code versions of the Cursor plugins in this repository, as one marketplace: **16** workflow plugins and **75** MCP integrations.
+Claude Code versions of the Cursor plugins in this repository, as one marketplace: **16** workflow plugins and **85** MCP integrations.
 
 > [!IMPORTANT]
 > Everything in `plugins/`, `third_party/`, `.claude-plugin/`, and this README is generated. To change a plugin, edit [`scripts/port.config.mjs`](scripts/port.config.mjs) or add a file under [`overrides/<plugin>/`](overrides/), then rebuild.
@@ -174,6 +174,16 @@ OAuth servers may sign in through `/mcp`; plugins with a required token prompt f
 | [PayPal](third_party/paypal/) | Work with invoices, orders, refunds, subscriptions, disputes, and transactions in PayPal. | — |
 | [Engine](third_party/engine/) | Search and book hotels, shorten or cancel stays, and check support cases in Engine. | — |
 | [Squarespace](third_party/squarespace/) | Brainstorm business names and check domain availability, pricing, and checkout links on Squarespace. | — |
+| [Hospitable](third_party/hospitable/) | Manage short-term rental properties, reservations, calendars, guest messages, tasks, payouts, and owner statements in Hospitable. | — |
+| [Close](third_party/close/) | Search and update leads, contacts, opportunities, tasks, and conversations in Close. | — |
+| [FactSet](third_party/factset/) | Query FactSet fundamentals, prices, estimates, ownership, and company data. | — |
+| [Rillet](third_party/rillet/) | Query financial reports and manage customers, invoices, bills, contracts, and vendors in Rillet. | — |
+| [Item](third_party/item/) | Search, create, and update CRM contacts, companies, and custom objects, run saved views, manage lists, notes, and tasks, and ask the Item assistant about your customer data. | — |
+| [HQ](third_party/hq/) | Read and capture company knowledge, projects, policies, files, and skills, message teammates and bots, and call governed integrations in HQ by Indigo. | — |
+| [CreateOS](third_party/createos/) | Deploy and manage projects, environments, deployments, domains, logs, cron jobs, security scans, templates, and sandboxes on NodeOps CreateOS. | `CREATEOS_API_KEY` |
+| [Fiscal.ai](third_party/fiscal-ai/) | Pull source-linked financials, filings, ratios, prices, segments, KPIs, ownership, fund letters, and news from Fiscal.ai. | — |
+| [LMTY](third_party/lmty/) | Read tracked competitors, competitive intelligence reports, change logs, evidence, social mentions, and market feeds for your products, and browse LMTY's public Markets, event timelines, and company, product, and person profiles. | — |
+| [Sabre Developer Hub](third_party/sabre-developer-hub/) | Search and read Sabre Developer Hub documentation, OpenAPI specs, and Sabre-published agent skills for travel APIs, SDKs, and product collections. | — |
 
 ## Add these servers yourself
 
@@ -181,7 +191,9 @@ These servers require provider-specific endpoint, registration, redirect, or sec
 
 | Server | Why | Command |
 | --- | --- | --- |
-| front | An administrator creates a confidential Front app with the MCP feature, own client ID/secret, feature:mcp scope and the native redirect. Read/write/send permissions are separate; request minimum access and reconnect after permissions change. Preview exact recipients/content before sending. | `claude mcp add-json front '{"type":"http","url":"https://mcp.frontapp.com/mcp","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"feature:mcp"}}' --client-secret` |
+| front | Front 1.1.1 removes credential fields because Cursor now supplies its OAuth client and scope. This does not establish DCR or a native client. Qualify current provider-supported registration and exact native redirect before proceeding; no command is supplied meanwhile. Preserve feature:mcp, separate read/write/send permissions, reconnect after permission changes, teammate/inbox ACLs and rate limits. Confirm exact recipients/content before sending. | `No command: qualify native client registration and redirect support first.` |
+| expensify | Source availability is labeled Grok-only despite a first-party PKCE/DCR endpoint. Qualify actual Claude Code registration, redirect and tool access before using this conditional template. Search expenses/reports within approval/admin permissions only; no submissions, approvals, edits, cards or money movement. | `claude mcp add-json expensify '{"type":"http","url":"https://www.expensify.com/mcp","oauth":{"callbackPort":8787,"scopes":"mcp:tools"}}'` |
+| redo | DCR permits only allowlisted redirects; the source explicitly includes http://localhost:8787/callback. Use this fixed-port conditional template only after actual native registration is qualified. Preserve store permissions, ready-state return drafts, async polling, non-idempotent analytics quotas, expectedRevision, risk acknowledgements, confirmLiveChange, shipping quote/idempotency and human-entered secrets. Sanitized feedback requires user permission. | `claude mcp add-json redo '{"type":"http","url":"https://mcp.getredo.com/mcp","oauth":{"callbackPort":8787}}'` |
 | mixpanel | Select the organization's US (mcp.mixpanel.com), EU (mcp-eu.mixpanel.com), or IN (mcp-in.mixpanel.com) host; never infer or switch residency. Provider supports PKCE/DCR, so omit explicit client credentials when supported by the actual native connection. Org admin MCP enablement, project permissions and query limits apply. | `claude mcp add-json mixpanel '{"type":"http","url":"https://<selected-region-host>/mcp","oauth":{"callbackPort":8787}}'` |
 | netsuite | Use the authorized account-specific AI Connector Service URL, /all or the exact SuiteApp suffix. Verify native DCR client identity/redirect and only the mcp scope. Admin must enable SuiteScript/OAuth and the integration, install tools and assign a dedicated non-admin role with MCP/ACL permissions. Preserve ePHI exclusion; no endpoint or native registration is assumed. | `claude mcp add-json netsuite '{"type":"http","url":"<netsuite-mcp-url>","oauth":{"callbackPort":8787,"scopes":"mcp"}}'` |
 | servicenow | Requires an active instance MCP server, its exact server name, and your own authorization-code OAuth client with a secret, JWT token format and mcp_server scope. Register the native redirect, verify sn_mcp_server.viewer plus tool ACLs, and preserve the documented 26 KB request/64 KB response limits. | `claude mcp add-json servicenow '{"type":"http","url":"https://<servicenow-host>/sncapps/mcp-server/mcp/<servicenow-mcp-server>","oauth":{"clientId":"<your-client-id>","callbackPort":8787,"scopes":"mcp_server"}}' --client-secret` |
@@ -204,6 +216,10 @@ These servers require provider-specific endpoint, registration, redirect, or sec
 
 | Plugin | Reason |
 | --- | --- |
+| google-search-console | The MCP server is Cursor's hosted proxy (`api.cursor.com/rest-mcp`), which needs a Cursor account. |
+| uber-courier | Cursor REST proxy plus Grok registration; no portable native booking implementation is supplied. |
+| sap-s4hana-cloud | Cursor hosts this connector and supplies no endpoint or implementation. Do not request communication-user credentials for an unavailable native connector. |
+| strava | Only approved clients are accepted; Grok holds app credentials and performs token exchange. No supported native registration is supplied. |
 | google-analytics | The MCP server is Cursor's hosted proxy (`api.cursor.com/rest-mcp`), which needs a Cursor account. |
 | gong | Gong 1.1.0 requires HTTPS redirects; this port's localhost OAuth recipe cannot satisfy that requirement. Grok auto-registration does not establish Claude Code support. |
 | runta | Runta requires Client ID Metadata Documents, not DCR. Native Claude Code client metadata and consent support have not been qualified; no automatic connection is exposed. |

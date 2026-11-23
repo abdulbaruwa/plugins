@@ -1,0 +1,30 @@
+{
+  "name": "lmty",
+  "displayName": "LMTY",
+  "version": "1.0.0+claude.1dd65dad",
+  "description": "Read tracked competitors, competitive intelligence reports, change logs, evidence, social mentions, and market feeds for your products, and browse LMTY's public Markets, event timelines, and company, product, and person profiles.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://lmty.dev/market-analyst",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "lmty",
+    "competitive intelligence",
+    "competitor tracking",
+    "competitor monitoring",
+    "market research",
+    "market analyst",
+    "battlecards",
+    "positioning",
+    "pricing",
+    "social listening",
+    "share of voice",
+    "go-to-market",
+    "product marketing",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png"
+}

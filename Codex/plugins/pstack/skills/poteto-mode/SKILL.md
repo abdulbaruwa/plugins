@@ -12,3 +12,5 @@ Route design questions to ../architect/SKILL.md, runtime questions to ../how/SKI
 Choose autopilot-full only with merge authority, autopilot-stack when the user lands the PRs, and orchestrate for a standing program with native workers and durable evidence. Interrogate is an explicit adversarial review workflow, not a mandatory ceremony for every PR.
 
 Delegate independent passes only when available and authorized. Parent intelligence is the default; no Cursor model matrix is installed. Progress within existing authorization, preserve unrelated work, and stop at the user's actual gates. A native goal or automation requires an explicit request. Return the result, evidence, remaining limitations, and the principles that changed a specific choice.
+
+Before starting a worker, resolve this skill folder's absolute path. Begin its brief with `Read <absolute skill folder>/worker.md before starting the task.` Then give a standalone goal, scope, file ownership, acceptance criteria, and evidence requirements. A worker brief cannot waive higher-priority instructions or the user's approval and shipping gates.
