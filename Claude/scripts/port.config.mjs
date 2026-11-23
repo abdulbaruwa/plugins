@@ -573,6 +573,11 @@ export const PLUGINS = {
             "replace": "model: inherit"
       },
       {
+            "file": "skills/poteto-mode/playbooks/autopilot-full.md",
+            "find": "Where that playbook says to report a rebase, the owner rebases its own branch and publishes it with `git push --force-with-lease`.",
+            "replace": "Report conflicts to the designated topology writer. A rebase or history rewrite needs the operator's actual authority; only that writer may publish it, preserving the exact last-pushed SHA lease and unknown-push stop below. This playbook grants no extra rewrite or merge authority."
+      },
+      {
             "file": "skills/poteto-mode/SKILL.md",
             "find": "The operator's rules live in skills that only load from a slash command, so they reach another agent no other way. Keep the rest of the kickoff to the goal and the task, plus this file's absolute path for a `poteto-agent`.",
             "replace": "Resolve that path from this installed package. Include the goal, exclusive write scope, operator constraints, required proof, prohibited actions and this file's absolute path in the kickoff. The worker file supplements the current instruction hierarchy and never overrides it."
