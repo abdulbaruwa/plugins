@@ -1,0 +1,5 @@
+# Easyship for Claude Code
+
+Qualify native PKCE/DCR and the actual redirect. Calls follow the signed-in user, account permissions and consent. Label purchase can occur in create_label, create_shipment or update_shipment and charges the account. Offer a draft shipment/rate review first and confirm the exact shipment, rate and purchase authority. Before delete_shipment, cancel_shipment or cancel_pickup, confirm ID and current status. With authority, list_shipments is a read smoke test; no purchase is part of setup.
+
+Install from the native marketplace; actual native registration, entitlements and live behavior remain unverified. The source README linked in the banner records upstream evidence, not an executable Cursor/Grok setup flow.

@@ -44,3 +44,7 @@ A DM needs authority for the exact recipient and text. Send only with the native
 Use only supported authenticated Chat tools. Follow returned cursors through short or empty pages; unread paging stops at the recorded boundary, and a page size is not an end marker. Listing or opening a message request is distinct from accepting it or marking messages read; do not silently perform those writes. Never request pasted Chat PINs, tokens, or keys, use Grok credential files, or assume a proprietary secret-request helper exists.
 
 Developer/billing scopes in the source do not authorize purchases, credit changes, application changes, or other writes. Require the user's concrete authority and current provider cost evidence. Upstream Grok free-tool and built-in public-read statements do not transfer to Codex.
+
+## Encrypted-send metadata
+
+When the supported native encrypted-payload facility supplies `xdk_version` and the actual `send_chat_message` schema accepts or requires it, pass that supplied value unchanged on every authorized send, including replies, reactions, edits and media. Never invent it from a helper/package minimum version. A missing required version or unsupported encryption facility is a capability gap: offer a draft. The Grok helper clone, reset, dependency installation and venv-swap routines in upstream 2.11.2 remain inapplicable.

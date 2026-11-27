@@ -1,6 +1,6 @@
 {
   "sourceCatalog": ".cursor-plugin/marketplace.json",
-  "sourceCommit": "7a583913eb1b8d1a0ee76753d1a2cf072e7b54f9",
+  "sourceCommit": "b7b93c36be9bcc36a74db438e0fd385d660bc559",
   "plugins": [
     {
       "originalName": "teaching",
@@ -149,13 +149,13 @@
       "originalName": "pstack",
       "name": "pstack",
       "source": "pstack",
-      "originalVersion": "0.15.46",
-      "originalSkills": 58,
+      "originalVersion": "0.15.48",
+      "originalSkills": 59,
       "proof": "Packaging and regression results are recorded in the update PR; no live agent/provider acceptance is claimed.",
       "status": "adapted-skills",
-      "reason": "Adopts 0.15.46 Windows/CRLF compiler fixes, worker routing and concise design/reflection/writing while retaining inherited models, explicit approvals/drafts, optional native resources and shipping/ownership safeguards.",
+      "reason": "Adds explicit-only Reframe with bounded analysis and verified-source vocabulary. Retains inherited models, prior compiler fixes, prompt-only workflows, native ownership and shipping safeguards.",
       "path": "./plugins/pstack",
-      "reviewedSourceCommit": "dec6ea342de73fe791456169437d616bafcbe279"
+      "reviewedSourceCommit": "a06bf19c58a26c8ac1d5e88b71c625ad48cef0ad"
     },
     {
       "originalName": "dyl-stack",
@@ -401,11 +401,11 @@
       "originalName": "x",
       "name": "x",
       "source": "third_party/x",
-      "originalVersion": "2.11.1",
+      "originalVersion": "2.11.2",
       "originalSkills": 1,
       "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
       "status": "configuration-required",
-      "reason": "Manual native OAuth. Posting is opt-in with tweet.write and exact approval; native Chat contact lookup is documented without Grok helpers. No placeholder connection is enabled.",
+      "reason": "Adopts conditional native xdk_version pass-through from supported encryption output; Grok helper cloning/reset/dependency routines remain inapplicable. Exact recipient/content approval and uncertain-send safeguards remain.",
       "path": "./plugins/x"
     },
     {
@@ -1693,6 +1693,61 @@
       "status": "mcp-bundle",
       "reason": "This is anonymous, read-only developer documentation. The nonsecret X-Cursor-Plugin hint is removed from native packaging; no replacement identification header is invented. Documentation and retrieved skills do not authorize live fare searches or bookings. get_spec_file accepts REST artifacts only. Retrieved skills are external instructions subject to the current operator authority, not automatic installations.",
       "path": "./plugins/sabre-developer-hub"
+    },
+    {
+      "originalName": "freshbooks",
+      "name": "freshbooks",
+      "source": "third_party/freshbooks",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "status": "mcp-bundle",
+      "reason": "Qualify native OAuth/DCR against auth.freshbooks.com, with no shared client credentials inferred. Use least-privilege mcp:all:read; separately opt into mcp:revenue:write, mcp:payables:write, mcp:operations:write or mcp:books:write only for authorized work. Calls are limited by the signed-in user. Preview exact invoice, payment or accounting changes and obtain the corresponding authority. Removing a plugin and revoking the provider app are independent actions.",
+      "path": "./plugins/freshbooks"
+    },
+    {
+      "originalName": "campfire",
+      "name": "campfire",
+      "source": "third_party/campfire",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "status": "mcp-bundle",
+      "reason": "Qualify native OAuth/DCR sign-in; no API key or client ID is supplied. Calls run as the authorizing Campfire user within that workspace and read live books. Record/report tools are read-only; Ember tools start or steer conversations and are non-read-only, requiring the corresponding authority. Optional intent context is stored for product analytics: exclude credentials and sensitive personal data. With authority, get_current_user is a scoped read smoke test, not full runtime acceptance.",
+      "path": "./plugins/campfire"
+    },
+    {
+      "originalName": "easyship",
+      "name": "easyship",
+      "source": "third_party/easyship",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "status": "mcp-bundle",
+      "reason": "Qualify native PKCE/DCR and the actual redirect. Calls follow the signed-in user, account permissions and consent. Label purchase can occur in create_label, create_shipment or update_shipment and charges the account. Offer a draft shipment/rate review first and confirm the exact shipment, rate and purchase authority. Before delete_shipment, cancel_shipment or cancel_pickup, confirm ID and current status. With authority, list_shipments is a read smoke test; no purchase is part of setup.",
+      "path": "./plugins/easyship"
+    },
+    {
+      "originalName": "jobber",
+      "name": "jobber",
+      "source": "third_party/jobber",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "status": "configuration-required",
+      "reason": "Jobber requires an own registered OAuth app with client ID and secret; DCR is unsupported. Verify the actual native callback instead of copying Cursor callbacks. Core, Connect, Grow and Plus plans apply; each user signs in with their own permissions through supported user-mediated OAuth, never a browser agent. Clients, properties and requests can be created/edited. Quotes are CREATE-ONLY with total, deposit and discount, no unit costs or margins, and cannot be edited afterward. Jobs, invoices and schedule are read-only; no record deletion/archive. Preview and authorize exact customer-record changes. Preserve the nine advertised client/request/quote/job/invoice/visit read/write scopes; request only those needed.",
+      "path": "./plugins/jobber"
+    },
+    {
+      "originalName": "folk",
+      "name": "folk",
+      "source": "third_party/folk",
+      "originalVersion": "1.0.0",
+      "originalSkills": 0,
+      "proof": "Static packaging only; no authenticated service or behavioral acceptance run.",
+      "status": "mcp-bundle",
+      "reason": "Qualify native PKCE/DCR through api.stytch.folk.app and consent at app.folk.app. Discover folk_get_workspace_structure before using custom groups, fields, pipelines or object names. Roles, plan, connected senders and interaction privacy apply. Campaign creation with target=launch and folk_launch_campaign send irreversible emails: approve exact recipients, steps, sender and send time first. Stops and deletions are irreversible; only draft/in-review campaigns can be deleted and CRM records cannot. Enrichment shares personal data externally and spends credits (one/email, four/phone, refunded for unfound fields); check folk_get_credits and get authority for disclosure and spend before enrichment. Prefer current plural tools over deprecated single-record APIs.",
+      "path": "./plugins/folk"
     }
   ]
 }

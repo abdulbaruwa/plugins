@@ -1,0 +1,25 @@
+{
+  "name": "campfire",
+  "displayName": "Campfire",
+  "version": "1.0.0+claude.f171fbbc",
+  "description": "Pull financial statements, ledgers, AR/AP, revenue recognition, and close status, and ask Ember about your books.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://github.com/cursor/plugins/tree/main/third_party/campfire",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "campfire",
+    "erp",
+    "accounting",
+    "general-ledger",
+    "financial-statements",
+    "revenue-recognition",
+    "month-end-close",
+    "finance",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png"
+}

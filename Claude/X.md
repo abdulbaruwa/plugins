@@ -2,7 +2,7 @@
 
 X remains a manual connection. Use the [marketplace's X template](README.md#add-these-servers-yourself) only after confirming the provider supports your native OAuth client and redirect. Use your own supported client registration. Do not copy the Cursor client ID, assume dynamic registration works, or paste a token into chat or a config file.
 
-The template requests `tweet.read` and `users.read`. Add only the scopes the user needs. Upstream 2.11.1 documents `tweet.write` for posting; get the user's agreement before requesting it and reconnect through the supported OAuth flow. A scope grant does not approve a post. Verify the account, tool availability, and current costs for the actual connection. Grok public reads, credits, Chat enrollment, helpers, and approval cards do not transfer.
+The template requests `tweet.read` and `users.read`. Add only the scopes the user needs. Upstream 2.11.2 documents `tweet.write` for posting; get the user's agreement before requesting it and reconnect through the supported OAuth flow. A scope grant does not approve a post. Verify the account, tool availability, and current costs for the actual connection. Grok public reads, credits, Chat enrollment, helpers, and approval cards do not transfer.
 
 ## Post or edit
 
@@ -20,3 +20,7 @@ Send only with the connected native `send_chat_message` tool, supported encrypte
 ## Other updated tool guidance
 
 For a failed read, honor a returned rate-limit reset or use bounded server-error backoff within the authorized budget. Do not repeat a write on that basis. For authorized livestream source creation, choose the nearest appropriate supported region. Source IDs may be stream keys; refer to sources by name and do not disclose keys except for explicitly requested encoder setup. Check for an existing source before retrying creation, and read the current schedule before updating it so unchanged fields are retained.
+
+## Encrypted-send metadata
+
+When the supported native encrypted-payload facility supplies `xdk_version` and the actual `send_chat_message` schema accepts or requires it, pass that supplied value unchanged on every authorized send, including replies, reactions, edits and media. Never invent it from a helper/package minimum version. A missing required version or unsupported encryption facility is a capability gap: offer a draft. The Grok helper clone, reset, dependency installation and venv-swap routines in upstream 2.11.2 remain inapplicable.

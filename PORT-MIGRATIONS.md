@@ -13,3 +13,7 @@
 - Expensify and Redo require native registration/redirect qualification; the conditional Claude Redo recipe preserves its allowlisted localhost:8787 callback. CreateOS uses a key supplied through native sensitive configuration; a deployment acceptance response is not deployment completion.
 - Google Search Console, SAP S/4HANA Cloud, Strava and Uber Courier remain excluded where the source supplies a hosted runtime, approved-client credentials or no portable implementation.
 - This repository update installs no plugins and changes no account credentials, client preferences or active services.
+
+## 27 November 2026
+
+Jobber returns as a setup-only Codex package and manual Claude recipe. It now supports properties editing, but quotes remain create-only with no unit costs or margins, and jobs/invoices/schedule remain read-only. No saved credentials or connections are restored automatically. Nooks was added and reverted upstream; no native package is exposed for it. X retains native encryption boundaries and installs no Grok helper.

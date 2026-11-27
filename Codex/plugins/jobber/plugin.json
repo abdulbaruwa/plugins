@@ -1,0 +1,36 @@
+{
+  "name": "jobber",
+  "description": "Look up clients, quotes, jobs, visits, and invoices, and create clients, requests, and quotes.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://help.getjobber.com/en/articles/connect-jobber-to-claude-and-chatgpt/",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "jobber",
+    "field-service",
+    "home-services",
+    "clients",
+    "quotes",
+    "jobs",
+    "invoices",
+    "scheduling",
+    "mcp"
+  ],
+  "version": "1.0.0-codex.1",
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Jobber",
+        "shortDescription": "Look up clients, quotes, jobs, visits, and invoices, and create clients, requests, and quotes.",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Productivity",
+        "logo": "./assets/logo.png"
+      },
+      "onboardingSkill": "./skills/setup-jobber/SKILL.md"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+# Campfire for Claude Code
+
+Qualify native OAuth/DCR sign-in; no API key or client ID is supplied. Calls run as the authorizing Campfire user within that workspace and read live books. Record/report tools are read-only; Ember tools start or steer conversations and are non-read-only, requiring the corresponding authority. Optional intent context is stored for product analytics: exclude credentials and sensitive personal data. With authority, get_current_user is a scoped read smoke test, not full runtime acceptance.
+
+Install from the native marketplace; actual native registration, entitlements and live behavior remain unverified. The source README linked in the banner records upstream evidence, not an executable Cursor/Grok setup flow.

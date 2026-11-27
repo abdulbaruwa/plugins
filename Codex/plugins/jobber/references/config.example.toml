@@ -1,0 +1,3 @@
+# Manual qualification: verify own-client registration, secret handling and actual native redirect.
+[mcp_servers.jobber]
+url = "https://mcp.getjobber.com/mcp"
