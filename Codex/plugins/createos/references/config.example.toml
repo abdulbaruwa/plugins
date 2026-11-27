@@ -1,0 +1,4 @@
+# Manual only: supply the key in the native process environment, never in this file.
+[mcp_servers.createos]
+url = "https://api-createos.nodeops.network/mcp"
+env_http_headers = { "X-Api-Key" = "CREATEOS_API_KEY" }

@@ -1,0 +1,3 @@
+# Setup evidence only: resolve endpoint and qualify native authentication first.
+[mcp_servers.databricks-genie]
+url = "https://<databricks-host>/ai-gateway/mcp-services/system.ai.genie_one_mcp"

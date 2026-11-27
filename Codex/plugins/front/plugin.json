@@ -1,0 +1,34 @@
+{
+  "name": "front",
+  "description": "Search conversations, draft and send replies, and manage tags, tasks, and inboxes.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://dev.frontapp.com/docs/mcp-server",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "front",
+    "frontapp",
+    "mcp",
+    "inbox",
+    "customer support",
+    "email",
+    "conversations"
+  ],
+  "version": "1.1.1-codex.1",
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Front",
+        "shortDescription": "Search conversations, draft and send replies, and manage tags, tasks, and inboxes.",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Productivity",
+        "logo": "./assets/logo.png"
+      },
+      "onboardingSkill": "./skills/setup-front/SKILL.md"
+    }
+  }
+}

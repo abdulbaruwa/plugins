@@ -1,0 +1,32 @@
+{
+  "name": "ringcentral-phone",
+  "description": "Read call activity, AI call notes, SMS, voicemail, and fax, and send SMS.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://www.ringcentral.com",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "ringcentral",
+    "ringcentral phone",
+    "phone",
+    "calls",
+    "sms",
+    "mcp"
+  ],
+  "version": "1.1.0-codex.1",
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "RingCentral Phone",
+        "shortDescription": "Read call activity, AI call notes, SMS, voicemail, and fax, and send SMS.",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Productivity",
+        "logo": "./assets/logo.png"
+      }
+    }
+  }
+}

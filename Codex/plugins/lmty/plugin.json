@@ -1,0 +1,40 @@
+{
+  "name": "lmty",
+  "description": "Read tracked competitors, competitive intelligence reports, change logs, evidence, social mentions, and market feeds for your products, and browse LMTY's public Markets, event timelines, and company, product, and person profiles.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://lmty.dev/market-analyst",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "lmty",
+    "competitive intelligence",
+    "competitor tracking",
+    "competitor monitoring",
+    "market research",
+    "market analyst",
+    "battlecards",
+    "positioning",
+    "pricing",
+    "social listening",
+    "share of voice",
+    "go-to-market",
+    "product marketing",
+    "mcp"
+  ],
+  "version": "1.0.0-codex.1",
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "LMTY",
+        "shortDescription": "Read tracked competitors, competitive intelligence reports, change logs, evidence, social mentions, and market feeds for your products, and browse LMT",
+        "developerName": "Cursor (community Codex port)",
+        "category": "Productivity",
+        "logo": "./assets/logo.png"
+      }
+    }
+  }
+}

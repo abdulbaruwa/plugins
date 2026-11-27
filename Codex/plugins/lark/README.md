@@ -17,3 +17,5 @@ Register the standalone marketplace with `codex plugin marketplace add <reposito
 ```sh
 codex plugin add lark@cursor-plugins-codex
 ```
+
+Lark Base/Bitable is a separate source integration backed by Cursor's hosted proxy. It is excluded from this native marketplace; this package retains Lark's own docs/messages endpoint.

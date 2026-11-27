@@ -1,6 +1,8 @@
 {
-  "quickbooks-online": {
-    "type": "http",
-    "url": "https://mcp-e2e.quickbooks.intuit.com/mcp"
+  "mcpServers": {
+    "quickbooks-online": {
+      "type": "http",
+      "url": "https://mcp-e2e.quickbooks.intuit.com/mcp"
+    }
   }
 }

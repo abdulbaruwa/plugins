@@ -266,8 +266,13 @@ function mergeHooks(base, extra) {
 }
 
 function convertMcp(mcp, manifest, settings) {
-  const vars = manifest.variables?.properties ?? {};
-  const required = new Set(manifest.variables?.required ?? []);
+  const sourceVars = manifest.variables?.properties ?? {};
+  const extraVars = settings.mcpVariables?.properties ?? {};
+  for (const name of Object.keys(extraVars)) {
+    if (Object.hasOwn(sourceVars, name)) throw new Error(`${manifest.name}: review the native MCP variable ${name}; upstream now declares it`);
+  }
+  const vars = { ...sourceVars, ...extraVars };
+  const required = new Set([...(manifest.variables?.required ?? []), ...(settings.mcpVariables?.required ?? [])]);
   const servers = {};
   for (const [id, server] of Object.entries(mcp.mcpServers ?? {})) {
     const unknown = Object.keys(server).filter((key) => !MCP_SERVER_KEYS.has(key));
@@ -503,14 +508,24 @@ const cell = (value) => String(value ?? "").replace(/\r?\n/g, " ").replace(/\|/g
 const row = (cells) => `| ${cells.map(cell).join(" | ")} |`;
 
 function manualMcpRecipe(name, spec) {
+  if (spec.registration === "qualification-only") return "No command: qualify native client registration and redirect support first.";
   const mcp = readJson(path.join(repoRoot, "third_party", name, "mcp.json"));
   const [[id, server]] = Object.entries(mcp.mcpServers);
   const url = (spec.url ?? server.url).replace(/\$\{([A-Z_]+)[^}]*\}/g, (_, v) => `<${v.toLowerCase().replace(/_/g, "-")}>`);
   const secret = server.auth?.CLIENT_SECRET;
   const needsSecret = spec.secret ?? Boolean(secret && !/:-\}$/.test(secret));
   const port = config.OAUTH_CALLBACK_PORT;
-  if (server.auth?.scopes) {
-    const oauth = { clientId: "<your-client-id>", callbackPort: port, scopes: server.auth.scopes.join(" ") };
+  if (spec.registration === "dynamic") {
+    const oauth = { callbackPort: port, ...(spec.dcrScopes && { scopes: spec.dcrScopes.join(" ") }) };
+    return `claude mcp add-json ${id} '${JSON.stringify({ type: "http", url, oauth })}'`;
+  }
+  const sourceScopes = server.auth?.scopes;
+  if (spec.scopes?.some((scope) => !sourceScopes?.includes(scope))) {
+    throw new Error(`${name}: manual MCP example requests a scope absent from upstream`);
+  }
+  const scopes = spec.scopes ?? sourceScopes;
+  if (scopes) {
+    const oauth = { clientId: "<your-client-id>", callbackPort: port, scopes: scopes.join(" ") };
     return `claude mcp add-json ${id} '${JSON.stringify({ type: "http", url, oauth })}'${needsSecret ? " --client-secret" : ""}`;
   }
   return `claude mcp add --transport http ${id} ${url} --client-id <your-client-id> --callback-port ${port}${needsSecret ? " --client-secret" : ""}`;

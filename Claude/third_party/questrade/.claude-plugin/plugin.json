@@ -1,0 +1,26 @@
+{
+  "name": "questrade",
+  "displayName": "Questrade",
+  "version": "1.0.0+claude.67842317",
+  "description": "Read your Questrade portfolio, get live market data, and discuss potential trades.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://www.questrade.com/",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "questrade",
+    "brokerage",
+    "trading",
+    "portfolio",
+    "positions",
+    "balances",
+    "market data",
+    "watchlists",
+    "canada",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png"
+}

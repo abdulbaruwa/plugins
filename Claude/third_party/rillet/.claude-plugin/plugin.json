@@ -1,0 +1,26 @@
+{
+  "name": "rillet",
+  "displayName": "Rillet",
+  "version": "1.0.0+claude.8c64f620",
+  "description": "Query financial reports and manage customers, invoices, bills, contracts, and vendors in Rillet.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://docs.api.rillet.com/docs/mcp",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "rillet",
+    "erp",
+    "accounting",
+    "general ledger",
+    "finance",
+    "invoices",
+    "bills",
+    "revenue recognition",
+    "financial reports",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png"
+}

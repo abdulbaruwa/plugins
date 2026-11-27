@@ -3,6 +3,9 @@
 >
 > Install: `/plugin marketplace add <path-to-repo>/Claude`, then `/plugin install lark@cursor-plugins-claude`.
 >
+> Changes from the Cursor version:
+> - This retains Lark's own docs/messages endpoint. The separate Lark Base source uses a Cursor-hosted proxy and is excluded from this native marketplace.
+>
 > The rest of this page is the upstream Cursor README. Where it disagrees with the notes above, the notes apply.
 
 # Lark
@@ -22,6 +25,8 @@ Official MCP introduction: https://open.larksuite.com/document/uAjLw4CM/ukTMukTM
 Or run `/plugin install lark@cursor-plugins-claude` in chat.
 
 Accounts on China-region Feishu should install the separate [Feishu](../feishu/) plugin instead. This plugin talks only to `mcp.larksuite.com`.
+
+Lark Base (Bitable) is the separate [Lark Base](../lark-base/) plugin.
 
 ## MCP
 
