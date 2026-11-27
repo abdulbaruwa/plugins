@@ -1,0 +1,27 @@
+{
+  "name": "folk",
+  "displayName": "folk",
+  "version": "1.0.0+claude.4d3619a9",
+  "description": "Search and update people, companies, deals, notes, tasks, and interactions, enrich contacts, and run email campaigns in folk.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://developer.folk.app/mcp/overview",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "folk",
+    "crm",
+    "relationships",
+    "contacts",
+    "people",
+    "companies",
+    "deals",
+    "pipeline",
+    "campaigns",
+    "enrichment",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png"
+}

@@ -209,7 +209,7 @@
       "name": "pstack",
       "source": "./plugins/pstack",
       "description": "if you want to go fast, go deep first. pstack helps you write less, but higher quality code. rigorous agent workflows you can parallelize with confidence.",
-      "version": "0.15.46+claude.7eea0679",
+      "version": "0.15.48+claude.8f4d5c69",
       "author": {
         "name": "Lauren Tan"
       },
@@ -1711,6 +1711,74 @@
         "sabre",
         "travel",
         "documentation",
+        "mcp"
+      ]
+    },
+    {
+      "name": "freshbooks",
+      "source": "./third_party/freshbooks",
+      "description": "Manage invoices, clients, expenses, bills, time tracking, and accounting reports.",
+      "version": "1.0.0+claude.271aaa8f",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "finance-and-legal",
+      "tags": [
+        "freshbooks",
+        "accounting",
+        "finance",
+        "mcp"
+      ]
+    },
+    {
+      "name": "campfire",
+      "source": "./third_party/campfire",
+      "description": "Pull financial statements, ledgers, AR/AP, revenue recognition, and close status, and ask Ember about your books.",
+      "version": "1.0.0+claude.f171fbbc",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "finance-and-legal",
+      "tags": [
+        "campfire",
+        "accounting",
+        "finance",
+        "mcp"
+      ]
+    },
+    {
+      "name": "easyship",
+      "source": "./third_party/easyship",
+      "description": "Compare courier rates, create shipments, buy labels, book pickups, track parcels, and read shipping analytics across 550+ couriers.",
+      "version": "1.0.0+claude.dcec482a",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "easyship",
+        "shipping",
+        "logistics",
+        "mcp"
+      ]
+    },
+    {
+      "name": "folk",
+      "source": "./third_party/folk",
+      "description": "Search and update people, companies, deals, notes, tasks, and interactions, enrich contacts, and run email campaigns in folk.",
+      "version": "1.0.0+claude.4d3619a9",
+      "author": {
+        "name": "Cursor",
+        "email": "plugins@cursor.com"
+      },
+      "category": "integrations",
+      "tags": [
+        "folk",
+        "crm",
+        "sales",
         "mcp"
       ]
     }

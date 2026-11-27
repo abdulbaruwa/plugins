@@ -1,6 +1,6 @@
 # Claude Code port
 
-Claude Code versions of the Cursor plugins in this repository, as one marketplace: **16** workflow plugins and **85** MCP integrations.
+Claude Code versions of the Cursor plugins in this repository, as one marketplace: **16** workflow plugins and **89** MCP integrations.
 
 > [!IMPORTANT]
 > Everything in `plugins/`, `third_party/`, `.claude-plugin/`, and this README is generated. To change a plugin, edit [`scripts/port.config.mjs`](scripts/port.config.mjs) or add a file under [`overrides/<plugin>/`](overrides/), then rebuild.
@@ -184,6 +184,10 @@ OAuth servers may sign in through `/mcp`; plugins with a required token prompt f
 | [Fiscal.ai](third_party/fiscal-ai/) | Pull source-linked financials, filings, ratios, prices, segments, KPIs, ownership, fund letters, and news from Fiscal.ai. | — |
 | [LMTY](third_party/lmty/) | Read tracked competitors, competitive intelligence reports, change logs, evidence, social mentions, and market feeds for your products, and browse LMTY's public Markets, event timelines, and company, product, and person profiles. | — |
 | [Sabre Developer Hub](third_party/sabre-developer-hub/) | Search and read Sabre Developer Hub documentation, OpenAPI specs, and Sabre-published agent skills for travel APIs, SDKs, and product collections. | — |
+| [FreshBooks](third_party/freshbooks/) | Manage invoices, clients, expenses, bills, time tracking, and accounting reports. | — |
+| [Campfire](third_party/campfire/) | Pull financial statements, ledgers, AR/AP, revenue recognition, and close status, and ask Ember about your books. | — |
+| [Easyship](third_party/easyship/) | Compare courier rates, create shipments, buy labels, book pickups, track parcels, and read shipping analytics across 550+ couriers. | — |
+| [folk](third_party/folk/) | Search and update people, companies, deals, notes, tasks, and interactions, enrich contacts, and run email campaigns in folk. | — |
 
 ## Add these servers yourself
 
@@ -191,6 +195,7 @@ These servers require provider-specific endpoint, registration, redirect, or sec
 
 | Server | Why | Command |
 | --- | --- | --- |
+| jobber | Requires an own registered confidential OAuth app with client ID and secret; DCR is unsupported. Verify the actual native callback (source documents localhost:8787), account permissions and Core/Connect/Grow/Plus plan. Clients/properties/requests can be created or edited; quotes are create-only, with total/deposit/discount but no unit costs/margins. Jobs/invoices/schedule are read-only; no delete/archive. Preserve the provider's advertised client/request/quote/job/invoice/visit scopes and approve exact record changes. Sign-in is user-mediated, never through a browser agent. | `claude mcp add --transport http jobber https://mcp.getjobber.com/mcp --client-id <your-client-id> --callback-port 8787 --client-secret` |
 | front | Front 1.1.1 removes credential fields because Cursor now supplies its OAuth client and scope. This does not establish DCR or a native client. Qualify current provider-supported registration and exact native redirect before proceeding; no command is supplied meanwhile. Preserve feature:mcp, separate read/write/send permissions, reconnect after permission changes, teammate/inbox ACLs and rate limits. Confirm exact recipients/content before sending. | `No command: qualify native client registration and redirect support first.` |
 | expensify | Source availability is labeled Grok-only despite a first-party PKCE/DCR endpoint. Qualify actual Claude Code registration, redirect and tool access before using this conditional template. Search expenses/reports within approval/admin permissions only; no submissions, approvals, edits, cards or money movement. | `claude mcp add-json expensify '{"type":"http","url":"https://www.expensify.com/mcp","oauth":{"callbackPort":8787,"scopes":"mcp:tools"}}'` |
 | redo | DCR permits only allowlisted redirects; the source explicitly includes http://localhost:8787/callback. Use this fixed-port conditional template only after actual native registration is qualified. Preserve store permissions, ready-state return drafts, async polling, non-idempotent analytics quotas, expectedRevision, risk acknowledgements, confirmLiveChange, shipping quote/idempotency and human-entered secrets. Sanitized feedback requires user permission. | `claude mcp add-json redo '{"type":"http","url":"https://mcp.getredo.com/mcp","oauth":{"callbackPort":8787}}'` |

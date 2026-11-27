@@ -1,0 +1,24 @@
+{
+  "name": "freshbooks",
+  "displayName": "FreshBooks",
+  "version": "1.0.0+claude.271aaa8f",
+  "description": "Manage invoices, clients, expenses, bills, time tracking, and accounting reports.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://github.com/cursor/plugins/tree/main/third_party/freshbooks",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "freshbooks",
+    "accounting",
+    "bookkeeping",
+    "invoices",
+    "expenses",
+    "time-tracking",
+    "finance",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png"
+}

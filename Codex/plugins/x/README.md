@@ -1,6 +1,6 @@
 # X for Codex
 
-Community adaptation of `third_party/x` at upstream version `2.11.1`. Original authors and MIT license are preserved. This is not an official Cursor or OpenAI distribution.
+Community adaptation of `third_party/x` at upstream version `2.11.2`. Original authors and MIT license are preserved. This is not an official Cursor or OpenAI distribution.
 
 Search and read X, and use supported account tools. Posting is opt-in: it requires a native connection with `tweet.write`, the actual posting tool, and approval for each exact post.
 
@@ -25,3 +25,5 @@ codex plugin add x@cursor-plugins-codex
 Use the installed skill catalog to invoke a packaged skill, such as `$x:setup-x`. Full names avoid collisions with skills from other plugins.
 
 Run `$x:setup-x` to complete the provider configuration. The bundled `references/upstream-mcp.json` is evidence, not an enabled connection; credentials belong in supported native client configuration.
+
+The 2.11.2 send-metadata update applies only to a supported native encrypted-payload facility and actual tool schema. Grok helper maintenance is reviewed as inapplicable; this package installs no helper or crypto runtime.

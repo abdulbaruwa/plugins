@@ -12,3 +12,5 @@ For a catch-up on changes since the user's last message, read [ketchup](../ketch
 Use [sharpen](../sharpen/SKILL.md) to improve the framing before work. Use [create-formal-verification-skill](../create-formal-verification-skill/SKILL.md) to create a code-linked formal check or clearly labeled generated-input fallback; use [maintain-formal-verification-skill](../maintain-formal-verification-skill/SKILL.md) to reconcile its model, bounds, and sync checkpoint after code changes. A model or bounded pass does not establish whole-system correctness.
 
 Use `$statechart` for TLA+ state transitions and counterexamples, `$ketchup-video` for an evidence-based visual update, and `$sharpen` to rewrite a task without executing it.
+
+Use [reframe](../reframe/SKILL.md) only on explicit request to compare possible problem framings, learn verified expert terms and rewrite a description. It stops before implementation.
